@@ -1,0 +1,959 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2016/11/16/angular-js-on-sharepoint-2013/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:50:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Angular JS on SharePoint 2013/ 2016" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="Now-a-days Angular JS has become popular and certainly there is reason for that. If you search in Internet you can find really good examples of Angular JS. Since SharePoint 2013 is my bread and but…" />
+<meta property="article:published_time" content="2016-11-16T09:41:40+00:00" />
+<meta property="article:modified_time" content="2017-05-17T12:04:21+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2016/11/ang6.png" />
+<meta property="og:image:width" content="1143" />
+<meta property="og:image:height" content="370" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Angular JS on SharePoint 2013/ 2016" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2016/11/ang1d209.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>Angular JS on SharePoint 2013/ 2016 &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2016\/11\/16\/angular-js-on-sharepoint-2013\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"Angular JS on SharePoint 2013\/ 2016","datePublished":"2016-11-16T09:41:40+00:00","dateModified":"2017-05-17T12:04:21+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2016\/11\/ang1.png","width":712,"height":280}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716{color:#0000ff;}.amp-wp-inline-02957e77e6e3fff1ed2a1aef63be59d5{height:300px;max-width:600px;}.amp-wp-inline-7c287960c061ac7660be0186155f6930{background-color:#f07432;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">Angular JS on SharePoint 2013/ 2016</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2016-11-16T09:41:40+00:00">
+		7 months ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<p>Now-a-days Angular JS has become popular and certainly there is reason for that. If you search in Internet you can find really good examples of Angular JS.</p>
+<p>Since SharePoint 2013 is my bread and butter for some time, I thought of using it on SharePoint 2013, I have found few examples in the internet but none of them was working correctly for me. I had to make few modifications and it worked on SharePoint. The main reason was incorrect angular tags. So I’ll explain this as a first thing.</p>
+<p>This same steps can be performed in a SharePoint 2016 site also.</p>
+<h2> <span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Relation between Angular JS and HTML page</strong></span></h2>
+<p>I’ll not give you details of how Angular JS works; I assume you must have some sort of idea about it. But I found below relation was working in all of my SharePoint pages. Note the <strong>DIV</strong> tags <strong><em>ng-app=”myApp”</em></strong>, <strong><em>ng-controller=”ConactController” </em></strong>in the HTML side and their relation with the JavaScript in the below diagram.</p>
+<p><amp-img class="alignnone size-full wp-image-92 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang1bc78.png?w=712" alt="ang1" srcset="https://arindamchat.files.wordpress.com/2016/11/ang1.png?w=712 712w, https://arindamchat.files.wordpress.com/2016/11/ang1.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang1.png?w=300 300w, https://arindamchat.files.wordpress.com/2016/11/ang1.png?w=768 768w, https://arindamchat.files.wordpress.com/2016/11/ang1.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2016/11/ang1.png 1242w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="280"></amp-img></p>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Preparation</strong></span></h2>
+<p>Before you start development you need to prepare the environment, i.e. getting the necessary JS files I have used Angular JS, JQuery and Bootstrap CSS for the examples, but bootstrap is not essential.</p>
+<p>I have downloaded most of the files and placed them inside “SiteAssets” library; you may want to put it in a more orderly folder structure.</p>
+<p>Sometimes I have used CDN also e.g.: <a href="../../../../../../getbootstrap.com/2.3.2/assets/css/bootstrap.css">http://getbootstrap.com/2.3.2/assets/css/bootstrap.css</a> . Similarly you can use Google CDN for jQuery and Angular JS.</p>
+<p>You can download Angular JS from <a href="https://angularjs.org/">https://angularjs.org/</a>  and bootstrap from here: <a href="http://getbootstrap.com/">http://getbootstrap.com/</a></p>
+<p>Below is a screenshot of the Site Assets library in my SharePoint.</p>
+<p><amp-img class="alignnone size-full wp-image-94 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang2bc78.png?w=712" alt="ang2" srcset="https://arindamchat.files.wordpress.com/2016/11/ang2.png 711w, https://arindamchat.files.wordpress.com/2016/11/ang2.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang2.png?w=300 300w" sizes="(min-width: 711px) 711px, 100vw" width="711" height="618"></amp-img></p>
+<p>Page1-Page6 JS files are specific for the SharePoint examples shown in Page1 to 6 (see them in the left navigation). All other files are common.</p>
+<p>For some reason the JS was not working until I activated SharePoint Publishing feature on the site. I’m not sure if that’s really needed though. But for a better looking site you might want to use publishing pages rather than wiki pages.</p>
+<p>I have added all HTML script in a script editor on each page.</p>
+<p>Create a page named Page1 Edit the page. Add a script editor in the page</p>
+<p><amp-img class="alignnone size-full wp-image-93 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang2-1bc78.png?w=712" alt="ang2-1" srcset="https://arindamchat.files.wordpress.com/2016/11/ang2-1.png 462w, https://arindamchat.files.wordpress.com/2016/11/ang2-1.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang2-1.png?w=300 300w" sizes="(min-width: 462px) 462px, 100vw" width="462" height="418"></amp-img></p>
+<p>Once you add the script editor, go to Edit Snippet and paste the HTML there. A sample screenshot is given below.</p>
+<p><amp-img class="alignnone size-full wp-image-95 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang3bc78.png?w=712" alt="ang3" srcset="https://arindamchat.files.wordpress.com/2016/11/ang3.png?w=712 712w, https://arindamchat.files.wordpress.com/2016/11/ang3.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang3.png?w=300 300w, https://arindamchat.files.wordpress.com/2016/11/ang3.png?w=768 768w, https://arindamchat.files.wordpress.com/2016/11/ang3.png 836w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="485"></amp-img></p>
+<p>I have created a custom list name <strong>Employee</strong> which has been used in many examples below. Notice the <strong><em>EmpImage</em></strong> column. The Images are stored in the <strong>Images</strong> library, this library should be already created when you activate SharePoint publishing feature. You can use some other library too.</p>
+<p><amp-img class="alignnone size-full wp-image-96 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang5-5bc78.png?w=712" alt="ang5-5" srcset="https://arindamchat.files.wordpress.com/2016/11/ang5-5.png 610w, https://arindamchat.files.wordpress.com/2016/11/ang5-5.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang5-5.png?w=300 300w" sizes="(min-width: 610px) 610px, 100vw" width="610" height="353"></amp-img></p>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Page1 Example </strong></span></h2>
+<p>Now to the actual examples, this is a really simple example, just to give you an idea. You enter some data and a popup shows your answer.</p>
+<p><amp-img class="alignnone size-full wp-image-97 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang5-6bc78.png?w=712" alt="ang5-6" srcset="https://arindamchat.files.wordpress.com/2016/11/ang5-6.png 686w, https://arindamchat.files.wordpress.com/2016/11/ang5-6.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang5-6.png?w=300 300w" sizes="(min-width: 686px) 686px, 100vw" width="686" height="442"></amp-img></p>
+<p>I have created a page name Page1.aspx, added a script editor and pasted below HTML into the script editor. Same technique used for all the examples.</p>
+<p><strong>HTML</strong></p>
+<p>This few lines of HTML render the questions and popup answers too.</p>
+<pre id="PutYourContentInside"><a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://code.jquery.com/ui/1.10.3/jquery-ui.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/angular.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/Page1.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/Page1.js
+</a>&lt;link rel="stylesheet" type="text/css" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css"&gt;
+&lt;style type="text/css"&gt;    .auto-style1 {   color: #339933;}&lt;/style&gt;
+1 {{question.text}}
+&lt;/div&gt;&lt;/div&gt;</pre>
+<div>
+<div>
+<p><strong>JavaScript: </strong></p>
+<p>The JavaScript used here is saved as Page1.js in the site asserts library. So this script just passes the questions to the ‘ContactController’module and gets back the answers.  This JavaScript was saved as Page1.js in the Site Assets library.</p>
+<pre>var myApp = angular.module('myApp', []);
+var uid = (function () {
+var id = 1;
+return function () {
+if (arguments[0] === 0)
+id = 1;
+return id++;  }})();
+var siteUrl = GetSiteUrl();
+myApp.controller('ContactController', function ($scope) {
+$scope.questions = [
+{ text: 'How would you like your eggs done?', answer: "" },
+{ text: 'What kind of bread would you like?', answer: "" },
+{ text: 'What kind of drink would you like?', answer: "" }  ];
+
+$scope.addAnswers = function ($event) {
+$event.preventDefault();
+var ans = "";
+for (i in $scope.questions) {
+ans = ans + $scope.questions[i].answer + ", ";
+$scope.questions[i].answer = "";
+}
+$scope.$apply();
+alert("Thank you for your answers : " + ans);
+}});
+function GetSiteUrl() {
+var urlParts = document.location.href.split("/");
+return urlParts[0] + "//" + urlParts[2] + "/" + urlParts[3] + "/" + urlParts[4];
+}</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Page2 Example </strong></span></h2>
+<p>This is a simple data grid operation.</p>
+<p><amp-img class="alignnone size-full wp-image-98 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang5-7bc78.png?w=712" alt="ang5-7" srcset="https://arindamchat.files.wordpress.com/2016/11/ang5-7.png?w=712 712w, https://arindamchat.files.wordpress.com/2016/11/ang5-7.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang5-7.png?w=300 300w, https://arindamchat.files.wordpress.com/2016/11/ang5-7.png?w=768 768w, https://arindamchat.files.wordpress.com/2016/11/ang5-7.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2016/11/ang5-7.png 1110w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="332"></amp-img></p>
+<p><strong>HTML</strong></p>
+<pre><a href="../../../../../../code.jquery.com/ui/1.10.3/jquery-ui.min.js">http://code.jquery.com/ui/1.10.3/jquery-ui.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/angular.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/Page2.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/Page2.js
+</a>&lt;link rel="stylesheet" type="text/css" href="http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/bootstrap.css"&gt;
+&lt;style type="text/css"&gt;
+.auto-style1 { color: #339933;     }
+&lt;/style&gt;</pre>
+<div>
+<div>
+<p><span class="auto-style1"><strong>Enter data.</strong></span></p>
+<p>Name</p>
+<p>Email</p>
+<p>Phone</p>
+<table class="table table-striped table-bordered"><thead><tr><th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
+</tr></thead><tbody><tr><td>{{ contact.name }}</td>
+<td>{{ contact.email }}</td>
+<td>{{ contact.phone }}</td>
+<td>edit |
+<p>delete</p></td>
+</tr></tbody></table></div>
+</div>
+<p><strong>JavaScript: </strong></p>
+<pre>var myApp = angular.module('myApp', []);
+var uid = (function () {
+var id = 1;
+return function () {
+if (arguments[0] === 0)
+id = 1;
+return id++;
+}})();
+myApp.controller('ContactController', function ($scope) {
+$scope.contacts = [{ id: 0, 'name': 'Arindam', 'email': 'Arindam@myemail.com 'phone': '123-2343-44' }];
+$scope.saveContact = function () {
+if ($scope.newcontact.id == null) {
+$scope.newcontact.id = uid();
+$scope.contacts.push($scope.newcontact);
+}
+else {
+for (i in $scope.contacts) {
+if ($scope.contacts[i].id == $scope.newcontact.id) {
+$scope.contacts[i] = $scope.newcontact;
+}}}
+$scope.newcontact = {};
+}
+$scope.delete = function (id) {
+for (i in $scope.contacts) {
+if ($scope.contacts[i].id == id) {
+$scope.contacts.splice(i, 1); $scope.newcontact = {};
+}}}
+$scope.edit = function (id) {
+for (i in $scope.contacts) {
+if ($scope.contacts[i].id == id) {
+$scope.newcontact = angular.copy($scope.contacts[i]);
+}}}
+});</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Page3 Example </strong></span></h2>
+<p>In this example I have done some real SharePoint operations, I have created a custom list named <strong>Employee</strong> and then read the list items in a tabular mode. Now there is more than one way of doing list operation in client side coding. Here I have used the list service but this is not just normal list service call, I have used Angula JS’s capability of calling a http method and parse data. Latter I have another example with async client calling.</p>
+<p>Check how small amount of coding was required for this. You must have noticed that bootstrap CSS was used for the table formatting.</p>
+<p><amp-img class="alignnone size-full wp-image-99 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang6bc78.png?w=712" alt="ang6" srcset="https://arindamchat.files.wordpress.com/2016/11/ang6.png?w=712 712w, https://arindamchat.files.wordpress.com/2016/11/ang6.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang6.png?w=300 300w, https://arindamchat.files.wordpress.com/2016/11/ang6.png?w=768 768w, https://arindamchat.files.wordpress.com/2016/11/ang6.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2016/11/ang6.png 1143w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="230"></amp-img></p>
+<p><strong>HTML</strong></p>
+<pre><a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/jquery-2.1.3.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/jquery-2.1.3.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/angular.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/bootstrap.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/bootstrap.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/Page3.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/Page3.js
+</a>&lt;link rel="stylesheet" type="text/css" href="http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/bootstrap.min.css"&gt;
+&lt;style type="text/css"&gt;
+.auto-style1 {
+color: #339933;
+}
+&lt;/style&gt;</pre>
+<div class="row">
+<div class="span10">
+<table class="table table-striped table-bordered"><tbody><tr><th>Employee ID</th>
+<th>Employee Name</th>
+<th>City</th>
+</tr><tr><td>{{customer.Id}}</td>
+<td>{{customer.EmpName}}</td>
+<td>{{customer.EmpCity}}</td>
+</tr></tbody></table></div>
+<pre>&lt;/div&gt;</pre>
+<p><strong>JavaScript: </strong></p>
+<pre>var webSiteURL = GetSiteUrl();
+//alert(webSiteURL);
+var myAngApp = angular.module('SharePointAngApp', []);
+myAngApp.controller('spCustomerController', function ($scope, $http) {
+$http({
+method: 'GET',
+url: webSiteURL + "/_api/web/lists/getByTitle('Employee')/items?$select=Id,EmpName,EmpCity",
+headers: { "Accept": "application/json;odata=verbose" }
+}).success(function (d, s, h, c) {
+$scope.customers = d.d.results;
+});
+});
+function GetSiteUrl() {
+var urlParts = document.location.href.split("/");
+return urlParts[0] + "//" + urlParts[2] + "/" + urlParts[3] + "/" + urlParts[4] + "/" + urlParts[5];
+}</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Page4 Example</strong></span></h2>
+<p>In this example I’m adding a new item to the Employee list, client site async call have been used for this.</p>
+<p><amp-img class="alignnone size-full wp-image-100 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang7bc78.png?w=712" alt="ang7" srcset="https://arindamchat.files.wordpress.com/2016/11/ang7.png?w=712 712w, https://arindamchat.files.wordpress.com/2016/11/ang7.png?w=150 150w, https://arindamchat.files.wordpress.com/2016/11/ang7.png?w=300 300w, https://arindamchat.files.wordpress.com/2016/11/ang7.png 730w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="316"></amp-img></p>
+<p><strong>HTML</strong></p>
+<pre><a href="../../../../../../code.jquery.com/ui/1.10.3/jquery-ui.min.js">http://code.jquery.com/ui/1.10.3/jquery-ui.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/angular.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/Page4.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/Page4.js</a>
+&lt;link rel="stylesheet" type="text/css" href="http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/bootstrap.css"&gt;
+&lt;style type="text/css"&gt;
+.auto-style1 {
+color: #339933;
+}
+&lt;/style&gt;
+1 {{question.text}}</pre>
+<div>
+<div>
+<pre id="PutYourContentInside">&lt;/div&gt;
+&lt;/div&gt;</pre>
+<p><strong>JavaScript: </strong></p>
+<pre>var myApp = angular.module('myApp', []);
+var uid = (function () {
+var id = 1;
+return function () {
+if (arguments[0] === 0)
+id = 1;
+return id++;
+}})();
+var siteUrl = GetSiteUrl();
+//alert(siteUrl);
+myApp.controller('ContactController', function ($scope) {
+$scope.questions = [
+{ text: 'What is the new Employee name?', answer: "" },
+{ text: 'Where does he live?', answer: "" }
+];
+$scope.addAnswers = function ($event) {
+$event.preventDefault();
+var clientContext = new SP.ClientContext(siteUrl);
+var web = clientContext.get_web();
+var list = web.get_lists().getByTitle('Employee');
+// create the ListItemInformational object
+var listItemInfo = new SP.ListItemCreationInformation();
+// add the item to the list
+var listItem = list.addItem(listItemInfo);
+// Assign Values for fields
+listItem.set_item('EmpName', $scope.questions[0].answer);
+listItem.set_item('EmpCity', $scope.questions[1].answer);
+listItem.update();
+clientContext.executeQueryAsync(
+Function.createDelegate(this, onQuerySucceeded),
+Function.createDelegate(this, onQueryFailed)
+);
+};
+onQuerySucceeded = function () {
+alert('Thank you, one record added to Employee list.');
+}
+onQueryFailed = function (sender, args) {
+alert('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+}
+});
+function GetSiteUrl() {
+var urlParts = document.location.href.split("/");
+return urlParts[0] + "//" + urlParts[2] + "/" + urlParts[3] + "/" + urlParts[4] + "/" + urlParts[5];
+}</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"> <strong>Page5 Example </strong></span></h2>
+<p>Here I’m reading data again from Employee list; I have used JQury’s capability of calling a service and get the response in JSON format, for Image parsing we need to do some special coding pls note that in the JS file.</p>
+<p><amp-img class="alignnone size-full wp-image-101 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang8bc78.png?w=712" alt="ang8" srcset="https://arindamchat.files.wordpress.com/2016/11/ang8.png 243w, https://arindamchat.files.wordpress.com/2016/11/ang8.png?w=73 73w" sizes="(min-width: 243px) 243px, 100vw" width="243" height="501"></amp-img></p>
+<p><strong>HTML</strong></p>
+<pre><a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/jquery-2.1.3.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/jquery-2.1.3.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/angular.min.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/angular.min.js</a>
+<a href="../../../../../../servername/sites/arindamc/Subsite1/SiteAssets/Page5.js">http://SERVERNAME/sites/arindamc/Subsite1/SiteAssets/Page5.js</a></pre>
+<div>
+<div>
+<div>
+<table class="amp-wp-inline-7c287960c061ac7660be0186155f6930"><tbody><tr><td><b>Employee Name: {{p.EmpName}}</b></td>
+</tr><tr><td></td>
+</tr><tr><td><b> Employee City:{{p.EmpCity}}.</b></td>
+</tr></tbody></table><hr/></div>
+</div>
+</div>
+<p><strong>JavaScript: </strong></p>
+<pre>var myApp = angular.module('myApp', []);
+var webSiteURL = GetSiteUrl();
+myApp.controller('ContactController', function ($scope) {
+$scope.loadREST = function () {
+jQuery.ajax({
+url: webSiteURL + "/_vti_bin/listdata.svc/Employee?$select=EmpName,EmpCity,EmpImage",
+type: "GET",
+dataType: "json",
+async: "true",
+headers: { "Accept": "application/json;odata=verbose" },
+success: function (data) {
+var newData = [];
+jQuery.each(data.d.results, function (index, value) {
+//alert(value.EmpImage);
+<span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716">var pImage = value.EmpImage;</span>
+<span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716">                    if (pImage != null) {</span>
+<span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716">                        prImage = pImage.substring(0, pImage.indexOf(','));</span>
+<span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716">                        newData.push({ EmpName: value.EmpName, EmpCity: value.EmpCity, EmpImage: prImage });</span>
+}
+});
+$scope.$apply(function () {
+$scope.Products = newData;});
+},
+error: function () {
+alert("error");
+}});};
+$scope.loadREST();
+});
+function GetSiteUrl() {
+var urlParts = document.location.href.split("/");
+return urlParts[0] + "//" + urlParts[2] + "/" + urlParts[3] + "/" + urlParts[4] + "/" + urlParts[5];
+}</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Page6 Example </strong></span></h2>
+<p>This example is adopted from this awesome article: <a href="http://www.codeproject.com/Articles/760870/Chart-SharePoint-Hosted-App-with-AngularJs-and-JqP">Chart SharePoint Hosted App with AngularJs and JqPlot</a></p>
+<p>Please go ahead and check the details there. The scenario here is to have data inside SharePoint List (custom list, one column for title and one column for value), to access that data, to use angular (<a href="http://angularjs.org/" rel="nofollow">http://angularjs.org</a>) for data-binding part and jqPlot (<a href="http://www.jqplot.com/" rel="nofollow">http://www.jqplot.com</a> ) for chart rendering. Also, one chart in this example is using ui-chart directive (<a href="http://angular-ui.github.io/ui-chart/" rel="nofollow">http://angular-ui.github.io/ui-chart/</a>), the directive that lets you use jqPlot with Angular.</p>
+<p><strong>Note: </strong>The original article was written as an App on SharePoint 2013, I have converted it to fully client side coding, no Visual studio was used. For that I have provided the HTML below, also I had to make some changes the App.JS which is the main JS file for this (like Page1.Js for Page1.aspx in previous articles).</p>
+<p>I have also copied the whole script folder as <strong>SiteAsset\ChartApp</strong> in the SharePoint portal. The content was copied from the <strong>Your Download path \ChartApp\Scripts</strong> folder. This has duplicate angular.js/JQuey-min.js etc. which you need to take care in actual scenario.</p>
+<p>I also copied App.Css from ChartApp\Content folder to <strong>SiteAsset\ChartApp</strong> in the SharePoint portal. The site assets now look like below.</p>
+<p><amp-img class="alignnone size-full wp-image-102 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang9bc78.png?w=712" alt="ang9" srcset="https://arindamchat.files.wordpress.com/2016/11/ang9.png 603w, https://arindamchat.files.wordpress.com/2016/11/ang9.png?w=120 120w, https://arindamchat.files.wordpress.com/2016/11/ang9.png?w=240 240w" sizes="(min-width: 603px) 603px, 100vw" width="603" height="755"></amp-img></p>
+<p><strong>HTML</strong></p>
+<pre id="linechart" class="amp-wp-inline-02957e77e6e3fff1ed2a1aef63be59d5"><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/jquery-1.9.1.min.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/jquery-1.9.1.min.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/angular/angular.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/angular/angular.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/jquery.jqplot.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/jquery.jqplot.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.pieRenderer.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.pieRenderer.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.barRenderer.min.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.barRenderer.min.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.categoryAxisRenderer.min.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.categoryAxisRenderer.min.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.pointLabels.min.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/plugins/jqplot.pointLabels.min.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/chart.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/chart.js</a><a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/Common.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/Common.js</a>
+&lt;link rel="stylesheet" type="text/css" href="http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/lib/jqplot/jquery.jqplot.css"/&gt;
+&lt;!-- Add your CSS styles to the following file --&gt;
+&lt;link rel="Stylesheet" type="text/css" href="http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/App.css" /&gt;
+&lt;!-- Add your JavaScript to the following file --&gt;
+<a href="../../../../../../inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/App.js">http://inbaghpc00156/sites/arindamc/Subsite1/SiteAssets/ChartApp/App.js</a> 
+&lt;/div&gt;</pre>
+<div>
+<p><strong>JavaScript</strong></p>
+<p>The below script is the App.js, I did not have to modify any other JS file. I also have commented the original code so that you can understand my changes.</p>
+<pre>'use strict';
+// The allAnnouncements variable is used by more than one
+//  function to retrieve and process the results.
+var allData;
+var hostweburl;
+var appweburl;
+//alert('inside');
+var myChartingApp = angular.module('myChartingApp', ['ui.chart'])
+.value('charting', {
+pieChartOptions: {
+seriesDefaults: {
+// Make this a pie chart.
+renderer: jQuery.jqplot.PieRenderer,
+rendererOptions: {
+
+// Put data labels on the pie slices.
+// By default, labels show the percentage of the slice.
+showDataLabels: true
+}
+},
+legend: { show: true, location: 'e' }
+}
+});
+myChartingApp.service('$SharePointJSOMService', function ($q, $http) {
+this.getData = function ($scope, listTitle) {
+var deferred = $q.defer();
+hostweburl = 'http://inbaghpc00156/sites/arindamc/Subsite1';
+// decodeURIComponent(
+//  getQueryStringParameter("SPHostUrl")
+// );
+appweburl = 'http://inbaghpc00156/sites/arindamc/Subsite1';
+// decodeURIComponent(
+//    getQueryStringParameter("SPAppWebUrl")
+// );
+//alert(hostweburl);
+//alert(appweburl);
+// resources are in URLs in the form:
+// web_url/_layouts/15/resource
+var scriptbase = hostweburl + "/_layouts/15/";
+// Load the js files and continue to the successHandler
+$.getScript(scriptbase + "SP.Runtime.js",
+function () {
+$.getScript(scriptbase + "SP.js",
+function () {
+$.getScript(scriptbase + "SP.RequestExecutor.js",
+function () {
+// var clientContext = new SP.ClientContext(siteUrl);
+// var web = clientContext.get_web();
+// var list = web.get_lists().getByTitle('Employee');
+var context = new SP.ClientContext(appweburl);
+//var factory = new SP.ProxyWebRequestExecutorFactory(appweburl);
+//  context.set_webRequestExecutorFactory(factory);
+// var appContextSite = new SP.AppContextSite(context, hostweburl);
+//var web = appContextSite.get_web();
+var web = context.get_web();
+context.load(web);
+var list = web.get_lists().getByTitle(listTitle);
+var camlQuery = SP.CamlQuery.createAllItemsQuery();
+this.listItems = list.getItems(camlQuery);
+context.load(this.listItems);
+context.executeQueryAsync(
+Function.createDelegate(this, function () {
+var ListEnumerator = this.listItems.getEnumerator();
+while (ListEnumerator.moveNext()) {
+var currentItem = ListEnumerator.get_current();
+console.info(currentItem.get_item('Title') + currentItem.get_item('ID'));
+var Title = currentItem.get_item("Title");
+var Value = currentItem.get_item("Value");
+var b = [Title, Value];
+$scope.someData[0].push(b);
+$scope.ticks.push(Title);
+$scope.barvalues.push(Value);
+//$scope is not updating so force with this command
+$scope.$apply();
+}
+$scope.setBarChart();
+$scope.setLineChart();
+}),
+Function.createDelegate(this, function (sender, args) {
+deferred.reject('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+})
+);});});});
+return deferred.promise;
+};});
+myChartingApp.controller('DemoCtrl', function ($scope, charting, $SharePointJSOMService) {
+//alert('controller');
+$scope.someData = [[]];
+$scope.ticks = [];
+$scope.barvalues = [];
+var promise = $SharePointJSOMService.getData($scope, 'PieChartData');
+promise.then(
+function (message) {
+alert(message);
+},
+function (reason) {
+alert(reason);
+}
+);
+$scope.myChartOpts = charting.pieChartOptions;
+$scope.setBarChart = function () {
+//alert('setBarChart');
+var plot2 = $.jqplot('barchart', [$scope.barvalues], {
+seriesDefaults: {
+renderer: $.jqplot.BarRenderer,
+pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+},
+axes: {
+xaxis: {
+renderer: $.jqplot.CategoryAxisRenderer,
+ticks: $scope.ticks
+}}});}
+$scope.setLineChart = function () {
+//alert('setLineChart');
+var plot = $.jqplot('linechart', [$scope.barvalues], {
+title: 'Sales 2014',
+axesDefaults: {
+labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+}, seriesDefaults: {
+rendererOptions: {
+smooth: true
+}
+},
+axes: {
+yaxis: {
+label: 'Sales', min: 0
+},
+xaxis: {
+label: 'Months', min: 1, max: $scope.barvalues.length
+}},
+series: [{ color: '#5FAB78' }]
+});}});</pre>
+<h2><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716">Output</span></h2>
+<p><amp-img class="alignnone size-full wp-image-103 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2016/11/ang-lastbc78.png?w=712" alt="ang-last" srcset="https://arindamchat.files.wordpress.com/2016/11/ang-last.png 468w, https://arindamchat.files.wordpress.com/2016/11/ang-last.png?w=96 96w, https://arindamchat.files.wordpress.com/2016/11/ang-last.png?w=192 192w" sizes="(min-width: 468px) 468px, 100vw" width="468" height="732"></amp-img></p>
+<p><span class="amp-wp-inline-f56e491a9b8cb65a6502fbf071f2f716"><strong>Points to be noted</strong></span></p>
+<ul><li>I have masked the actual server name with SERVERNAME is all JS references, you need to use correct URL.</li>
+<li>If you are using CDN, make sure internet is available in your server</li>
+</ul><ul><li>function GetSiteUrl()- is a very basic method, you need to modify it based on the depth of the SharePoint portal URL you are using, for me the URL is <a href="http://servrname/arindamc/Subsite1">http://SERVRNAME/arindamc/Subsite1</a>, so I used until urlParts[4] in the return statement.</li>
+</ul><p> </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/sharepoint/sharepoint-2013/index.html" rel="category tag">SharePoint 2013</a>, <a href="../../../../../category/sharepoint/sharepoint-2016/index.html" rel="category tag">SharePoint 2016</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/angular-js/index.html" rel="tag">Angular JS</a>, <a href="../../../../../tag/angularjs/index.html" rel="tag">AngularJS</a>, <a href="../../../../../tag/sharepoint-2013/index.html" rel="tag">SharePoint 2013</a>, <a href="../../../../../tag/sharepoint-app/index.html" rel="tag">SharePoint App</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b73ec.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=89&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b0adc.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDk1a1NBTTBmNXJTTWR%2BUnhoN2h3SkpwZ0RDWmZGJjVbYitUamUmbEVvUjBQNFsxaGVGQ2xwN21Sc1JEdG1icElhaFJCNEgtYS9VLy90eHIlfDNSWHR%2BSGpZZWtjc00s"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2016/11/16/angular-js-on-sharepoint-2013/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:50:43 GMT -->
+</html>

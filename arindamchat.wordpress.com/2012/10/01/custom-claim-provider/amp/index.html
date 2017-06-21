@@ -1,0 +1,1049 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/10/01/custom-claim-provider/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SharePoint 2010 Custom Claim provider" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="Custom Claim provider Here I&#8217;m not going to explain what a claim provider is and why you need this etc..   For Concept, how to create a Claims Provider etc. visit: I&#8217;m putting the first…" />
+<meta property="article:published_time" content="2012-10-01T12:22:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:45:59+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2012/10/1451d-image3jpgc6eb.jpg?w=300" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="SharePoint 2010 Custom Claim provider" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2012/10/a5c0c-image1d209.jpg?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>SharePoint 2010 Custom Claim provider &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2012\/10\/01\/custom-claim-provider\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"SharePoint 2010 Custom Claim provider","datePublished":"2012-10-01T12:22:00+00:00","dateModified":"2017-05-17T10:45:59+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2012\/10\/a5c0c-image1.jpg","width":626,"height":493}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-d485ee17378690004748f307935ef3a5{clear:both;text-align:left;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-21507e7500323d7b431dffade0db2874{text-indent:-.25in;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979{font-family:&#039;font-size:7pt;}.amp-wp-inline-05a3de982a6da7902bb154558fc13443{font-size:16pt;line-height:115%;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69{font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6{color:#2b91af;}.amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5{color:green;}.amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b{color:grey;}.amp-wp-inline-18b437614bed45025c4c295b9ac5faad{color:#a31515;}.amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c{color:blue;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-372cfef5e85cfba777b96ffe554f20e6{color:#2b91af;font-family:Consolas;font-size:14pt;}.amp-wp-inline-5351c802b9ef9e49480592783bbf5623{color:#2b91af;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-6014f4182e3c84f413edcd54f4b0111e{color:#a31515;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c{font-size:7pt;text-indent:-.25in;}.amp-wp-inline-6ed20ffe580859a881231d4bacaee8a1{font-family:&#039;font-size:9.5pt;line-height:115%;}.amp-wp-inline-c7cfcdf43446d40acc269e12b6963fb0{font-family:&#039;font-size:10pt;}.amp-wp-inline-ff8a8fe3ebe7f7f29b0236c8150e1690{font-size:20pt;line-height:115%;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">SharePoint 2010 Custom Claim provider</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2012-10-01T12:22:00+00:00">
+		5 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="MsoNormal"><b><span class="amp-wp-inline-ff8a8fe3ebe7f7f29b0236c8150e1690">Custom Claim provider</span></b></div>
+<div class="MsoNormal">Here I’m not going to explain what a claim provider is and why you need this etc..</div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b>For Concept, how to create a Claims Provider etc. visit:</b> <a href="http://msdn.microsoft.com/library/ee537299.aspx">http://msdn.microsoft.com/library/ee537299.aspx</a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">I’m putting the first Para here from the above MSDN page:</div>
+<p><i><span class="amp-wp-inline-c7cfcdf43446d40acc269e12b6963fb0">A claims provider issues claims and packages claims into security tokens. A claims provider has two roles: augmentation and picking.</span></i></p>
+<div><i><span class="amp-wp-inline-c7cfcdf43446d40acc269e12b6963fb0">Claims augmentation enables an application to augment additional claims into the user’s token. For example, with Windows-based log-in, the Active Directory ‘directory service’ can augment all of a user’s security groups into the user’s Windows token. With claims-based log-in, a customer relationship management (CRM) application can augment roles from a CRM database. By having these claims in the user’s token, resources can be authorized against these claims. That is, these claims are used to determine whether a particular user has access to specific resources.</span></i></div>
+<div><i><span class="amp-wp-inline-c7cfcdf43446d40acc269e12b6963fb0">Claims can be displayed in the People Picker control through claims picking. Claims picking enables an application to surface claims in the people picker, for example, when configuring the security of a SharePoint site or SharePoint service. This functionality enables you to provide search, resolve, and friendly display of claims.</span></i></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b>Case Study:</b>Microsoft IT implements a custom claims provider: <a href="http://technet.microsoft.com/en-us/library/hh427307.aspx">http://technet.microsoft.com/en-us/library/hh427307.aspx</a></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b>This article will give you some good startup for coding perspective: </b><a href="http://msdn.microsoft.com/en-us/magazine/hh547099.aspx">http://msdn.microsoft.com/en-us/magazine/hh547099.aspx</a></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b>And lastly this is one of the best articles written by </b><b><span class="amp-wp-inline-6ed20ffe580859a881231d4bacaee8a1">Steve Peschka: </span></b><a href="http://msdn.microsoft.com/library/ff699494.aspx">http://msdn.microsoft.com/library/ff699494.aspx</a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">So once you go through the above links, you will have a fairly good idea about how to write code, what are classes you have to override etc.etc.</div>
+<div class="MsoNormal">However I had my own scenario for which I had to write a CCP (custom claim provider), let me put the requirements here.</div>
+<div class="MsoNormal"></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<ul class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">a&gt;</span><span class="amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c">     </span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">We have to create a site where there will be different document libraries, the view/contribute access will be controlled by some properties each user has in AD.</span></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">b&gt;</span><span class="amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c">    </span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">The properties are Country, Department and Designation.</span></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">c&gt;</span><span class="amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c">     </span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">The first level control is country; users from one country should be able to doc libs meant for other countries.</span></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">d&gt;</span><span class="amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c">    </span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">2</span><sup class="amp-wp-inline-21507e7500323d7b431dffade0db2874">nd</sup><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874"> level control is the department, say all users are from India, but they have department like HR, Finance etc., they are also not suppose to view doc libs meant for other department</span></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">e&gt;</span><span class="amp-wp-inline-bd6a536f98c93710233fd5e64a805a2c">    </span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">3</span><sup class="amp-wp-inline-21507e7500323d7b431dffade0db2874">rd</sup><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874"> control is the designation, so one manager from HR department will have contribute permission, but other may have just the view permission.</span></li>
+</ul><p><!-- [if !supportLists]--></p>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">One option for this scenario is creating different security groups, but then the whole process become manual and it will not be easy in future to maintain this.</div>
+<div class="MsoNormal">So my option is create CCP based on the user profile values. That way we don’t have to bother who can be part of a security group or not, it’s all will be controlled by the AD properties.</div>
+<div class="MsoNormal">In this example, I have created just 3 CCP, but you can create as many you need, this is just one time job, once you deployed you are done, unless you need to change rules latter. That will be another code change and deployment.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">So here basically I have created 3 claims <span class="amp-wp-inline-6014f4182e3c84f413edcd54f4b0111e">“HRClaimUsers1”</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“EndClaimUser1”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“AdminClaimUsers1”</span></span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Let see how you can create the project, create an empty SharePoint project in Visual studio 2010, add an event receiver. The first thing you have to is to change the inheritance from current event receiver interface to   <span class="amp-wp-inline-5351c802b9ef9e49480592783bbf5623">SPClaimProvider.</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Once you do that, use VS to generate the override methods for this interface. After that you will basic clay have these two classes.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal">In the blog provider you will implement the actual method to read data from user profile and create differne4t claims and update people picker etc.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Collections.Generic;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Linq;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Text;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Web;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Administration;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Administration.Claims;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Diagnostics;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Utilities;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.Office.Server.UserProfiles;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.Office.Server;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.IdentityModel;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.IdentityModel.Claims;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.WebControls;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Data;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Data.SqlClient;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Collections;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Configuration;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Security.Permissions;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">namespace</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> BlogHRClaims</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">{</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    [Microsoft.SharePoint.Security.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SharePointPermission</span>(System.Security.Permissions.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SecurityAction</span>.Demand, ObjectModel = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>)]</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <b><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">class</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span></b>: </span><b><span class="amp-wp-inline-372cfef5e85cfba777b96ffe554f20e6">SPClaimProvider</span></b></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> BlogClaimProvider(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>displayName): <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">base</span>(displayName)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">internal</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">static</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ProviderDisplayName</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“HR Portal Claims”</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">internal</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">static</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ProviderInternalName</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“HRPortalClaimsProvider”</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> Name</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> ProviderInternalName;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">       </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Keys for our picker hierarchy.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] claimKeys = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] { <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“empHR”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“empEU”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“empAdmin”</span>};</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Teams we are using.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] claimNames = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] { <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“HRClaimUsers1”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“EndClaimUser1”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“AdminClaimUsers1”</span> };</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Labels for our nodes in the picker.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] claimLabels = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] { <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“HR Team”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“European Teams”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Admin Teams”</span> };</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">        #region</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">ClaimTypeInfo</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">static</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> SqlClaimType</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“<a href="http://schema.eu.myportal.com/hrportal&amp;#8221" rel="nofollow">http://schema.eu.myportal.com/hrportal&amp;#8221</a>;</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">static</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> SqlClaimValueType</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> Microsoft.IdentityModel.Claims.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ClaimValueTypes</span>.String;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">        #endregion</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b"><br/></span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> Gets the name from a fully qualified name.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></span> 
+</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">The full name. </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">a name string. </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>GetName(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> fullName)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] aName;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">char</span>[] aDelims = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Char</span>[] { <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">‘/’</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">‘\\’</span> };</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            aName = fullName.Split(aDelims);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> aName[aName.GetUpperBound(0)];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillClaimsForEntity(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Uri</span>context, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaim</span> entity, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaim</span>&gt; claims)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (entity == <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">throw</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ArgumentNullException</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“entity”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (claims == <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">throw</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ArgumentNullException</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“claims”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Figure out who the user is so we know what team to add to their claim.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaim</span> userIdClaim = <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimProviderManager</span>.DecodeUserIdentifierClaim(entity);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> userAlias = GetName(userIdClaim.Value.ToLowerInvariant());</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//if(userAlias.Contains(“gbchatta”))</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//{</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">// //Add the claim.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">// claims.Add(CreateClaim(SqlClaimType, “HRClaimUsers1”, SqlClaimValueType));</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//}</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//else</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//{</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//    claims.Add(CreateClaim(SqlClaimType, “EndClaimUser1”, SqlClaimValueType));</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//}</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            claims.Add(CreateClaim(SqlClaimType, getClaimFromAD(userAlias), SqlClaimValueType));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillClaimTypes(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>&gt; claimTypes)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (claimTypes == <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">throw</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ArgumentNullException</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“claimTypes”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add our claim type.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            claimTypes.Add(SqlClaimType);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillClaimValueTypes(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>&gt; claimValueTypes)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (claimValueTypes == <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">throw</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ArgumentNullException</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“claimValueTypes”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add our claim value type.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            claimValueTypes.Add(SqlClaimValueType);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillEntityTypes(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>&gt; entityTypes)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Return the type of entity claim we are using (only one in this case).</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            entityTypes.Add(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillHierarchy(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Uri</span>context, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] entityTypes, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> hierarchyNodeID, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">int</span>numberOfLevels, Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyTree</span>hierarchy)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Make sure picker is asking for the type of entity we return; site collection admin won’t for example.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (!EntityTypesContain(entityTypes, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Check to see if the hierarchyNodeID is null; it will be when the control </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//is first loaded but if a user clicks on one of the nodes it will return</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//the key of the node that was clicked.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">switch</span> (hierarchyNodeID)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">case</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>:</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//When it first loads add all our nodes.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    hierarchy.AddChild(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyNode</span>(</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderInternalName, </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimLabels[0], </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimKeys[0], </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    hierarchy.AddChild(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyNode</span>(</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderInternalName,</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimLabels[1],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimKeys[1],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    hierarchy.AddChild(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyNode</span>(</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderInternalName,</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimLabels[2],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimKeys[2],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">break</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">default</span>:</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">break</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillResolve(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Uri</span>context, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] entityTypes, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaim</span> resolveInput, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span>&gt; resolved)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Make sure picker is asking for the type of entity we return; site collection admin won’t for example.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (!EntityTypesContain(entityTypes, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Same sort of code as in search to validate we have a match.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">foreach</span> (<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> team <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">in</span> claimNames)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (team.ToLower() == resolveInput.Value.ToLower())</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//We have a match, create a matching entity.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span> pe = GetPickerEntity(team);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add it to the return list of picker entries.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    resolved.Add(pe);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillResolve(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Uri</span>context, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] entityTypes, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> resolveInput, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span>&gt; resolved)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Make sure picker is asking for the type of entity we return; site collection admin won’t for example.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (!EntityTypesContain(entityTypes, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Same sort of code as in search to validate we have a match.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">foreach</span> (<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> team <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">in</span> claimNames)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (team.ToLower() == resolveInput.ToLower())</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//We have a match, create a matching entity.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span> pe = GetPickerEntity(team);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add it to the return list of picker entries.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    resolved.Add(pe);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillSchema(Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderSchema</span> schema)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add the schema element we need at a minimum in our picker node.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            schema.AddSchemaElement(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSchemaElement</span>(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PeopleEditorEntityDataKeys</span>.DisplayName, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Display Name”</span>, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSchemaElementType</span>.Both));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">protected</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FillSearch(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Uri</span>context, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>[] entityTypes, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> searchPattern, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>hierarchyNodeID, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">int</span> maxCount, Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyTree</span> searchTree)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Make sure search is asking for the type of entity we return; site collection admin won’t for example.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (!EntityTypesContain(entityTypes, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Counter to track what node we are in.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">int</span> teamNode = -1;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Nodes where we will stick our matches.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            Microsoft.SharePoint.WebControls.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyNode</span>matchNode = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Look to see if the value that is typed in matches any of our teams.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">foreach</span> (<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> team <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">in</span> claimNames)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Increment team node tracker.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                teamNode += 1;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (team.ToLower().StartsWith(searchPattern.ToLower()))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//We have a match, create a matching entity.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span> pe = GetPickerEntity(team);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add the team node where it should be displayed too.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span>(!searchTree.HasChild(claimKeys[teamNode]))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Create the node so we can show our match in there too.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        matchNode = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPProviderHierarchyNode</span>(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderInternalName,</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimLabels[teamNode],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            claimKeys[teamNode],</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add it to the tree.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        searchTree.AddChild(matchNode);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">else</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Get the node for this team.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                        matchNode = searchTree.Children.Where(theNode =&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                            theNode.HierarchyNodeID == claimKeys[teamNode]).First();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Add the match to our node.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    matchNode.AddEntity(pe);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span>GetPickerEntity(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ClaimValue)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//We have a match, create a matching entity.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PickerEntity</span> pe = CreatePickerEntity();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Set the claim associated with this match.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.Claim = CreateClaim(SqlClaimType, ClaimValue, SqlClaimValueType);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Set the tooltip that is displayed when you hover over the resolved claim.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.Description = <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderDisplayName + <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“:”</span> + ClaimValue;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Set the text we will display.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.DisplayText = ClaimValue;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Store it here too in the hashtable **.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.EntityData[<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">PeopleEditorEntityDataKeys</span>.DisplayName] = ClaimValue;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//User entity.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.EntityType = <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimEntityTypes</span>.FormsRole;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Flag the entry as being resolved.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.IsResolved = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//This is the first part of the description that shows</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//up above the matches, like Role: Forms Authentication when</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//you do an FBA search and find a matching role.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            pe.EntityGroupName = <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Choose HR Claim Group”</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> pe;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">bool</span> SupportsEntityInformation</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            { </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>; </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">bool</span> SupportsHierarchy</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            { </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>; </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">bool</span> SupportsResolve</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            { </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>; </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">bool</span> SupportsSearch</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            { </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>; </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>getClaimFromAD(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> userName)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> sClaim = <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“ErrorClaim”</span>;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">try</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSecurity</span>.RunWithElevatedPrivileges(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">delegate</span>()</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">               {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                   <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">using</span> (<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSite</span>site = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSite</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“<a href="http://gbise:1111/&amp;#8221" rel="nofollow">http://gbise:1111/&amp;#8221</a>;</span>))</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                   {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPServiceContext</span>serviceContext = <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPServiceContext</span>.GetContext(site.WebApplication.ServiceApplicationProxyGroup, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSiteSubscriptionIdentifier</span>.Default);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">UserProfileManager</span>profileManager = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">UserProfileManager</span>(serviceContext);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">UserProfile</span>profile = profileManager.GetUserProfile(userName);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span>(profile != <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ADDepartment = profile[<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Department”</span>].Value.ToString();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>ADOffice = profile[<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Designation”</span>].Value.ToString();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ADCountryCode = profile[<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“CountryName”</span>].Value.ToString(); <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//Internal Name of Country is </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//”HRClaimUsers1″, “EndClaimUser1”, “AdminClaimUsers1”</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//EndUserClaimGroup</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (ADOffice != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Bangalore”</span>&amp;&amp; ADDepartment != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“BPES”</span>&amp;&amp; ADCountryCode != <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span>.Empty)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                               sClaim = claimNames[1];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//HRClaimGroup</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (ADOffice != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Bangalore”</span>&amp;&amp; ADDepartment == <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“BPES”</span>&amp;&amp; ADCountryCode != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“GB”</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                               sClaim = claimNames[0];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">//AdminClaimGroup</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (ADOffice == <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Bangalore”</span>&amp;&amp; ADDepartment == <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“BPES”</span>&amp;&amp; ADCountryCode == <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“GB”</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                               sClaim = claimNames[2];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                           </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                         </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                       }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                   }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">               });</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">catch</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">             <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> sClaim;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">   </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">}</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">And below is the event receiver class:</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Runtime.InteropServices;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> System.Security.Permissions;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Security;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">using</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> Microsoft.SharePoint.Administration.Claims;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">namespace</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> BlogHRClaims.Features.BlogClaimsFeature</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">{</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b"><br/></span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> This class handles events raised during feature activation, deactivation, installation, uninstallation, and upgrade.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></span> 
+</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> The GUID attached to this class may be used during packaging and should not be modified.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    [<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SharePointPermission</span>(System.Security.Permissions.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SecurityAction</span>.Demand, ObjectModel = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">true</span>)]</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    [<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Guid</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“65a1dedf-89fe-466b-91b9-7ec09c23bfad”</span>)]</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">class</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">HRClaimsFeatureEventReceiver</span> : <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPClaimProviderFeatureReceiver</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ClaimProviderAssembly</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> { <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">typeof</span>(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>).Assembly.FullName; }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ClaimProviderDescription</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> { <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">@”Arindam:This feature adds ContentWeb claim types/values in the security token”</span>; }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ClaimProviderDisplayName</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> { <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>.ProviderDisplayName; }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> ClaimProviderType</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">get</span> { <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">typeof</span>(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">BlogClaimProvider</span>).FullName; }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b"><br/></span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> This methods gets called after the activation of the feature.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></span> 
+</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">Represents the properties of a feature activation</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">void.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">public</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">override</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> FeatureActivated(Microsoft.SharePoint.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFeatureReceiverProperties</span> properties)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            ExecBaseFeatureActivated(properties);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b"><br/></span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> Because use of base keywork can lead to unverifiable code inside lambda expression, </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> this function is created as a wrapper for the base.FeatureActivated function.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span><span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> This function gets called in the following lambda expression.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> </span></span> 
+</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5">Represents the properties of a feature activation.</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-b9b40175fabe1bbb5f0e1105c8b1bf0b">///</span> <span class="amp-wp-inline-61f54ec584ad0df1f18f15c5583390b5"> void </span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">private</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span>ExecBaseFeatureActivated(Microsoft.SharePoint.<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFeatureReceiverProperties</span>properties)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">base</span>.FeatureActivated(properties);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">    }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">}</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443">Test:</span></b></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Open your claim solution in Visual studio 2010.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Change the SharePoint site name to appropriate one, Note: This SharePoint site must be within a claim based Web Application</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Build and <a name="_GoBack"></a>deploy the project.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Open the site say <a href="http://gbise001:1111/">http://gbise001:1111/</a></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Create A document library Named <b>Doc1</b></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Go to the document library permission page, break the inheritance.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Go to the add permission page of the document library</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Open the people picker, select the “HR Portal Claims” , type HR</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/10/a5c0c-image1.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/10/a5c0c-image1dcbd.jpg?w=400&amp;h=315" width="400" height="315" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"><!--[endif]--></div>
+<div class="MsoNormal"><b>Fig: The claim provider “HR Portal Claims” is shown.</b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/10/52b94-image2.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/10/52b94-image21ba8.jpg?w=400&amp;h=310" width="400" height="310" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"><!--[endif]--></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->HRCLaimUser1 will appear, add it and grant it Contribute permission.</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Do similar for the other two claim groups also. Final look will be as below</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/10/1451d-image3jpg.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/10/1451d-image3jpg09f8.jpg?w=320&amp;h=251" width="320" height="251" sizes="(min-width: 320px) 320px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="separator amp-wp-inline-d485ee17378690004748f307935ef3a5">So now you don’t have to worry about who is entering in your site, based of his user profile data his access will be controlled.</div>
+<div class="MsoNormal"><!--[endif]--></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/claims/index.html" rel="tag">Claims</a>, <a href="../../../../../tag/custom-claim/index.html" rel="tag">Custom Claim</a>, <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>, <a href="../../../../../tag/sharepoint-claim/index.html" rel="tag">SharePoint Claim</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#comments">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b8305.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=45&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b02d7.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDlaOWUzY18%2FUkh1bnFvXWJrMWZublFtSmNSdGhKbEYtTll3ciVod1J%2BTT1tLFJIQjM9TXJRTSZhWnwlalglSWFBW0l5OHVtSUZNcFpKU3xmV09mLVRBX3Fzd1RRamQ%3D"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/10/01/custom-claim-provider/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:43 GMT -->
+</html>

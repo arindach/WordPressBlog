@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:45:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="../../../../xmlrpc.php">
+
+<title>Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS) &#8211; Arindam&#039;s Blog</title>
+<link rel='dns-prefetch' href='http://s2.wp.com/' />
+<link rel='dns-prefetch' href='http://s1.wp.com/' />
+<link rel='dns-prefetch' href='http://s0.wp.com/' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS) Comments Feed" href="feed/index.html" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8-RC2-40878"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJyFkNFOwzAMRX+IYG2MCh4mviVJrc5bHFu1q21/v5QKEBsqL5GvdY+vYzhryFIdqwNPQcs0UDU4axYOxlTweqees9kT/I0VOqHBEV1jPoVP9WBPRYafHBn72BsMRVIsa6NHLNGxDyrmd2oNyzJi67NGnx2MPUUsyM22hrF2X9RcHtp3VmOWC6WkI5qF9jJNHPzQgv5Zj+dVllNBM/7uLChBFadG23fxMHOJAp0S0IWkgvm14Gz74P1m995tu9e3zcvxBtrkuko=' type='text/css' media='all' />
+<link rel='stylesheet' id='ixion-fonts-archivo-css'  href='http://fonts.googleapis.com/css?family=Archivo+Narrow%3A400%2C400i%2C700%2C700i&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9jUsKwzAMRC9UV6Skv0XpWRyjOCq2ZSyFpLevszOEZjePmcfAko3jpJgUdMKIAnkegFbiBFYEVWCsvYBjzlgmXEj17ERO0KhxNjnMnpKAx4SFavEn7tzdLSUHot+AZsmO4/EZm8DO6ua1YMZgqRypBYfAvkYPddXgJr3jq+vvj2t/eXa3zw92gm4m' type='text/css' media='all' />
+<link rel='stylesheet' id='print-css-3-1' href='../../../../../s0.wp.com/wp-content/mu-plugins/global-print/global-print6805.css?m=1465851035h' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-4-1' href='https://s2.wp.com/_static/??-eJx9i9EKwjAMRX/IGoVN54P4LVnp2kialCbD3xcfRGTi0z0XzoFHC1HFkzjUNTReM4kBRieVGfuH9tFsB7/1puZhYaQOVrCT5Pf+q0wjIQfWrN9nE3lJNRmUATLrjPwSbvV6HC6H83Qap/H+BMWZScE=' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='../../../../../s1.wp.com/wp-content/mu-plugins/highlander-comments/style0196.css?m=1377793621h' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Azure Log Analysis in Operations Manager Suits (OMS)' href='../../25/operationmanagersuit-oms/index.html' />
+<link rel='next' title='Deploy ASP.NET MVC5 Grid View Application to Azure App Service' href='../../../05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/index.html' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='http://wp.me/p4VKgf-4Z' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)" />
+<meta property="og:url" content="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/" />
+<meta property="og:description" content="This is in continuation of my previous post, Azure Log Analysis. In that post I have discussed how to configure log data collection from your server, next step will be analyze and visualize the dat…" />
+<meta property="article:published_time" content="2017-01-27T13:16:25+00:00" />
+<meta property="article:modified_time" content="2017-01-27T13:16:25+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="https://arindamchat.files.wordpress.com/2017/01/28.png" />
+<meta property="og:image:width" content="475" />
+<meta property="og:image:height" content="367" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)" />
+<meta name="twitter:image" content="https://arindamchat.files.wordpress.com/2017/01/110.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=114" />
+<link rel='openid.server' href='../../../../indexdd8f.html?openidserver=1' />
+<link rel='openid.delegate' href='../../../../index.html' />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../osd.xml" title="Arindam&#039;s Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f5f0e9" />
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Arindam&#039;s Blog" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://arindamchat.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS) | Arindam&#039;s Blog on WordPress.com" />
+<meta name="description" content="This is in continuation of my previous post, Azure Log Analysis. In that post I have discussed how to configure log data collection from your server, next step will be analyze and visualize the data collected. We have Log Search, Dashboard and Designers available for that in OMS portal. In Log Search feature you can combine and correlate&hellip;" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f0e9; }
+</style>
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'arindamchat.wordpress.com',
+				pageURL: 'https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/'
+			};
+		</script>
+ 		<script type="text/javascript" src="../../../../../s.pubmine.com/head.js"></script>
+		<script type="text/javascript" src="../../../../../static.criteo.net/js/ld/publishertag.js"></script><link rel="amphtml" href="amp/index.html" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{color:#fff}.site-description,.featured-content .hentry .entry-title a{color:#fff}.comment-author,.footer-widgets .widget a,body,button,input,select,textarea{color:#192930}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:#eeece8}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:rgba(238,236,232,.3)}.comment-metadata,.entry-footer,.entry-meta,.footer-widgets .widget-title,.main-navigation ul>li.current-menu-item>a,.main-navigation ul>li.current_page_item>a,.more-recent-posts,.more-recent-posts:visited,.more-testimonials,.more-testimonials:visited,.search-form-icon:before,.site-header .jetpack-social-navigation a,.site-info,div#jp-relatedposts h3.jp-relatedposts-headline{color:#67655f}.search-form-icon:before,.search-form .search-field{border-color:#a5a29d}.search-form-icon:before,.search-form .search-field{border-color:rgba(165,162,157,.3)}body,ins,mark,.site-header .search-form-icon:before,.site-header .search-form .search-field,.footer-widgets .widget{background-color:#f5f0e9}.entry-author,.widget,hr,.testimonials .hentry{background-color:#f0e9df}.featured-content .hentry,.header-overlay{background-color:#42566a}.header-overlay:before{background-color:#42566a}.header-overlay:before{background-color:rgba(66,86,106,.7)}h1,h2,h3,h4,h5,h6,.entry-title a,.entry-title a:visited,.entry-title,.page-title,.widget-title,.site-title,.comments-title,.site-title a,.site-title a:visited{color:#42566a}#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"]{background-color:#a84c38}#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{background-color:#954331}.main-navigation ul ul{border-top-color:#a84c38}.main-navigation ul ul:before{color:#a84c38}.comment-metadata .edit-link a,.site-header .jetpack-social-navigation a:hover,a,a:visited,.main-navigation .nav-menu>li>a,.testimonials .edit-link a,.testimonials .edit-link a:visited{color:#a44a36}a:hover,a:focus,a:active{color:#a84c38}.featured-content .hentry:hover .entry-title a{color:#e8d0c9}</style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-309 single-format-standard custom-background mp6 customizer-styles-applied singular has-description no-featured-posts highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="utility-container">
+						
+<form role="search" method="get" class="search-form" action="https://arindamchat.wordpress.com/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field"
+		placeholder="Search &hellip;"
+		value="" name="s"
+		title="Search for:" />
+		<span class="search-form-icon"></span>
+	</label>
+	<input type="submit" class="search-submit"
+		value="Search" />
+</form>
+		</div>
+
+		<div class="branding-container">
+					<div class="site-branding">
+			
+								<p class="site-title"><a href="../../../../index.html" rel="home">Arindam&#039;s Blog</a></p>
+					</div><!-- .site-branding -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+	<div class="menu-top-menu-for-the-site-container"><ul id="top-menu" class="menu"><li id="menu-item-205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-205"><a href="../../../../index.html">Home</a></li>
+<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-523"><a href="../../../../category/azure/index.html">Azure</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-526"><a href="../../../../category/fast/index.html">FAST</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-527"><a href="../../../../category/sharepoint/index.html">SharePoint</a>
+<ul  class="sub-menu">
+	<li id="menu-item-532" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532"><a href="../../../../category/sharepoint/sharepoint-2016/index.html">SharePoint 2016</a></li>
+	<li id="menu-item-530" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-530"><a href="../../../../category/sharepoint/sharepoint-2013/index.html">SharePoint 2013</a></li>
+	<li id="menu-item-531" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-531"><a href="../../../../category/sharepoint/sharepoint-2010/index.html">SharePoint 2010</a></li>
+</ul>
+</li>
+<li id="menu-item-528" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-528"><a href="../../../../category/net/index.html">.NET</a>
+<ul  class="sub-menu">
+	<li id="menu-item-533" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533"><a href="../../../../category/net/smart-client/index.html">Smart Client</a></li>
+	<li id="menu-item-534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534"><a href="../../../../category/net/click-once/index.html">Click Once</a></li>
+</ul>
+</li>
+<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href="../../../../zabout-me/index.html">About Me</a></li>
+</ul></div></nav>
+		</div>
+
+	</header>
+
+	
+	<div id="content" class="site-content">
+		<div class="entry-meta">
+			<span class="posted-on"><a href="index.html" rel="bookmark"><time class="entry-date published updated" datetime="2017-01-27T13:16:25+00:00">January 27, 2017</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="../../../../author/arindach/index.html">Arindam C</a></span></span> <span class="cat-links"><a href="../../../../category/azure/index.html" rel="category tag">Azure</a></span>					</div><!-- .entry-meta -->
+<h1 class="entry-title">Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)</h1>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-309" class="post-309 post type-post status-publish format-standard hentry category-azure tag-azure tag-iis-logs tag-iislogs tag-log-analysis tag-log-search tag-logs tag-oms tag-operations-management-suite tag-sharepoint-logs no-featured-image">
+	<div class="entry-body">
+		<header class="entry-header">
+					</header>
+		<div class="entry-content">
+			<h2></h2>
+<p>This is in continuation of my previous post, <a href="../../25/operationmanagersuit-oms/index.html" target="_blank">Azure Log Analysis</a>. In that post I have discussed how to configure log data collection from your server, next step will be analyze and visualize the data collected. We have Log Search, Dashboard and Designers available for that in OMS portal.</p>
+<p class="lf-text-block lf-block">In <strong>Log Search</strong> feature you can combine and correlate any machine data from multiple sources within your environment. On the Search page, you can create a query to filter the results. You can also create advanced queries to transform, filter, and report on your results, save and export the output.</p>
+<p class="lf-text-block lf-block"><strong>Dashboard</strong> is used to create a visualization with the saved queries.</p>
+<p class="lf-text-block lf-block"><strong>Designer</strong> is used to create  custom views in the OMS console that contain different visualizations of data in the OMS repository</p>
+<h2>How to Search logs in Log Search:</h2>
+<p>Before star, please check this niche article from MS: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-log-searches">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-log-searches</a> , this will give you a good idea how to do log search and the properties of various types of logs.</p>
+<p>To perform Log Search you need to click on right icon as below</p>
+<p><img data-attachment-id="329" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/1-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/110.png?w=712" data-orig-size="544,320" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="1" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/110.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/110.png?w=712?w=544" class="alignnone size-full wp-image-329" src="../../../../../arindamchat.files.wordpress.com/2017/01/110bc78.png?w=712" alt="1" srcset="https://arindamchat.files.wordpress.com/2017/01/110.png 544w, https://arindamchat.files.wordpress.com/2017/01/110.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/110.png?w=300 300w" sizes="(max-width: 544px) 100vw, 544px"   /></p>
+<p>Some good points about Log search</p>
+<ul>
+<li>In the Log search page there are some default queries and filters present which can be readily used as shown below, you can then modify the query further.</li>
+<li><img data-attachment-id="330" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/2-5/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/25.png?w=712" data-orig-size="354,424" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="2" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/25.png?w=712?w=250" data-large-file="https://arindamchat.files.wordpress.com/2017/01/25.png?w=712?w=354" class="alignnone size-full wp-image-330" src="../../../../../arindamchat.files.wordpress.com/2017/01/25bc78.png?w=712" alt="2" srcset="https://arindamchat.files.wordpress.com/2017/01/25.png 354w, https://arindamchat.files.wordpress.com/2017/01/25.png?w=125 125w, https://arindamchat.files.wordpress.com/2017/01/25.png?w=250 250w" sizes="(max-width: 354px) 100vw, 354px"   /></li>
+</ul>
+<ul>
+<li>You can either use a filter for basic find of a query for more complex find.</li>
+<li>The query syntax is pretty easy.</li>
+<li>You can use Boolean operators, math operators, AND/OR, where, select, aggregate and group by features.</li>
+<li>Pipe sign can also be used to pass a query output to another</li>
+<li>Log properties are same as the log columns headers e.g. for IIS log there is a property called “csUserAgent” which you can find in the IIS log file also. So it’s easy to correlate.</li>
+<li>There is intellisense while writing the query.</li>
+<li>You can save your query</li>
+<li>The query result can be viewed as table of graph, it’s possible to change graph type also.</li>
+<li>You can create dashboard using the same query.</li>
+<li>Query output can be exported to excel.</li>
+</ul>
+<h1>Use filters</h1>
+<p>The most basic filters you can use are <em>keywords</em>, such as ‘error’ or ‘timeout’, or a computer name. These types of simple queries generally return diverse shapes of data within the same result set. This is because Log Analytics has different <em>types</em> of data in the system e.g. W3CIISLog is the IIS logtype, if you type “Type=” is the search box then you can see the available types.</p>
+<p><img data-attachment-id="331" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/3-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/31.png?w=712" data-orig-size="421,343" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="3" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/31.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/31.png?w=712?w=421" class="alignnone size-full wp-image-331" src="../../../../../arindamchat.files.wordpress.com/2017/01/31bc78.png?w=712" alt="3" srcset="https://arindamchat.files.wordpress.com/2017/01/31.png 421w, https://arindamchat.files.wordpress.com/2017/01/31.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/31.png?w=300 300w" sizes="(max-width: 421px) 100vw, 421px"   /></p>
+<p>You can also just type error or timeout to find specific type of entries.</p>
+<h1>Use Queries</h1>
+<p>But most of the time filters won’t help you much and often you need to write complex queries. Here I’m going to how write complex queries for IISLogs, but similar or same syntax can be used for other type of logs also like windows event logs or syslog or any type of custom logs.</p>
+<p>To remind, I have connected to 3 Windows Computers and reading IISLog from there, you can check how to set that in my previous blog: <a href="../../25/operationmanagersuit-oms/index.html" target="_blank">Azure Log Analysis</a>, and set to read IISlogs from connected computers.</p>
+<p><img data-attachment-id="332" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/4-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/41.png?w=712" data-orig-size="1039,211" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="4" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/41.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/41.png?w=712?w=712" class="alignnone size-full wp-image-332" src="../../../../../arindamchat.files.wordpress.com/2017/01/41bc78.png?w=712" alt="4" srcset="https://arindamchat.files.wordpress.com/2017/01/41.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/41.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/41.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/41.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/41.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/41.png 1039w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p><img data-attachment-id="333" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/5-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/51.png?w=712" data-orig-size="1018,423" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="5" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/51.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/51.png?w=712?w=712" class="alignnone size-full wp-image-333" src="../../../../../arindamchat.files.wordpress.com/2017/01/51bc78.png?w=712" alt="5" srcset="https://arindamchat.files.wordpress.com/2017/01/51.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/51.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/51.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/51.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/51.png 1018w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>If your connection is good then you should see some logs when you click “All collected data” link in the “Log Search” area, this is a default query.</p>
+<p><img data-attachment-id="335" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/7-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/71.png?w=712" data-orig-size="299,93" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="7" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/71.png?w=712?w=299" data-large-file="https://arindamchat.files.wordpress.com/2017/01/71.png?w=712?w=299" class="alignnone size-full wp-image-335" src="../../../../../arindamchat.files.wordpress.com/2017/01/71bc78.png?w=712" alt="7" srcset="https://arindamchat.files.wordpress.com/2017/01/71.png 299w, https://arindamchat.files.wordpress.com/2017/01/71.png?w=150 150w" sizes="(max-width: 299px) 100vw, 299px"   /></p>
+<p>So I have lots of result, and by default this is shown as list.</p>
+<p><img data-attachment-id="336" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/8-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/81.png?w=712" data-orig-size="806,708" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="8" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/81.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/81.png?w=712?w=712" class="alignnone size-full wp-image-336" src="../../../../../arindamchat.files.wordpress.com/2017/01/81bc78.png?w=712" alt="8" srcset="https://arindamchat.files.wordpress.com/2017/01/81.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/81.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/81.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/81.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/81.png 806w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>You can change it to Table also</p>
+<p><img data-attachment-id="337" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/9-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/91.png?w=712" data-orig-size="1468,590" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="9" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/91.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/91.png?w=712?w=712" class="alignnone size-full wp-image-337" src="../../../../../arindamchat.files.wordpress.com/2017/01/91bc78.png?w=712" alt="9" srcset="https://arindamchat.files.wordpress.com/2017/01/91.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/91.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/01/91.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/91.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/91.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/91.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Check the table headers; there are many more properties for IISLogs , you can check here: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources-iis-logs">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources-iis-logs</a> , but the table by default show these columns. If you add a column in the query that will appear as a column in the output.</p>
+<p><img data-attachment-id="338" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/10-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/101.png?w=712" data-orig-size="1327,50" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="10" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/101.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/101.png?w=712?w=712" class="alignnone size-full wp-image-338" src="../../../../../arindamchat.files.wordpress.com/2017/01/101bc78.png?w=712" alt="10" srcset="https://arindamchat.files.wordpress.com/2017/01/101.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/101.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/101.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/101.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/101.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/101.png 1327w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Another interesting thing is the search box. Since you searched all data, this shows the wildcard filter *. We will write our queries here.</p>
+<p><img data-attachment-id="339" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/11-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/111.png?w=712" data-orig-size="615,262" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="11" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/111.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/111.png?w=712?w=615" class="alignnone size-full wp-image-339" src="../../../../../arindamchat.files.wordpress.com/2017/01/111bc78.png?w=712" alt="11" srcset="https://arindamchat.files.wordpress.com/2017/01/111.png 615w, https://arindamchat.files.wordpress.com/2017/01/111.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/111.png?w=300 300w" sizes="(max-width: 615px) 100vw, 615px"   /></p>
+<h3></h3>
+<h3>Query Operator:</h3>
+<p>Let’s search all the logs generated in last 24 hours. The query will be:</p>
+<p><em>(Type=W3CIISLog) TimeGenerated&gt;NOW-24HOURS</em></p>
+<p>Paste this query in the search bar and press enter. So the result shows all records generated on last 24 hours. You can change the query like</p>
+<p>(<em>Type=W3CIISLog) TimeGenerated&gt;NOW-1Day</em></p>
+<p>The result will be same</p>
+<p><img data-attachment-id="340" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/12-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/121.png?w=712" data-orig-size="582,285" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="12" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/121.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/121.png?w=712?w=582" class="alignnone size-full wp-image-340" src="../../../../../arindamchat.files.wordpress.com/2017/01/121bc78.png?w=712" alt="12" srcset="https://arindamchat.files.wordpress.com/2017/01/121.png 582w, https://arindamchat.files.wordpress.com/2017/01/121.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/121.png?w=300 300w" sizes="(max-width: 582px) 100vw, 582px"   /></p>
+<p>Let’s check the syntax of the query, this is pretty straight forward. Search logtype IIS for last 24 hours or 1 day, so keywords are Type and TimeGenrated, inputs are W§CIISLog and NOW and 24HOURS, operators are “-“, see the nice color coding below J</p>
+<p><strong>(<span style="color:#0000ff;">Type</span>=<span style="color:#008000;">W3CIISLog</span>) <span style="color:#0000ff;">TimeGenerated</span><span style="color:#ff0000;">&gt;</span><span style="color:#008000;">NOW</span><span style="color:#ff0000;">&#8211;</span><span style="color:#008000;">24HOURS</span></strong></p>
+<h3>Sort</h3>
+<p>Let’s add sort on the above query, query will be as below, note the usage of pipe sign here. <em>(Type=W3CIISLog) TimeGenerated&gt;NOW-1Day | Sort TimeGenerated desc</em></p>
+<p><img data-attachment-id="341" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/13-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712" data-orig-size="462,237" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712?w=462" class="alignnone size-full wp-image-341" src="../../../../../arindamchat.files.wordpress.com/2017/01/131bc78.png?w=712" alt="13" srcset="https://arindamchat.files.wordpress.com/2017/01/131.png 462w, https://arindamchat.files.wordpress.com/2017/01/131.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/131.png?w=300 300w" sizes="(max-width: 462px) 100vw, 462px"   /></p>
+<h3>Limit and top</h3>
+<p>Query: <em>(Type=W3CIISLog) TimeGenerated&gt;NOW-1Day | Sort TimeGenerated desc| Limit 3</em></p>
+<p><img data-attachment-id="341" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/13-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712" data-orig-size="462,237" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/131.png?w=712?w=462" class="alignnone size-full wp-image-341" src="../../../../../arindamchat.files.wordpress.com/2017/01/131bc78.png?w=712" alt="13" srcset="https://arindamchat.files.wordpress.com/2017/01/131.png 462w, https://arindamchat.files.wordpress.com/2017/01/131.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/131.png?w=300 300w" sizes="(max-width: 462px) 100vw, 462px"   /></p>
+<h3>Select</h3>
+<p>To select only the properties that you specify. Here I’m selecting Computer, Username, site name and time taken load the sites</p>
+<p><em>(Type=W3CIISLog) TimeGenerated&gt;NOW-1Day | Sort TimeGenerated desc| Limit 3 | Select Computer,csUserName,sSiteName, TimeTaken</em></p>
+<p><img data-attachment-id="343" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/15-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/151.png?w=712" data-orig-size="815,255" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="15" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/151.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/151.png?w=712?w=712" class="alignnone size-full wp-image-343" src="../../../../../arindamchat.files.wordpress.com/2017/01/151bc78.png?w=712" alt="15" srcset="https://arindamchat.files.wordpress.com/2017/01/151.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/151.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/151.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/151.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/151.png 815w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h3>Functions and Group By</h3>
+<p>We often have to use functions like max, min, count, avg etc. To use them we need to use the keyword “Measure” e.g. Measure Max() and Measure Min()</p>
+<p>Let’s try to find the log entry which needed max time to load in each server.</p>
+<p><em>(Type=W3CIISLog) TimeGenerated&gt;NOW-1Day | Sort TimeGenerated desc | Measure Max (TimeTaken) by Computer</em></p>
+<p><img data-attachment-id="344" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/16-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/161.png?w=712" data-orig-size="1119,222" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="16" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/161.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/161.png?w=712?w=712" class="alignnone size-full wp-image-344" src="../../../../../arindamchat.files.wordpress.com/2017/01/161bc78.png?w=712" alt="16" srcset="https://arindamchat.files.wordpress.com/2017/01/161.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/161.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/161.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/161.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/161.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/161.png 1119w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Now this query does not tell me what was the sites that is taking most time to load, so let’s modify the query further.</p>
+<p><em>(Type=W3CIISLog) TimeGenerated&gt;NOW-1Day | Sort TimeGenerated desc | Measure Max (TimeTaken) by Computer, sSiteName</em></p>
+<p>Notice the output here, when you are adding “by Computer, sSiteName”, you are actually adding group by here, so the result will be group by computers first and then by sites.</p>
+<p><img data-attachment-id="345" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/17-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/171.png?w=712" data-orig-size="888,305" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="17" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/171.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/171.png?w=712?w=712" class="alignnone size-full wp-image-345" src="../../../../../arindamchat.files.wordpress.com/2017/01/171bc78.png?w=712" alt="17" srcset="https://arindamchat.files.wordpress.com/2017/01/171.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/171.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/171.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/171.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/171.png 888w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>To get average time taken by each site in last 3days, check the part <em>NOW-3DAY..NOW. </em>This is between two dates.</p>
+<p><em>(Type=W3CIISLog) TimeGenerated: [NOW-3DAY..NOW] | measure avg(TimeTaken) by sSiteName</em></p>
+<p>To get number of users in last 3 days</p>
+<p><em>(Type=W3CIISLog) TimeGenerated: [NOW-3DAY..NOW] | measure COUNT (csUserName) by sSiteName</em></p>
+<p><img data-attachment-id="346" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/18-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/181.png?w=712" data-orig-size="630,231" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="18" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/181.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/181.png?w=712?w=630" class="alignnone size-full wp-image-346" src="../../../../../arindamchat.files.wordpress.com/2017/01/181bc78.png?w=712" alt="18" srcset="https://arindamchat.files.wordpress.com/2017/01/181.png 630w, https://arindamchat.files.wordpress.com/2017/01/181.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/181.png?w=300 300w" sizes="(max-width: 630px) 100vw, 630px"   /></p>
+<p>Does the output look a bit awkward?  <strong>255750 users???</strong> Yea, you are not counting distinct users here, so the correct query will be</p>
+<p><em>(Type=W3CIISLog) TimeGenerated: [NOW-3DAY..NOW] | measure COUNTDISTINCT (csUserName) by sSiteName</em></p>
+<p>Now this looks correct 🙂<img data-attachment-id="347" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/19-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/191.png?w=712" data-orig-size="696,260" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="19" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/191.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/191.png?w=712?w=696" class="alignnone size-full wp-image-347" src="../../../../../arindamchat.files.wordpress.com/2017/01/191bc78.png?w=712" alt="19" srcset="https://arindamchat.files.wordpress.com/2017/01/191.png 696w, https://arindamchat.files.wordpress.com/2017/01/191.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/191.png?w=300 300w" sizes="(max-width: 696px) 100vw, 696px"   /></p>
+<h3>Interval</h3>
+<p>This is an interesting keyword. With real time log data collection, like this IISlogs, if you want check trends, this is very useful, e.g. let’s try to find how many requests are coming to sites in every 30 minutes. This is a good way to know when your server is busy maximum. The query will be like below</p>
+<p><em>(Type=W3CIISLog) TimeGenerated: [NOW-3DAY..NOW] | measure COUNTDISTINCT (csMethod) by Computer ,sSiteName Interval 30MINUTES</em></p>
+<p><img data-attachment-id="348" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/20-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/201.png?w=712" data-orig-size="837,353" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/201.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/201.png?w=712?w=712" class="alignnone size-full wp-image-348" src="../../../../../arindamchat.files.wordpress.com/2017/01/201bc78.png?w=712" alt="20" srcset="https://arindamchat.files.wordpress.com/2017/01/201.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/201.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/201.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/201.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/201.png 837w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Now to get a more visual idea, you can change the output to “Chart” as below</p>
+<p><img data-attachment-id="349" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/21-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/211.png?w=712" data-orig-size="1091,655" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="21" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/211.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/211.png?w=712?w=712" class="alignnone size-full wp-image-349" src="../../../../../arindamchat.files.wordpress.com/2017/01/211bc78.png?w=712" alt="21" srcset="https://arindamchat.files.wordpress.com/2017/01/211.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/211.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/211.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/211.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/211.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/211.png 1091w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>You can change this to bar by clicking the settings wheel on top right</p>
+<p><img data-attachment-id="350" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/22-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/221.png?w=712" data-orig-size="453,247" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="22" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/221.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/221.png?w=712?w=453" class="alignnone size-full wp-image-350" src="../../../../../arindamchat.files.wordpress.com/2017/01/221bc78.png?w=712" alt="22" srcset="https://arindamchat.files.wordpress.com/2017/01/221.png 453w, https://arindamchat.files.wordpress.com/2017/01/221.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/221.png?w=300 300w" sizes="(max-width: 453px) 100vw, 453px"   /></p>
+<p>And the output will be</p>
+<p><img data-attachment-id="351" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/23-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/231.png?w=712" data-orig-size="1078,588" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="23" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/231.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/231.png?w=712?w=712" class="alignnone size-full wp-image-351" src="../../../../../arindamchat.files.wordpress.com/2017/01/231bc78.png?w=712" alt="23" srcset="https://arindamchat.files.wordpress.com/2017/01/231.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/231.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/231.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/231.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/231.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/231.png 1078w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h1>Saving Your Query</h1>
+<p>So like this you can keep writing your own query, but it’s always good to save them, you can Save these queries using the Save button and they will be stored as “Favorites”, you can export the result also from here.</p>
+<p><img data-attachment-id="352" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/24-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/241.png?w=712" data-orig-size="392,178" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="24" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/241.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/241.png?w=712?w=392" class="alignnone size-full wp-image-352" src="../../../../../arindamchat.files.wordpress.com/2017/01/241bc78.png?w=712" alt="24" srcset="https://arindamchat.files.wordpress.com/2017/01/241.png 392w, https://arindamchat.files.wordpress.com/2017/01/241.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/241.png?w=300 300w" sizes="(max-width: 392px) 100vw, 392px"   /></p>
+<p>Your saved search will be in the right side of the window</p>
+<p><img data-attachment-id="353" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/25/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/251.png?w=712" data-orig-size="474,492" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="25" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/251.png?w=712?w=289" data-large-file="https://arindamchat.files.wordpress.com/2017/01/251.png?w=712?w=474" class="alignnone size-full wp-image-353" src="../../../../../arindamchat.files.wordpress.com/2017/01/251bc78.png?w=712" alt="25" srcset="https://arindamchat.files.wordpress.com/2017/01/251.png 474w, https://arindamchat.files.wordpress.com/2017/01/251.png?w=145 145w, https://arindamchat.files.wordpress.com/2017/01/251.png?w=289 289w" sizes="(max-width: 474px) 100vw, 474px"   /></p>
+<h1>Creating Dashboard</h1>
+<p>Though you can save your queries, but it’s best to create a dashboard with the necessary queries so that you can always get a consolidated view. So click on dashboard.</p>
+<p><img data-attachment-id="354" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/26/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/26.png?w=112&#038;h=207" data-orig-size="180,332" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="26" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/26.png?w=112&#038;h=207?w=163" data-large-file="https://arindamchat.files.wordpress.com/2017/01/26.png?w=112&#038;h=207?w=180" class="alignnone  wp-image-354" src="../../../../../arindamchat.files.wordpress.com/2017/01/266fcf.png?w=112&amp;h=207" alt="26" width="112" height="207" srcset="https://arindamchat.files.wordpress.com/2017/01/26.png?w=112&amp;h=207 112w, https://arindamchat.files.wordpress.com/2017/01/26.png?w=81&amp;h=150 81w, https://arindamchat.files.wordpress.com/2017/01/26.png 180w" sizes="(max-width: 112px) 100vw, 112px" /></p>
+<p>Now if you click of the “Customize” wheel, you can see all your saved search has appeared, you have to use them.</p>
+<p><img data-attachment-id="355" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/27/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/27.png?w=712" data-orig-size="1910,954" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="27" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/27.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/27.png?w=712?w=712" class="alignnone size-full wp-image-355" src="../../../../../arindamchat.files.wordpress.com/2017/01/27bc78.png?w=712" alt="27" srcset="https://arindamchat.files.wordpress.com/2017/01/27.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/27.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/01/27.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/27.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/27.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/27.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Let’s click on the first Saved query; it will add a tile in the dashboard.</p>
+<p><img data-attachment-id="356" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/28/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/28.png?w=712" data-orig-size="475,367" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="28" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/28.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/28.png?w=712?w=475" class="alignnone size-full wp-image-356" src="../../../../../arindamchat.files.wordpress.com/2017/01/28bc78.png?w=712" alt="28" srcset="https://arindamchat.files.wordpress.com/2017/01/28.png 475w, https://arindamchat.files.wordpress.com/2017/01/28.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/28.png?w=300 300w" sizes="(max-width: 475px) 100vw, 475px"   /></p>
+<p>If you want to change this to a graph, click on the tile and you will have the option to change the result type in the right side of the window</p>
+<p><img data-attachment-id="357" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/29/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/29.png?w=712" data-orig-size="1297,706" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="29" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/29.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/29.png?w=712?w=712" class="alignnone size-full wp-image-357" src="../../../../../arindamchat.files.wordpress.com/2017/01/29bc78.png?w=712" alt="29" srcset="https://arindamchat.files.wordpress.com/2017/01/29.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/29.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/29.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/29.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/29.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/29.png 1297w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>And the output will change</p>
+<p><img data-attachment-id="358" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/30/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/30.png?w=712" data-orig-size="397,343" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="30" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/30.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/30.png?w=712?w=397" class="alignnone size-full wp-image-358" src="../../../../../arindamchat.files.wordpress.com/2017/01/30bc78.png?w=712" alt="30" srcset="https://arindamchat.files.wordpress.com/2017/01/30.png 397w, https://arindamchat.files.wordpress.com/2017/01/30.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/30.png?w=300 300w" sizes="(max-width: 397px) 100vw, 397px"   /></p>
+<h1>Using Designer</h1>
+<p>Now in dashboard, you can only add saved queries and you have limited options, but you can create a more interesting dashboard by using the designer. Again read this MS article to get more idea: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-view-designer">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-view-designer</a></p>
+<p>Go to designer like below</p>
+<p><img data-attachment-id="359" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/31/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/311.png?w=712" data-orig-size="695,439" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="31" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/311.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/311.png?w=712?w=695" class="alignnone size-full wp-image-359" src="../../../../../arindamchat.files.wordpress.com/2017/01/311bc78.png?w=712" alt="31" srcset="https://arindamchat.files.wordpress.com/2017/01/311.png 695w, https://arindamchat.files.wordpress.com/2017/01/311.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/311.png?w=300 300w" sizes="(max-width: 695px) 100vw, 695px"   /></p>
+<p>To get idea how different charts will look, click on “+ View”, let’s choose “Two timelines &amp; list”, this will add a tile and the configuration pane at the right.</p>
+<p><img data-attachment-id="360" data-permalink="https://arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/attachment/32/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/32.png?w=712" data-orig-size="1476,787" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="32" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/32.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/32.png?w=712?w=712" class="alignnone size-full wp-image-360" src="../../../../../arindamchat.files.wordpress.com/2017/01/32bc78.png?w=712" alt="32" srcset="https://arindamchat.files.wordpress.com/2017/01/32.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/32.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/01/32.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/32.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/32.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/32.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>You can choose your own icon also here. But let’s do the, main configuration for first chart and 2<sup>nd</sup> chart. Put the sampls query <em>(Type=W3CIISLog) TimeGenerated: [NOW-3DAY..NOW] | measure COUNTDISTINCT (csMethod) by Computer ,sSiteName Interval 30MINUTES </em>in all the query fields i.e. for “First Chart”, “Second Chart” and “Navigation Query” at the bottom, you will have a output as above.</p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type='text/javascript' id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script>
+				</div>
+				        <div id="crt-457897294" style="width:300px;height:250px;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-457897294');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-457897294",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-457897294'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-309" class="share-twitter sd-button share-icon" href="index9a7b.html?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-309" class="share-facebook sd-button share-icon" href="index5a58.html?share=facebook" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-309" class="share-google-plus-1 sd-button share-icon" href="index386f.html?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-72867871-309-594a78301e0f6' data-src='//widgets.wp.com/likes/#blog_id=72867871&amp;post_id=309&amp;origin=arindamchat.wordpress.com&amp;obj_id=72867871-309-594a78301e0f6' data-name='like-post-frame-72867871-309-594a78301e0f6'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>		</div><!-- .entry-content -->
+
+			<footer class="entry-footer">
+		<span class="tags-links">Tagged <a href="../../../../tag/azure/index.html" rel="tag">Azure</a>, <a href="../../../../tag/iis-logs/index.html" rel="tag">IIS Logs</a>, <a href="../../../../tag/iislogs/index.html" rel="tag">IISLogs</a>, <a href="../../../../tag/log-analysis/index.html" rel="tag">Log Analysis</a>, <a href="../../../../tag/log-search/index.html" rel="tag">Log Search</a>, <a href="../../../../tag/logs/index.html" rel="tag">Logs</a>, <a href="../../../../tag/oms/index.html" rel="tag">OMS</a>, <a href="../../../../tag/operations-management-suite/index.html" rel="tag">Operations Management Suite</a>, <a href="../../../../tag/sharepoint-logs/index.html" rel="tag">SharePoint logs</a></span>	</footer><!-- .entry-footer -->
+			<div class="entry-author">
+		<div class="author-avatar">
+			<img alt='' src='https://2.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=60&amp;d=identicon&amp;r=G' class='avatar avatar-60' height='60' width='60' />		</div><!-- .author-avatar -->
+
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Arindam C</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+			Experience in Office 365 ,SharePoint,SCOM 2012, Azure Application Insight, Azure Log Analysis, MS CRM, ASP.NET,C# Angular JS . 
+Check Linked In : https://www.linkedin.com/in/arindamchat			<a class="author-link" href="../../../../author/arindach/index.html" rel="author">
+				View all posts by Arindam C			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+	</div> <!-- .entry-body -->
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://arindamchat.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="5b63f46314" /><input type="hidden" name="_wp_http_referer" value="/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="https://public-api.wordpress.com/connect/?googleplus-sign-in=https%3A%2F%2Farindamchat.wordpress.com" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='309' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="a98cb194fa" /></p>
+<input type="hidden" name="genseq" value="1498052656" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="15"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../../25/operationmanagersuit-oms/index.html" rel="prev">Azure Log Analysis in Operations Manager Suits (OMS)</a></div><div class="nav-next"><a href="../../../05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/index.html" rel="next">Deploy ASP.NET MVC5 Grid View Application to Azure App Service</a></div></div>
+	</nav>
+		</main>
+	</div>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="archives-5" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='../../../05/index.html'>May 2017</a></li>
+	<li><a href='../../index.html'>January 2017</a></li>
+	<li><a href='../../../../2016/11/index.html'>November 2016</a></li>
+	<li><a href='../../../../2014/07/index.html'>July 2014</a></li>
+	<li><a href='../../../../2014/03/index.html'>March 2014</a></li>
+	<li><a href='../../../../2014/02/index.html'>February 2014</a></li>
+	<li><a href='../../../../2013/06/index.html'>June 2013</a></li>
+	<li><a href='../../../../2013/03/index.html'>March 2013</a></li>
+	<li><a href='../../../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../../../2012/07/index.html'>July 2012</a></li>
+	<li><a href='../../../../2011/12/index.html'>December 2011</a></li>
+	<li><a href='../../../../2011/04/index.html'>April 2011</a></li>
+	<li><a href='../../../../2007/11/index.html'>November 2007</a></li>
+		</ul>
+		</section></aside>
+
+	</div>
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+	<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+	
+	</div><!-- .site-info -->	</footer>
+</div>
+<!--  -->
+<script type='text/javascript' src='../../../../../0.gravatar.com/js/gprofiles12f0.js?ver=201725y'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgrohoc3b6.js?m=1380573781h'></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e1684c9e7b0368aff778803d73e2c883">
+	</div>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/arindamchat.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?action=logout&_wpnonce=cbdb9fe6ca","homeURL":"https:\/\/arindamchat.wordpress.com\/","postID":"309","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s2.wp.com/_static/index1575.html??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="72867871" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://arindamchat.wordpress.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Arindam&#039;s Blog" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0193bea543" /><input type="hidden" name="_wp_http_referer" value="/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/arindamchat.wordpress.com\/2017\/01\/27\/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms\/":309};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/akismet-3.0/_inc/formcd10.js?m=1404442431h'></script>
+<link rel='stylesheet' id='all-css-0-3' href='../../../../../s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carouselaccd.css?m=1481571546h' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"72867871","siteName":"Arindam's Blog","siteURL":"http:\/\/arindamchat.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/ixion","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F","themeURL":"https:\/\/wordpress.com\/theme\/ixion\/","xhrURL":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bbaaeffc0c","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5c13a7b39d\" \/>","referer":"https:\/\/arindamchat.wordpress.com\/2017\/01\/27\/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/arindamchat.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F","postID":"309","shortlink":"http:\/\/wp.me\/p4VKgf-4Z","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/arindamchat.wordpress.com\/309","statsLink":"https:\/\/wordpress.com\/stats\/post\/309\/arindamchat.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Ixion","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"099d9bc6ed","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F27%2Fazure-log-search-dashboard-and-designer-in-operations-manager-suits-oms%2F","blog_id":"72867871","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=72867871&v=wpcom&tz=0&user_id=0&subd=arindamchat","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJyVkdtOwzAMhl+I1Ns0gbhAPIubuq3bnIiTbnt7UmClg6nSrmz99ucjnILS3iVyCQaBhibWFM7VIE+wCtmsgskdOwHDIwl8ZMrUo2sMxY1k7a0tkvqGhpmuQU4c6BHoRvgLpp5sSQu5Bj6zd4AilL44hxN3mIr4ACQjh9LJjar1OotqebkGO21ycztTpGAuleV/LVYLYVPiqsYIFiVRLJ7yE8XIc7FF26qg5y3mCot3bygJv3Os9aG8K15+TLXOund+jD4LGRgoBdSjugobTPCSVGuQI0iPkV13tQV6t2/74+tht3veH16GT3zz6s8='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='../../../../wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "arindamchat.wordpress.com";
+	</script>
+	<script type="text/javascript" defer src="../../../../../s.skimresources.com/js/725X1342.skimlinks.js"></script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<p class="robots-nocontent"><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /></p>
+		</noscript><script src="../../../../../stats.wp.com/w9f61.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'72867871','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'72867871','v':'wpcom','tz':'0','user_id':'0','post':'309','subd':'arindamchat'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDl4emN0NDZbT1tdLUNyPz1rTXdMYUhZSjdLOTYuS1c4JlFNRkVfR3AvJjZjMj16eHVXeTFhTURHVHpRWXZHSGx0eHFtPXVtT1Q2JnBdJXNGUXVpcm5uV0xlRU1GSEJVSWVoZ252JnksflJjPUttUmtsQ0wsUnNieVQvXWlHeTk3TQ=='}]);
+_stq.push([ 'clickTrackerInit', '72867871', '309' ]);
+	</script>
+<noscript><img src="../../../../../pixel.wp.com/b0b80.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:45:46 GMT -->
+</html>

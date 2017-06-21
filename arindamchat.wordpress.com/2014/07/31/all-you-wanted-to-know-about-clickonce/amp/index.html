@@ -1,0 +1,638 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/07/31/all-you-wanted-to-know-about-clickonce/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:51:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="All you wanted to know about ClickOnce" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="What is ClickOnce? MS says: ”ClickOnce deployment allows you to publish Windows-based applications (and WPF also) to a Web server or network file share for simplified installation. Visual Studio pr…" />
+<meta property="article:published_time" content="2014-07-31T14:04:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:52:05+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2014/07/60b42-8.png" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="All you wanted to know about ClickOnce" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2014/07/9dbe6-1d209.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>All you wanted to know about ClickOnce &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2014\/07\/31\/all-you-wanted-to-know-about-clickonce\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"All you wanted to know about ClickOnce","datePublished":"2014-07-31T14:04:00+00:00","dateModified":"2017-05-17T10:52:05+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2014\/07\/9dbe6-1.png","width":712,"height":451}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-51c4ae2386215debbe2e0868325166ad{background:white;line-height:13.35pt;margin:0 0 .0001pt 21.3pt;text-indent:-18pt;vertical-align:baseline;}.amp-wp-inline-475418c60f8baead3f2077d398c49abf{cursor:pointer;}.amp-wp-inline-fde87e81bac0761a77cdac6a530cf962{font-family:Arial, sans-serif;font-size:10.5pt;}.amp-wp-inline-48e2e3f5f104e62e94f3722ebcc01122{font-family:Symbol;font-size:10.5pt;}.amp-wp-inline-fe799cd3841a648ccad1abc6d1fe30ba{font-family:&#039;font-size:7pt;line-height:normal;}.amp-wp-inline-26b2042c17a0679fcb0dfc92c32c7636{color:windowtext;text-decoration:none;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-573c05be6d1606b2eaa20996716bcab6{border-collapse:collapse;border:none;}.amp-wp-inline-a8f42cb0a5b833bc425bbfa53fa0205f{border-left:none;border:solid windowtext 1pt;padding:0 5.4pt;max-width:239.4pt;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-df1e5ba9a3aeeef549f9d7fe30a43066{border:solid windowtext 1pt;padding:0 5.4pt;max-width:239.4pt;}.amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc{border-bottom:solid #4F81BD 1pt;border:none;padding:0 0 4pt;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">All you wanted to know about ClickOnce</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2014-07-31T14:04:00+00:00">
+		3 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc">
+<h2 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">What is ClickOnce?</span></h2>
+</div>
+<div class="MsoNoSpacing">MS says: ”<i>ClickOnce deployment allows you to publish <u>Windows-based applications </u></i><u>(and WPF also)</u><i> to a Web server or network file share for simplified installation. Visual Studio provides full support for publishing and updating applications deployed with ClickOnce. ClickOnce deployment is available for projects created with Visual Basic, Visual C#, and Visual J#, but not for Visual C+</i>+.”
+</div>
+<div class="MsoNormal">
+<p>So you developed a windows application and now want to distribute it over Internet and also don’t want to inform each users when a new version is released in future, you need ClickOnce.</p>
+</div>
+<div class="MsoNormal">
+<p>Your end user can download the Clickonce from a URL and whenever they start the app, it will check if there’s a new version released in the deployment server, if it is the new version will be downloaded automatically.</p>
+</div>
+<div class="MsoNormal">Check here for more: <a href="http://msdn.microsoft.com/en-us/library/aa480721.aspx">http://msdn.microsoft.com/en-us/library/aa480721.aspx</a></div>
+<div class="MsoNormal">If you are totally new you can check here: <a href="http://www.codeproject.com/Articles/38546/Click-Once-Deployment-Technique">Step-by-Step: A First ClickOnce Application</a></div>
+<div class="MsoNormal"></div>
+<h2><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">Publishing ClickOnce:</span></h2>
+<div class="MsoNormal"><b>In your Dev Box:</b><br/><b><br/></b></div>
+<div class="MsoNormal">
+<p>Now you can publish a Windows/WPF application many way, DiskBased, a network shared location or ftp or in web. For ClickOnce you should use the Web deployment only.</p>
+<p>The ideas is clear, you are done with your Windows Application development. Then in your Dev box you just give a localhost url and publish, a new website will be created with some files.</p>
+</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">
+<p>If you check that step by step article, in step 3 you give a URL, if you already have a WebSite you can give that path, otherwise the publishing process will create the folder in C:\inetpub\wwwroot and a new website will be added to IIS.</p>
+</div>
+<div class="MsoNormal">For now think that I published it to my Dev IIS to: <a href="http://localhost/WinFrom1Local">http://localhost/WinFrom1Local</a> , if this website is not in IIS already, a folder will be created as C:\inetpub\wwwroot\WinFrom1Local and the website will also be create automatically. Below is a sample screenshot.</div>
+<div class="MsoNormal"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/9dbe6-1.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/9dbe6-1e1a6.png?w=640&amp;h=404" width="640" height="404" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt;                              &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal">
+<p>Now when you publish successfully it will open the URL from where end users can download the app files, the page looks like below</p>
+</div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/14d2e-2.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/14d2e-27e86.png?w=640&amp;h=500" width="640" height="500" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p><b><u><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></u></b></p>
+</div>
+<div class="MsoNormal">
+<p>You click on Install, it will download setup.exe</p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/acfa6-3.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/acfa6-36c5c.png?w=640&amp;h=297" width="640" height="297" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+</div>
+<div class="MsoNormal"><b><u><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></u></b></div>
+<div class="MsoNormal">
+<p>You click Run, you will see below popup, this application now trying to connect to the server i.e. the Website where it was published and download any new version.</p>
+</div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/ab97d-4.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/ab97d-4bea1.png?w=320&amp;h=127" width="320" height="127" sizes="(min-width: 320px) 320px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p><b><u><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></u></b></p>
+</div>
+<div class="MsoNormal"><b><u><br/></u></b>
+<h2 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><b><u><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">What Happens when you Publish:</span></u></b></h2>
+</div>
+<div class="MsoNormal">
+<p>You must have seen the file structure once you publish your application to a URL, below screenshot shows the structure. This is the virtual folder of my Dev IIS website where I published the app (C:\inetpub\wwwroot\WinFrom1Local).</p>
+</div>
+<table class="MsoTableGrid amp-wp-inline-573c05be6d1606b2eaa20996716bcab6" border="1" cellspacing="0" cellpadding="0"><tbody><tr><td width="319" class="amp-wp-inline-df1e5ba9a3aeeef549f9d7fe30a43066">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><!-- [if gte vml 1]&gt;     &lt;![endif]--><!-- [if !vml]--><!--[endif]--><!-- [if gte mso 9]&gt;        &lt;![endif]--></div>
+</td>
+<td width="319" class="amp-wp-inline-a8f42cb0a5b833bc425bbfa53fa0205f">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><!-- [if gte vml 1]&gt;     &lt;![endif]--><!-- [if !vml]--><!--[endif]--><!-- [if gte mso 9]&gt;        &lt;![endif]--></div>
+</td>
+</tr></tbody></table><div class="MsoNormal"></div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/42c9d-5.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/42c9d-5bae0.png?w=640&amp;h=250" width="640" height="250" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p><b><u></u></b><br/><b><u><b><u><br/></u></b></u></b><b><u><b><u><br/></u></b></u></b><b><u><b><u><br/></u></b></u></b><b><u>Application Files folder: </u></b>This contains the different version of app files, each time you publish a new version will be created here. When end users open application, the app will check for any new version here and download if required.</p>
+</div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<p><b><u>Setup.exe: </u></b>This has the information from where rest of the required files to be downloaded. This download location will be the Publish URL you gave during Publish, in our case it will be <a href="http://localhost/WinFrom1Local">http://localhost/WinFrom1Local</a>.</p>
+</div>
+<div class="MsoNormal">This you can see, open the setup.exe in notepad, search for “”, you will see like below, the localhost has been replaced with the actual machine name.</div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/571dd-6.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/571dd-6be3b.png?w=640&amp;h=128" width="640" height="128" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">
+<h2 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><b><u><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">What about in my Production Box</span></u></b></h2>
+</div>
+<div class="MsoNormal">
+<p>The above technique will work in your Dev box; you can’t publish your application to any remote IIS hosted web site, mean from your Dev box you can’t directly publish to your Production site URL.</p>
+</div>
+<div class="MsoNormal">Also if you publish your app in Dev box to <a href="http://localhost/WinFrom1Local">http://localhost/WinFrom1Local</a> and then copy the output from path “C:\inetpub\wwwroot\WinFrom1Local” and put in the virtual directory of your Production box, the Publish.htm will open, but when you click on Install you will get some error like this</div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/7bb29-7.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/7bb29-7f707.png?w=400&amp;h=181" width="400" height="181" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p>This is because your setup.exe is still trying to download necessary files from your Dev box URL.</p>
+</div>
+<div class="MsoNormal"><b><br/></b><b>So here’s how you can do the publishing for your Prod box:</b><br/><b><br/></b></div>
+<div class="MsoNormal">
+<p>Do it as below, what happens here is, the app will be published locally, but setup.exe will be created with the Prod URL which you want.</p>
+</div>
+<div class="MsoNormal"><b><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></b></div>
+<div class="MsoNormal">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/07/60b42-8.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/07/60b42-895f0.png?w=640&amp;h=302" width="640" height="302" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p>Now when you go the local publish folder i.e. C:\Arindam\Work\POC-ARINDAM\LocalPublishFolder\, you will see the same structure as C:\inetpub\wwwroot\WinFrom1Local, but this is ready to copy and give it to Prod guys. They will put these files in the mapped virtual folder of the Prod site.</p>
+</div>
+<div class="MsoNormal">You can also open the setup.exe in the notepad and verify the Prod URL is there.</div>
+<div class="MsoNormal"></div>
+<h2><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">Some good articles:</span></h2>
+<div class="MsoNormal">
+<p>Check this URL, this has described it very nicely how to deploy in your Prod Box. : <a href="http://geekswithblogs.net/PsudoKnowledgeBase/archive/2010/03/18/click-once-deployment-process-and-issue-resolution.aspx">http://geekswithblogs.net/PsudoKnowledgeBase/archive/2010/03/18/click-once-deployment-process-and-issue-resolution.aspx</a></p>
+</div>
+<div class="MsoNormal">
+<p>Check MS site also for: <a href="http://msdn.microsoft.com/en-us/library/ms228998.aspx">Server and Client Configuration Issues in ClickOnce Deployments</a></p>
+</div>
+<div class="MsoNormal">People are asking: <b><a href="http://stackoverflow.com/questions/20038418/what-should-be-done-to-publish-a-net-click-once-application"><span class="amp-wp-inline-26b2042c17a0679fcb0dfc92c32c7636">What should be done to publish a .net click once application</span></a>, answers I found in Net</b></div>
+<div class="amp-wp-inline-51c4ae2386215debbe2e0868325166ad"><!-- [if !supportLists]--><span class="amp-wp-inline-48e2e3f5f104e62e94f3722ebcc01122">·<span class="amp-wp-inline-fe799cd3841a648ccad1abc6d1fe30ba">         </span></span><!--[endif]-->You need to get Code Signing certificate (the one for your domain will not work) – and then just sign the app. See this SO answer for more details<span class="amp-wp-inline-fde87e81bac0761a77cdac6a530cf962">:<span class="apple-converted-space"> </span></span><span class="MsoHyperlink"><a href="http://stackoverflow.com/a/9610744/1246870" class="amp-wp-inline-475418c60f8baead3f2077d398c49abf">http://stackoverflow.com/a/9610744/1246870</a></span></div>
+<div class="amp-wp-inline-51c4ae2386215debbe2e0868325166ad"><!-- [if !supportLists]--><span class="amp-wp-inline-48e2e3f5f104e62e94f3722ebcc01122">·<span class="amp-wp-inline-fe799cd3841a648ccad1abc6d1fe30ba">         </span></span><!--[endif]-->If you do this, don’t forget that you need to sign BOTH setup.exe – and the ##your app name##.exe file. See this SO answer for more details<span class="amp-wp-inline-fde87e81bac0761a77cdac6a530cf962">:<span class="apple-converted-space"> </span></span><span class="MsoHyperlink"><a href="http://stackoverflow.com/a/18636102/1246870" class="amp-wp-inline-475418c60f8baead3f2077d398c49abf">http://stackoverflow.com/a/18636102/1246870</a></span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">ClickOnce does not work with Form Based Authentication, it needs windows authentication, but here is a technique to: <a href="http://www.codeproject.com/Articles/24519/Make-ClickOnce-Work-With-ASP-NET-Forms-Authenticat">Make ClickOnce Work with ASP.NET Forms Authentication</a></div>
+<div class="MsoNormal">
+Click once works on Https, you might want to check</div>
+<div class="MsoNormal"><a href="http://stackoverflow.com/questions/502822/what-ssl-certificate-do-i-need">SSL Certificate or Code Signing Certificate for ClickOnce Deployment</a></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal">
+<h3 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><b><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">My Experience: </span></b></h3>
+</div>
+<div class="MsoNormal">This is a good technology. I was able to make it working in all scenarios, except with SSO. The situation was, you need to deploy the App to a website in a server secured by SSO, mean whatever URL you try to open it will first open the SSO page and after successful login it will redirect to the actual page. In this scenario, it always failed to download .manifest or other files, I have seen the error log and it appeared that even after I do a successful login to SSO page, when I click on the Install button, it tries to authenticate again with the SSO server and fails. Most probably reason is ClickOnce engine does not support cookie. If you see the above article for Form Based Authentication, this is the reason you need to do a cookie less authentication.</div>
+<div class="MsoNormal"></div>
+<p> </p>
+<div class="MsoNormal"></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/net/click-once/index.html" rel="category tag">Click Once</a>, <a href="../../../../../category/net/smart-client/index.html" rel="category tag">Smart Client</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/clickones/index.html" rel="tag">ClickOnes</a>, <a href="../../../../../tag/smartclient/index.html" rel="tag">SmartClient</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b6151.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=4&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b673e.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDk1OT1tUD9iR2NlYXxWTVUsenJwRV0vNWp5YSxIQ25aYjVoPWYyLD9oXSVEMFhXVHJ4VGhCQktZK3EySENoeUgwME56fkVNVWVpdDdjOV94cHBMOXZrMXlvVWN3Wlc%3D"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/07/31/all-you-wanted-to-know-about-clickonce/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:51:28 GMT -->
+</html>

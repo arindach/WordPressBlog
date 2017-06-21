@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:45:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="../../../../xmlrpc.php">
+
+<title>Azure Log Analysis in Operations Manager Suits (OMS) &#8211; Arindam&#039;s Blog</title>
+<link rel='dns-prefetch' href='http://s2.wp.com/' />
+<link rel='dns-prefetch' href='http://s1.wp.com/' />
+<link rel='dns-prefetch' href='http://s0.wp.com/' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Azure Log Analysis in Operations Manager Suits (OMS) Comments Feed" href="feed/index.html" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8-RC2-40878"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJyFkNFOwzAMRX+IYG2MCh4mviVJrc5bHFu1q21/v5QKEBsqL5GvdY+vYzhryFIdqwNPQcs0UDU4axYOxlTweqees9kT/I0VOqHBEV1jPoVP9WBPRYafHBn72BsMRVIsa6NHLNGxDyrmd2oNyzJi67NGnx2MPUUsyM22hrF2X9RcHtp3VmOWC6WkI5qF9jJNHPzQgv5Zj+dVllNBM/7uLChBFadG23fxMHOJAp0S0IWkgvm14Gz74P1m995tu9e3zcvxBtrkuko=' type='text/css' media='all' />
+<link rel='stylesheet' id='ixion-fonts-archivo-css'  href='http://fonts.googleapis.com/css?family=Archivo+Narrow%3A400%2C400i%2C700%2C700i&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9jUsKwzAMRC9UV6Skv0XpWRyjOCq2ZSyFpLevszOEZjePmcfAko3jpJgUdMKIAnkegFbiBFYEVWCsvYBjzlgmXEj17ERO0KhxNjnMnpKAx4SFavEn7tzdLSUHot+AZsmO4/EZm8DO6ua1YMZgqRypBYfAvkYPddXgJr3jq+vvj2t/eXa3zw92gm4m' type='text/css' media='all' />
+<link rel='stylesheet' id='print-css-3-1' href='../../../../../s0.wp.com/wp-content/mu-plugins/global-print/global-print6805.css?m=1465851035h' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-4-1' href='https://s2.wp.com/_static/??-eJx9i9EKwjAMRX/IGoVN54P4LVnp2kialCbD3xcfRGTi0z0XzoFHC1HFkzjUNTReM4kBRieVGfuH9tFsB7/1puZhYaQOVrCT5Pf+q0wjIQfWrN9nE3lJNRmUATLrjPwSbvV6HC6H83Qap/H+BMWZScE=' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='../../../../../s1.wp.com/wp-content/mu-plugins/highlander-comments/style0196.css?m=1377793621h' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='New Managed Solutions Gallery as Alternative for SharePoint Server Sandbox Solutions' href='../../../../2016/11/21/new-managed-solutions-gallery-as-alternative-for-sharepoint-server-sandbox-solutions/index.html' />
+<link rel='next' title='Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)' href='../../27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/index.html' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='http://wp.me/p4VKgf-40' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Azure Log Analysis in Operations Manager Suits (OMS)" />
+<meta property="og:url" content="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/" />
+<meta property="og:description" content="Recently I wanted to find a solution to check IIS logs , since MS has this new Log Analysis in azure I thought of giving it a try. In this post I&#8217;ll describe various way you can configure log…" />
+<meta property="article:published_time" content="2017-01-25T13:35:47+00:00" />
+<meta property="article:modified_time" content="2017-01-27T13:17:14+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="https://arindamchat.files.wordpress.com/2017/01/20.png" />
+<meta property="og:image:width" content="665" />
+<meta property="og:image:height" content="222" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Azure Log Analysis in Operations Manager Suits (OMS)" />
+<meta name="twitter:image" content="https://arindamchat.files.wordpress.com/2017/01/1.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=114" />
+<link rel='openid.server' href='../../../../indexdd8f.html?openidserver=1' />
+<link rel='openid.delegate' href='../../../../index.html' />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../osd.xml" title="Arindam&#039;s Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f5f0e9" />
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Arindam&#039;s Blog" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://arindamchat.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Azure Log Analysis in Operations Manager Suits (OMS) | Arindam&#039;s Blog on WordPress.com" />
+<meta name="description" content="Recently I wanted to find a solution to check IIS logs , since MS has this new Log Analysis in azure I thought of giving it a try. In this post I&#039;ll describe various way you can configure log collection to azure. I have used 30 days azure trial for this." />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f0e9; }
+</style>
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'arindamchat.wordpress.com',
+				pageURL: 'https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/'
+			};
+		</script>
+ 		<script type="text/javascript" src="../../../../../s.pubmine.com/head.js"></script>
+		<script type="text/javascript" src="../../../../../static.criteo.net/js/ld/publishertag.js"></script><link rel="amphtml" href="amp/index.html" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{color:#fff}.site-description,.featured-content .hentry .entry-title a{color:#fff}.comment-author,.footer-widgets .widget a,body,button,input,select,textarea{color:#192930}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:#eeece8}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:rgba(238,236,232,.3)}.comment-metadata,.entry-footer,.entry-meta,.footer-widgets .widget-title,.main-navigation ul>li.current-menu-item>a,.main-navigation ul>li.current_page_item>a,.more-recent-posts,.more-recent-posts:visited,.more-testimonials,.more-testimonials:visited,.search-form-icon:before,.site-header .jetpack-social-navigation a,.site-info,div#jp-relatedposts h3.jp-relatedposts-headline{color:#67655f}.search-form-icon:before,.search-form .search-field{border-color:#a5a29d}.search-form-icon:before,.search-form .search-field{border-color:rgba(165,162,157,.3)}body,ins,mark,.site-header .search-form-icon:before,.site-header .search-form .search-field,.footer-widgets .widget{background-color:#f5f0e9}.entry-author,.widget,hr,.testimonials .hentry{background-color:#f0e9df}.featured-content .hentry,.header-overlay{background-color:#42566a}.header-overlay:before{background-color:#42566a}.header-overlay:before{background-color:rgba(66,86,106,.7)}h1,h2,h3,h4,h5,h6,.entry-title a,.entry-title a:visited,.entry-title,.page-title,.widget-title,.site-title,.comments-title,.site-title a,.site-title a:visited{color:#42566a}#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"]{background-color:#a84c38}#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{background-color:#954331}.main-navigation ul ul{border-top-color:#a84c38}.main-navigation ul ul:before{color:#a84c38}.comment-metadata .edit-link a,.site-header .jetpack-social-navigation a:hover,a,a:visited,.main-navigation .nav-menu>li>a,.testimonials .edit-link a,.testimonials .edit-link a:visited{color:#a44a36}a:hover,a:focus,a:active{color:#a84c38}.featured-content .hentry:hover .entry-title a{color:#e8d0c9}</style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-248 single-format-standard custom-background mp6 customizer-styles-applied singular has-description no-featured-posts highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="utility-container">
+						
+<form role="search" method="get" class="search-form" action="https://arindamchat.wordpress.com/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field"
+		placeholder="Search &hellip;"
+		value="" name="s"
+		title="Search for:" />
+		<span class="search-form-icon"></span>
+	</label>
+	<input type="submit" class="search-submit"
+		value="Search" />
+</form>
+		</div>
+
+		<div class="branding-container">
+					<div class="site-branding">
+			
+								<p class="site-title"><a href="../../../../index.html" rel="home">Arindam&#039;s Blog</a></p>
+					</div><!-- .site-branding -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+	<div class="menu-top-menu-for-the-site-container"><ul id="top-menu" class="menu"><li id="menu-item-205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-205"><a href="../../../../index.html">Home</a></li>
+<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-523"><a href="../../../../category/azure/index.html">Azure</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-526"><a href="../../../../category/fast/index.html">FAST</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-527"><a href="../../../../category/sharepoint/index.html">SharePoint</a>
+<ul  class="sub-menu">
+	<li id="menu-item-532" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532"><a href="../../../../category/sharepoint/sharepoint-2016/index.html">SharePoint 2016</a></li>
+	<li id="menu-item-530" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-530"><a href="../../../../category/sharepoint/sharepoint-2013/index.html">SharePoint 2013</a></li>
+	<li id="menu-item-531" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-531"><a href="../../../../category/sharepoint/sharepoint-2010/index.html">SharePoint 2010</a></li>
+</ul>
+</li>
+<li id="menu-item-528" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-528"><a href="../../../../category/net/index.html">.NET</a>
+<ul  class="sub-menu">
+	<li id="menu-item-533" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533"><a href="../../../../category/net/smart-client/index.html">Smart Client</a></li>
+	<li id="menu-item-534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534"><a href="../../../../category/net/click-once/index.html">Click Once</a></li>
+</ul>
+</li>
+<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href="../../../../zabout-me/index.html">About Me</a></li>
+</ul></div></nav>
+		</div>
+
+	</header>
+
+	
+	<div id="content" class="site-content">
+		<div class="entry-meta">
+			<span class="posted-on"><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2017-01-25T13:35:47+00:00">January 25, 2017</time><time class="updated" datetime="2017-01-27T13:17:14+00:00">January 27, 2017</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="../../../../author/arindach/index.html">Arindam C</a></span></span> <span class="cat-links"><a href="../../../../category/azure/index.html" rel="category tag">Azure</a>, <a href="../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a></span>					</div><!-- .entry-meta -->
+<h1 class="entry-title">Azure Log Analysis in Operations Manager Suits (OMS)</h1>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-248" class="post-248 post type-post status-publish format-standard hentry category-azure category-microsoft-technologies tag-azure tag-iis-logs tag-iislogs tag-log-analysis tag-log-search tag-oms tag-operations-management-suite no-featured-image">
+	<div class="entry-body">
+		<header class="entry-header">
+					</header>
+		<div class="entry-content">
+			<p>Recently I wanted to find a solution to check IIS logs , since MS has this new Log Analysis in azure I thought of giving it a try. In this post I&#8217;ll describe various way you can configure log collection to azure. I have used 30 days azure trial for this.</p>
+<p>Log Analytics is a service in <a href="https://docs.microsoft.com/en-us/azure/operations-management-suite/operations-management-suite-overview">Operations Management Suite (OMS)</a> that helps you collect and analyze data generated by resources in your cloud and on-premises environments. It gives you real-time insights using integrated search and custom dashboards to readily analyze millions of records across all of your workloads and servers regardless of their physical location.</p>
+<p>Refer: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-overview">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-overview</a></p>
+<p>Below Sections Describes various types of log collection and analysis performed to get an idea how useful log analysis could be. This is a POC.</p>
+<h1>Prerequisite</h1>
+<ul>
+<li><strong>Azure Subscription</strong>&#8211; Azure subscription is the point of beginning, here a trial azure subscription has been used.</li>
+</ul>
+<p><img data-attachment-id="252" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/1-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/1.png?w=712" data-orig-size="536,272" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="1" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/1.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/1.png?w=712?w=536" class="alignnone size-full wp-image-252" src="../../../../../arindamchat.files.wordpress.com/2017/01/1bc78.png?w=712" alt="1" srcset="https://arindamchat.files.wordpress.com/2017/01/1.png 536w, https://arindamchat.files.wordpress.com/2017/01/1.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/1.png?w=300 300w" sizes="(max-width: 536px) 100vw, 536px"   /></p>
+<ul>
+<li><strong>Accounts in OMS portal</strong> &#8211; OMS accounts need to be created in <a href="https://docs.microsoft.com/en-us/azure/operations-management-suite/operations-management-suite-overview">Operations Management Suite (OMS)</a> and linked with the Azure Subscription. I have already created 3 OMS accounts.</li>
+</ul>
+<p>Read More: <a href="https://docs.microsoft.com/en-us/azure/operations-management-suite/operations-management-suite-architecture">https://docs.microsoft.com/en-us/azure/operations-management-suite/operations-management-suite-architecture</a></p>
+<p><img data-attachment-id="253" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/2-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/2.png?w=712" data-orig-size="1347,483" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="2" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/2.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/2.png?w=712?w=712" class="alignnone size-full wp-image-253" src="../../../../../arindamchat.files.wordpress.com/2017/01/2bc78.png?w=712" alt="2" srcset="https://arindamchat.files.wordpress.com/2017/01/2.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/2.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/2.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/2.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/2.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/2.png 1347w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li><strong>Check OMS is present in the Azure Portal</strong>&#8211; If correctly created and linked to Azure Portal, you should be able to see the OMS entries in your Azure dashboard.</li>
+</ul>
+<p><img data-attachment-id="254" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/3-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/3.png?w=712" data-orig-size="1216,717" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="3" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/3.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/3.png?w=712?w=712" class="alignnone size-full wp-image-254" src="../../../../../arindamchat.files.wordpress.com/2017/01/3bc78.png?w=712" alt="3" srcset="https://arindamchat.files.wordpress.com/2017/01/3.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/3.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/3.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/3.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/3.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/3.png 1216w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li><strong>Open and check OMS portal</strong>&#8211; Click on the OMS Portal icon above and this will open the OMS portal which looks like below</li>
+</ul>
+<h1><img data-attachment-id="255" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/4-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/4.png?w=712" data-orig-size="923,656" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="4" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/4.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/4.png?w=712?w=712" class="alignnone size-full wp-image-255" src="../../../../../arindamchat.files.wordpress.com/2017/01/4bc78.png?w=712" alt="4" srcset="https://arindamchat.files.wordpress.com/2017/01/4.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/4.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/4.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/4.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/4.png 923w" sizes="(max-width: 712px) 100vw, 712px"   /></h1>
+<h1>Configure Log Analysis</h1>
+<p>There is different way to collect different type of logs, check the Data Sources here: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources</a> , other than custom logs, all other logs can be directly collected from windows machines (it’s possible to collect from Linux machines also, but that’s not considered here).</p>
+<h2>Collecting Logs from Azure VM- Option 1</h2>
+<p>If you want to collect logs from Azure VMs, then there is no special configuration is needed. Azure VMS can be connected to OMS via storage account. Here I want to monitor one of my azure VM named WinServer2, so I’ll find the associated Storage account and connect that with OMS. When you create VMs a storage account will already create for the resource group, you can choose to create a new storage account in the same resource group if required.</p>
+<ul>
+<li>Go to Azure dashboard and click on WinServer2à Diagnostics settings</li>
+</ul>
+<p><img data-attachment-id="256" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/5-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/5.png?w=712" data-orig-size="580,441" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="5" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/5.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/5.png?w=712?w=580" class="alignnone size-full wp-image-256" src="../../../../../arindamchat.files.wordpress.com/2017/01/5bc78.png?w=712" alt="5" srcset="https://arindamchat.files.wordpress.com/2017/01/5.png 580w, https://arindamchat.files.wordpress.com/2017/01/5.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/5.png?w=300 300w" sizes="(max-width: 580px) 100vw, 580px"   /></p>
+<ul>
+<li>Click on ‘Storage Account’, you can see the available storage accounts.</li>
+</ul>
+<p><img data-attachment-id="257" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/6-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/6.png?w=712" data-orig-size="1192,619" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="6" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/6.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/6.png?w=712?w=712" class="alignnone size-full wp-image-257" src="../../../../../arindamchat.files.wordpress.com/2017/01/6bc78.png?w=712" alt="6" srcset="https://arindamchat.files.wordpress.com/2017/01/6.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/6.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/6.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/6.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/6.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/6.png 1192w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li>Note that there’s nothing configured to be collected from this computer, so we will choose what types of metrics and logs we want to collect and send to Log Analysis. Click on the check boxes you want and then on the storage account, click to the Save button.</li>
+</ul>
+<p><img data-attachment-id="258" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/7-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/7.png?w=712" data-orig-size="1157,599" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="7" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/7.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/7.png?w=712?w=712" class="alignnone size-full wp-image-258" src="../../../../../arindamchat.files.wordpress.com/2017/01/7bc78.png?w=712" alt="7" srcset="https://arindamchat.files.wordpress.com/2017/01/7.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/7.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/7.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/7.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/7.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/7.png 1157w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li>Now above metrics and logs will be collected from this computer to the storage account and this is ready to send to Log Analysis.</li>
+<li>Now click on the OMS instance you want to use, here I’m using ArindamOMSAzure, and click on the “Storage accounts logs”</li>
+</ul>
+<p><img data-attachment-id="259" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/8-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/8.png?w=712" data-orig-size="566,532" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="8" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/8.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/8.png?w=712?w=566" class="alignnone size-full wp-image-259" src="../../../../../arindamchat.files.wordpress.com/2017/01/8bc78.png?w=712" alt="8" srcset="https://arindamchat.files.wordpress.com/2017/01/8.png 566w, https://arindamchat.files.wordpress.com/2017/01/8.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/8.png?w=300 300w" sizes="(max-width: 566px) 100vw, 566px"   /></p>
+<ul>
+<li>Click on “Add” and select the Storage account, make sure you chose the same storage account as in the step before.</li>
+</ul>
+<p><img data-attachment-id="260" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/9-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/9.png?w=712" data-orig-size="1174,406" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="9" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/9.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/9.png?w=712?w=712" class="alignnone size-full wp-image-260" src="../../../../../arindamchat.files.wordpress.com/2017/01/9bc78.png?w=712" alt="9" srcset="https://arindamchat.files.wordpress.com/2017/01/9.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/9.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/9.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/9.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/9.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/9.png 1174w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li>Now you need to choose what type of Log you want to pass to the OMS, you need to choose one type at a time, you can choose to use the same storage account to pass different logs to OMS, i.e. first I can choose Storage account 909 for IISLogs and then I can add it again for Events. Let’s choose IIS logs for now, you will see the source is already filled. Click OK</li>
+<li>Now if you open OMS portal (from current Azure portal), you will see storage account is associated with the OMS as below.</li>
+</ul>
+<p><img data-attachment-id="261" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/10-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/10.png?w=712" data-orig-size="1086,413" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="10" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/10.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/10.png?w=712?w=712" class="alignnone size-full wp-image-261" src="../../../../../arindamchat.files.wordpress.com/2017/01/10bc78.png?w=712" alt="10" srcset="https://arindamchat.files.wordpress.com/2017/01/10.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/10.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/10.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/10.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/10.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/10.png 1086w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li>If you click on Log Search, you will be able to see IIS logs here ( this might take hours or a day before any data appears here)</li>
+<li>Same way you can choose to get Windows events in the OMS.</li>
+</ul>
+<p><img data-attachment-id="262" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/11-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/11.png?w=712" data-orig-size="936,610" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="11" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/11.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/11.png?w=712?w=712" class="alignnone size-full wp-image-262" src="../../../../../arindamchat.files.wordpress.com/2017/01/11bc78.png?w=712" alt="11" srcset="https://arindamchat.files.wordpress.com/2017/01/11.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/11.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/11.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/11.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/11.png 936w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h2>Collecting logs From Azure VM or On Premise Servers-Option 2</h2>
+<p>If you don’t want to use Storage Accounts, whole server can be added as a data source to OMS, this is done via Microsoft Management Server agent, the same agent used for SCOM-System Center Operations Management and Application Insight. You need to install the agent in the machines to be monitored. This can be done for <strong><u>both Azure and on premise machines</u></strong> (provided internet is enabled in the machines).</p>
+<p>Now if you already have SCOM agents installed i.e. the machine is already monitored by a System Center Management Group, then you can check if the azure extension for SCOM is already installed.</p>
+<p><strong>Note:</strong> It’s not mandatory to have any SCOM agent present in the machines, even if there’s already one; you might have to update that agent for azure.</p>
+<p>How to configure:</p>
+<ul>
+<li><strong>Step1 &#8211;</strong> Go to SCOM agent installation folder (typically C:\Program Files\Microsoft Monitoring Agent\Agent) and open SCOM control panel by clicking on “AgentControlPanel” file<strong><u>. If you don’t have this folder, that means there’s no preinstalled SCOM agent and that’s absolutely fine.</u></strong></li>
+</ul>
+<p><img data-attachment-id="263" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/12/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/12.png?w=712" data-orig-size="462,173" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="12" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/12.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/12.png?w=712?w=462" class="alignnone size-full wp-image-263" src="../../../../../arindamchat.files.wordpress.com/2017/01/12bc78.png?w=712" alt="12" srcset="https://arindamchat.files.wordpress.com/2017/01/12.png 462w, https://arindamchat.files.wordpress.com/2017/01/12.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/12.png?w=300 300w" sizes="(max-width: 462px) 100vw, 462px"   /></p>
+<p>If you see only below two tabs, there Azure extension is not installed here, go to next step. If you see a tab called “Azure Log Analytics (OMS)”, then go to step 3</p>
+<p><img data-attachment-id="264" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/13/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/13.png?w=712" data-orig-size="331,102" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/13.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/13.png?w=712?w=331" class="alignnone size-full wp-image-264" src="../../../../../arindamchat.files.wordpress.com/2017/01/13bc78.png?w=712" alt="13" srcset="https://arindamchat.files.wordpress.com/2017/01/13.png 331w, https://arindamchat.files.wordpress.com/2017/01/13.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/13.png?w=300 300w" sizes="(max-width: 331px) 100vw, 331px"   /></p>
+<ul>
+<li><strong>Step 2-</strong> Go to OMS portal ( not Azure portal) àConnected Sourcesà Windows Server
+<ul>
+<li>If you are opening this portal from within the server where you need to start monitoring, click on “Download Windows Agent (64 bit)”, otherwise you can download the exe and copy that to the machine where you want to install it.</li>
+</ul>
+</li>
+</ul>
+<p><img data-attachment-id="265" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/14/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/14.png?w=712" data-orig-size="532,422" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="14" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/14.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/14.png?w=712?w=532" class="alignnone size-full wp-image-265" src="../../../../../arindamchat.files.wordpress.com/2017/01/14bc78.png?w=712" alt="14" srcset="https://arindamchat.files.wordpress.com/2017/01/14.png 532w, https://arindamchat.files.wordpress.com/2017/01/14.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/14.png?w=300 300w" sizes="(max-width: 532px) 100vw, 532px"   /></p>
+<ul>
+<li>Run the application and complete it.</li>
+</ul>
+<p>&#8211;<strong>Step 3- Configure OMS via SCOM agent</strong></p>
+<ul>
+<li>Go to the oath as in step 1 and open SCOM control panel by clicking on “AgentControlPanel” file, now you will see two more tabs. Open the OMS tab.</li>
+</ul>
+<p><img data-attachment-id="266" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/15/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/15.png?w=712" data-orig-size="499,127" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="15" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/15.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/15.png?w=712?w=499" class="alignnone size-full wp-image-266" src="../../../../../arindamchat.files.wordpress.com/2017/01/15bc78.png?w=712" alt="15" srcset="https://arindamchat.files.wordpress.com/2017/01/15.png 499w, https://arindamchat.files.wordpress.com/2017/01/15.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/15.png?w=300 300w" sizes="(max-width: 499px) 100vw, 499px"   /></p>
+<ul>
+<li>Click Add and copy the WorkSpace ID and Key from OMS portal to here (See the above picture, you need to copy from there), if you give correct values, this machine now will be connected to the OMS, you can see if this succeeds as below.</li>
+</ul>
+<p><img data-attachment-id="267" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/16/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/16.png?w=712" data-orig-size="547,295" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="16" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/16.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/16.png?w=712?w=547" class="alignnone size-full wp-image-267" src="../../../../../arindamchat.files.wordpress.com/2017/01/16bc78.png?w=712" alt="16" srcset="https://arindamchat.files.wordpress.com/2017/01/16.png 547w, https://arindamchat.files.wordpress.com/2017/01/16.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/16.png?w=300 300w" sizes="(max-width: 547px) 100vw, 547px"   /></p>
+<ul>
+<li>Now go back to OMS portal again and there should be this machine added there ( this might take some time)</li>
+</ul>
+<p><img data-attachment-id="268" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/17/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/17.png?w=712" data-orig-size="683,175" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="17" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/17.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/17.png?w=712?w=683" class="alignnone size-full wp-image-268" src="../../../../../arindamchat.files.wordpress.com/2017/01/17bc78.png?w=712" alt="17" srcset="https://arindamchat.files.wordpress.com/2017/01/17.png 683w, https://arindamchat.files.wordpress.com/2017/01/17.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/17.png?w=300 300w" sizes="(max-width: 683px) 100vw, 683px"   /></p>
+<ul>
+<li>Click on the “# Windows Computers Connected”, you will be bought to Log Search and can view all connected computers.</li>
+</ul>
+<p><img data-attachment-id="269" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/18/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/18.png?w=712" data-orig-size="724,351" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="18" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/18.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/18.png?w=712?w=712" class="alignnone size-full wp-image-269" src="../../../../../arindamchat.files.wordpress.com/2017/01/18bc78.png?w=712" alt="18" srcset="https://arindamchat.files.wordpress.com/2017/01/18.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/18.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/18.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/18.png 724w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h2>Choose what to analysis.</h2>
+<p>Even if you are done all the steps successfully, you might not be able to see any logs present in the Log Search (this anyway may take hours to appear). You need to choose what you want to collect. For that</p>
+<p>Go to the OMS portal &#8211;&gt;Settings&#8211;&gt;Data</p>
+<p><img data-attachment-id="270" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/19/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/19.png?w=712" data-orig-size="1404,562" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="19" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/19.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/19.png?w=712?w=712" class="alignnone size-full wp-image-270" src="../../../../../arindamchat.files.wordpress.com/2017/01/19bc78.png?w=712" alt="19" srcset="https://arindamchat.files.wordpress.com/2017/01/19.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/19.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/19.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/19.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/19.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/19.png 1404w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<ul>
+<li><strong>Windows Events</strong></li>
+</ul>
+<p>If you want you can choose few events here.</p>
+<ul>
+<li>Under Windows Event Logs, click Enter the name of an event log to monitor.</li>
+<li>Type Microsoft-Windows-WinRM/Operational and click the plus sign.</li>
+<li>Select the check boxes next to ERROR, WARNING, and INFORMATION as shown in the following screenshot and click on the ‘Save ‘ button, like this you can add other logs also.</li>
+</ul>
+<p><img data-attachment-id="271" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/20/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/20.png?w=712" data-orig-size="665,222" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/20.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/20.png?w=712?w=665" class="alignnone size-full wp-image-271" src="../../../../../arindamchat.files.wordpress.com/2017/01/20bc78.png?w=712" alt="20" srcset="https://arindamchat.files.wordpress.com/2017/01/20.png 665w, https://arindamchat.files.wordpress.com/2017/01/20.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/20.png?w=300 300w" sizes="(max-width: 665px) 100vw, 665px"   /></p>
+<ul>
+<li><strong>Windows Performance Counters</strong> &#8211; you can see there are some default entries, if you choose to add anything else, all these entries will be gone and you have to add one by one again.</li>
+<li><strong>IIS Logs</strong>&#8211; Check the box and Save it</li>
+</ul>
+<p><img data-attachment-id="272" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/21/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/21.png?w=712" data-orig-size="298,117" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="21" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/21.png?w=712?w=298" data-large-file="https://arindamchat.files.wordpress.com/2017/01/21.png?w=712?w=298" class="alignnone size-full wp-image-272" src="../../../../../arindamchat.files.wordpress.com/2017/01/21bc78.png?w=712" alt="21" srcset="https://arindamchat.files.wordpress.com/2017/01/21.png 298w, https://arindamchat.files.wordpress.com/2017/01/21.png?w=150 150w" sizes="(max-width: 298px) 100vw, 298px"   /></p>
+<ul>
+<li><strong>Syslog</strong>&#8211; Same as Windows events, you can choose specific logs here also.</li>
+</ul>
+<p><strong> </strong><strong> </strong></p>
+<h2>Custom Logs</h2>
+<p>The Custom Logs data source in Log Analytics allows you to collect events from text files on both Windows and Linux computers. Many applications log information to text files instead of standard logging services such as Windows Event log or Syslog. Once collected, you can parse each record in the log into individual fields using the Custom Fields feature of Log Analytics.</p>
+<p>Microsoft has a very nice article describing this, read it here: <a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources-custom-logs">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-sources-custom-logs</a></p>
+<p>If you see below message when you click Custom Log, make sure, you have enabled this feature in Preview Section.</p>
+<p><img data-attachment-id="273" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/22/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/22.png?w=712" data-orig-size="1300,545" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="22" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/22.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/22.png?w=712?w=712" class="alignnone size-full wp-image-273" src="../../../../../arindamchat.files.wordpress.com/2017/01/22bc78.png?w=712" alt="22" srcset="https://arindamchat.files.wordpress.com/2017/01/22.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/22.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/22.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/22.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/22.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/22.png 1300w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p><img data-attachment-id="274" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/23/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/23.png?w=712" data-orig-size="1096,551" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="23" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/23.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/23.png?w=712?w=712" class="alignnone size-full wp-image-274" src="../../../../../arindamchat.files.wordpress.com/2017/01/23bc78.png?w=712" alt="23" srcset="https://arindamchat.files.wordpress.com/2017/01/23.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/23.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/23.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/23.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/23.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/23.png 1096w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Below you can see I have configured a custom log, this will read all logs from a folder, so you can give your machines log folder here.</p>
+<p><img data-attachment-id="275" data-permalink="https://arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/attachment/24/" data-orig-file="https://arindamchat.files.wordpress.com/2017/01/24.png?w=712" data-orig-size="1040,412" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="24" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/01/24.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/01/24.png?w=712?w=712" class="alignnone size-full wp-image-275" src="../../../../../arindamchat.files.wordpress.com/2017/01/24bc78.png?w=712" alt="24" srcset="https://arindamchat.files.wordpress.com/2017/01/24.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/01/24.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/01/24.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/01/24.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/01/24.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/01/24.png 1040w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>And in Log Search you should be able to analyze this custom logs.</p>
+<p>How to Search logs in Log Search:</p>
+<p>I’ll cover this in my next post, but you can get a good idea here.</p>
+<p><a href="https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-log-searches">https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-log-searches</a></p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type='text/javascript' id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script>
+				</div>
+				        <div id="crt-720886215" style="width:300px;height:250px;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-720886215');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-720886215",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-720886215'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-248" class="share-twitter sd-button share-icon" href="index9a7b.html?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-248" class="share-facebook sd-button share-icon" href="index5a58.html?share=facebook" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-248" class="share-google-plus-1 sd-button share-icon" href="index386f.html?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-72867871-248-594a78301b956' data-src='//widgets.wp.com/likes/#blog_id=72867871&amp;post_id=248&amp;origin=arindamchat.wordpress.com&amp;obj_id=72867871-248-594a78301b956' data-name='like-post-frame-72867871-248-594a78301b956'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>		</div><!-- .entry-content -->
+
+			<footer class="entry-footer">
+		<span class="tags-links">Tagged <a href="../../../../tag/azure/index.html" rel="tag">Azure</a>, <a href="../../../../tag/iis-logs/index.html" rel="tag">IIS Logs</a>, <a href="../../../../tag/iislogs/index.html" rel="tag">IISLogs</a>, <a href="../../../../tag/log-analysis/index.html" rel="tag">Log Analysis</a>, <a href="../../../../tag/log-search/index.html" rel="tag">Log Search</a>, <a href="../../../../tag/oms/index.html" rel="tag">OMS</a>, <a href="../../../../tag/operations-management-suite/index.html" rel="tag">Operations Management Suite</a></span>	</footer><!-- .entry-footer -->
+			<div class="entry-author">
+		<div class="author-avatar">
+			<img alt='' src='https://2.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=60&amp;d=identicon&amp;r=G' class='avatar avatar-60' height='60' width='60' />		</div><!-- .author-avatar -->
+
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Arindam C</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+			Experience in Office 365 ,SharePoint,SCOM 2012, Azure Application Insight, Azure Log Analysis, MS CRM, ASP.NET,C# Angular JS . 
+Check Linked In : https://www.linkedin.com/in/arindamchat			<a class="author-link" href="../../../../author/arindach/index.html" rel="author">
+				View all posts by Arindam C			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+	</div> <!-- .entry-body -->
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			One thought on &ldquo;<span>Azure Log Analysis in Operations Manager Suits (OMS)</span>&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-5" class="pingback even thread-even depth-1 highlander-comment">
+			<div class="comment-body">
+				Pingback: <a href='../../27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/index.html' rel='external nofollow' class='url'>Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS) | Arindam&#039;s Blog</a> 			</div>
+</li><!-- #comment-## -->
+		</ol>
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://arindamchat.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="5b63f46314" /><input type="hidden" name="_wp_http_referer" value="/2017/01/25/operationmanagersuit-oms/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="https://public-api.wordpress.com/connect/?googleplus-sign-in=https%3A%2F%2Farindamchat.wordpress.com" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='248' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="583cff8e07" /></p>
+<input type="hidden" name="genseq" value="1498052656" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="196"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../../../../2016/11/21/new-managed-solutions-gallery-as-alternative-for-sharepoint-server-sandbox-solutions/index.html" rel="prev">New Managed Solutions Gallery as Alternative for SharePoint Server Sandbox Solutions</a></div><div class="nav-next"><a href="../../27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/index.html" rel="next">Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)</a></div></div>
+	</nav>
+		</main>
+	</div>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="archives-5" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='../../../05/index.html'>May 2017</a></li>
+	<li><a href='../../index.html'>January 2017</a></li>
+	<li><a href='../../../../2016/11/index.html'>November 2016</a></li>
+	<li><a href='../../../../2014/07/index.html'>July 2014</a></li>
+	<li><a href='../../../../2014/03/index.html'>March 2014</a></li>
+	<li><a href='../../../../2014/02/index.html'>February 2014</a></li>
+	<li><a href='../../../../2013/06/index.html'>June 2013</a></li>
+	<li><a href='../../../../2013/03/index.html'>March 2013</a></li>
+	<li><a href='../../../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../../../2012/07/index.html'>July 2012</a></li>
+	<li><a href='../../../../2011/12/index.html'>December 2011</a></li>
+	<li><a href='../../../../2011/04/index.html'>April 2011</a></li>
+	<li><a href='../../../../2007/11/index.html'>November 2007</a></li>
+		</ul>
+		</section></aside>
+
+	</div>
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+	<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+	
+	</div><!-- .site-info -->	</footer>
+</div>
+<!--  -->
+<script type='text/javascript' src='../../../../../0.gravatar.com/js/gprofiles12f0.js?ver=201725y'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgrohoc3b6.js?m=1380573781h'></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e1684c9e7b0368aff778803d73e2c883">
+	</div>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/arindamchat.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?action=logout&_wpnonce=cbdb9fe6ca","homeURL":"https:\/\/arindamchat.wordpress.com\/","postID":"248","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s2.wp.com/_static/index1575.html??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="72867871" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://arindamchat.wordpress.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Arindam&#039;s Blog" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0193bea543" /><input type="hidden" name="_wp_http_referer" value="/2017/01/25/operationmanagersuit-oms/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/arindamchat.wordpress.com\/2017\/01\/25\/operationmanagersuit-oms\/":248};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/akismet-3.0/_inc/formcd10.js?m=1404442431h'></script>
+<link rel='stylesheet' id='all-css-0-3' href='../../../../../s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carouselaccd.css?m=1481571546h' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"72867871","siteName":"Arindam's Blog","siteURL":"http:\/\/arindamchat.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/ixion","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F","themeURL":"https:\/\/wordpress.com\/theme\/ixion\/","xhrURL":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bbaaeffc0c","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5c13a7b39d\" \/>","referer":"https:\/\/arindamchat.wordpress.com\/2017\/01\/25\/operationmanagersuit-oms\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/arindamchat.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F","postID":"248","shortlink":"http:\/\/wp.me\/p4VKgf-40","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/arindamchat.wordpress.com\/248","statsLink":"https:\/\/wordpress.com\/stats\/post\/248\/arindamchat.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Ixion","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"099d9bc6ed","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F01%2F25%2Foperationmanagersuit-oms%2F","blog_id":"72867871","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=72867871&v=wpcom&tz=0&user_id=0&subd=arindamchat","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJyVkdtOwzAMhl+I1Ns0gbhAPIubuq3bnIiTbnt7UmClg6nSrmz99ucjnILS3iVyCQaBhibWFM7VIE+wCtmsgskdOwHDIwl8ZMrUo2sMxY1k7a0tkvqGhpmuQU4c6BHoRvgLpp5sSQu5Bj6zd4AilL44hxN3mIr4ACQjh9LJjar1OotqebkGO21ycztTpGAuleV/LVYLYVPiqsYIFiVRLJ7yE8XIc7FF26qg5y3mCot3bygJv3Os9aG8K15+TLXOund+jD4LGRgoBdSjugobTPCSVGuQI0iPkV13tQV6t2/74+tht3veH16GT3zz6s8='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='../../../../wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "arindamchat.wordpress.com";
+	</script>
+	<script type="text/javascript" defer src="../../../../../s.skimresources.com/js/725X1342.skimlinks.js"></script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<p class="robots-nocontent"><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /></p>
+		</noscript><script src="../../../../../stats.wp.com/w9f61.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'72867871','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'72867871','v':'wpcom','tz':'0','user_id':'0','post':'248','subd':'arindamchat'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDk1VVNLLEFBLkw5c1hbWCwzWn54ZXBXdC9sN35wWGcycVRpV1d6YmVUX0F1PTRfckVZST9ZWnZDTUlNUDkxNXFlcnlNMFc5UG0wSWUrd1R0LU9Ra1dnTyV1RitnRnZseUY9anUtejFMa19hMl8vfHhJVX44VVZDX1ZVTk8rZldmLg=='}]);
+_stq.push([ 'clickTrackerInit', '72867871', '248' ]);
+	</script>
+<noscript><img src="../../../../../pixel.wp.com/b0b80.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/01/25/operationmanagersuit-oms/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:46:02 GMT -->
+</html>

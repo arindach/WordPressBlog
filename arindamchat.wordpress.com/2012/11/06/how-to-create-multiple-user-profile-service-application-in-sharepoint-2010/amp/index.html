@@ -1,0 +1,593 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/11/06/how-to-create-multiple-user-profile-service-application-in-sharepoint-2010/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to create multiple User Profile Service Application in SharePoint 2010" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="&nbsp; You might have requirement to create multiple user profile service application for various reason, like for me the requirement was to create a different mysite for a special project which wi…" />
+<meta property="article:published_time" content="2012-11-06T18:26:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:44:56+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2012/11/ef2db-2c6eb.jpg?w=300" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="How to create multiple User Profile Service Application in SharePoint 2010" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2012/11/df9cc-1d209.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>How to create multiple User Profile Service Application in SharePoint 2010 &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2012\/11\/06\/how-to-create-multiple-user-profile-service-application-in-sharepoint-2010\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"How to create multiple User Profile Service Application in SharePoint 2010","datePublished":"2012-11-06T18:26:00+00:00","dateModified":"2017-05-17T10:44:56+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2012\/11\/df9cc-1.png","width":670,"height":608}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-c0c3bd41ff684a960e51ef694b1e0c7e{font-family:Arial, Tahoma, Helvetica, FreeSans, sans-serif;font-size:x-small;}.amp-wp-inline-791720fca115c8038913d7ac547a84f7{line-height:18px;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-6278e5ecc1cca864c84fa2909917a523{background-color:white;font-family:Arial, Tahoma, Helvetica, FreeSans, sans-serif;font-size:13px;line-height:18px;}.amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107{margin:0 0 .25em;}.amp-wp-inline-664264bf1698968d0ed65318a036c7aa{color:red;font-weight:bold;}.amp-wp-inline-8ba16089d0a213bea4158674457f1a1b{font-style:italic;}.amp-wp-inline-86384b0e20ac09afa0084aec2224fdda{color:red;}.amp-wp-inline-b04c8cce0d1916c37f6eb6cbce716331{color:#38761d;}.amp-wp-inline-b97bbd3b1cd100fb50c71064ba1e20fa{color:#93c47d;}.amp-wp-inline-21507e7500323d7b431dffade0db2874{text-indent:-.25in;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979{font-family:&#039;font-size:7pt;}.amp-wp-inline-51c679c6c74ad3a49b85d945ad132f42{margin-left:13.5pt;}.amp-wp-inline-b9916147c8c61cf764167ecd3d374525{margin:0 0 .0001pt .5in;text-indent:-.25in;}.amp-wp-inline-aaaf83442d4a2e25cc223f55777a1124{background:yellow;color:red;}.amp-wp-inline-45ba09419953803f0350905366d5cb40{font-family:Symbol;font-size:11pt;font-weight:normal;}.amp-wp-inline-b29f9e7829b113649e4b0605f6cf8d87{font-family:Symbol;text-indent:-.25in;}.amp-wp-inline-573c05be6d1606b2eaa20996716bcab6{border-collapse:collapse;border:none;}.amp-wp-inline-499361e09380d296de972f726eab21aa{border-bottom:solid windowtext 1pt;border-left:none;border-right:solid windowtext 1pt;border-top:none;padding:0 5.4pt;max-width:237.3pt;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-e076b7eb97877a3efd63f7005da9b06d{border-top:none;border:solid windowtext 1pt;padding:0 5.4pt;max-width:159.6pt;}.amp-wp-inline-10ea2fdf78509a0142ad59eaba8b79f4{border-left:none;border:solid windowtext 1pt;padding:0 5.4pt;max-width:237.3pt;}.amp-wp-inline-61d9e9eac860619415f5a07e9c9a630d{border:solid windowtext 1pt;padding:0 5.4pt;max-width:159.6pt;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">How to create multiple User Profile Service Application in SharePoint 2010</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2012-11-06T18:26:00+00:00">
+		5 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<p> </p>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">You might have requirement to create multiple user profile service application for various reason, like for me the requirement was to create a different mysite for a special project which will run in its own web application and some of the user profile properties will come from a secure database. So I decided to create another UPSA in addition to the existing one.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><u>Now the catch here is, if you are working in a SharePoint farm with a single server, then there is no point creating more than one UPSA. The reason is UPSA is dependent on the user profile synchronization service and only one instance of this service can be run in a server. So if you create multiple UPSA, you have to select which one you want to associate with this user profile synchronization service, both USPA can’t be run simultaneousl</u>y.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">OK, so let me describe our farm architecture, we have 3 server farm, I’ll name then as SPWFE01, SPWFE02 and SPAPP01.  From the name you can understand what their functions are.</div>
+<div class="MsoNormal">Since I have 3 server in the farm so I can run 3 UPSA in this farm, each UPSA can be associated with the user profile synchronization service in a server.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">However I needed two UPSA, so the mapping is like below:</div>
+<div class="MsoNormal"></div>
+<table class="MsoTableGrid amp-wp-inline-573c05be6d1606b2eaa20996716bcab6" border="1" cellspacing="0" cellpadding="0"><tbody><tr><td width="213" class="amp-wp-inline-61d9e9eac860619415f5a07e9c9a630d">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><b>UPSA Name</b></div>
+</td>
+<td width="316" class="amp-wp-inline-10ea2fdf78509a0142ad59eaba8b79f4">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><b>Server where user profile synchronization service will run</b></div>
+</td>
+</tr><tr><td width="213" class="amp-wp-inline-e076b7eb97877a3efd63f7005da9b06d">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">User Profile Service 01</div>
+</td>
+<td width="316" class="amp-wp-inline-499361e09380d296de972f726eab21aa">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">SPAPP01</div>
+</td>
+</tr><tr><td width="213" class="amp-wp-inline-e076b7eb97877a3efd63f7005da9b06d">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">User Profile Service 02</div>
+</td>
+<td width="316" class="amp-wp-inline-499361e09380d296de972f726eab21aa">
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">SPWFE01</div>
+</td>
+</tr></tbody></table><div class="MsoNormal"></div>
+<div class="MsoNormal"><b>Note:</b> If you are in an existing farm ,most probably the default user profile service is already there, we will not touch that. In my case <b>User Profile Service 01</b> was the default one and it was already running in the SPAPP01.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">So we are going to create <b>User Profile Service 02.</b></div>
+<p><span class="amp-wp-inline-b29f9e7829b113649e4b0605f6cf8d87"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979"> </span></span><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">You know the basic steps, you can also go here :</span><a href="http://www.sharepointboost.com/blog/configuring-the-user-profile-service-ups-in-sharepoint-2010/">http://www.sharepointboost.com/blog/configuring-the-user-profile-service-ups-in-sharepoint-2010/</a> for a detailed step by step guide.</p>
+<ul class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">Go to </span><b class="amp-wp-inline-21507e7500323d7b431dffade0db2874">Application Management</b><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874"> and then </span><b class="amp-wp-inline-21507e7500323d7b431dffade0db2874">manage service application</b><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874"> and </span><b class="amp-wp-inline-21507e7500323d7b431dffade0db2874">create a new User profile service application</b><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">.</span></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">Give the name as </span><b class="amp-wp-inline-21507e7500323d7b431dffade0db2874">User Profile Service 02</b></li>
+<li><span class="amp-wp-inline-21507e7500323d7b431dffade0db2874">Enter other information as per your need.</span></li>
+</ul><p><!-- [if !supportLists]--></p>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/df9cc-1.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/df9cc-156dc.png?w=400&amp;h=362" width="400" height="362" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+<h3 class="amp-wp-inline-b9916147c8c61cf764167ecd3d374525"><!-- [if !supportLists]--><span class="amp-wp-inline-45ba09419953803f0350905366d5cb40">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]--><span class="amp-wp-inline-aaaf83442d4a2e25cc223f55777a1124">Important:</span> In the “Profile Synchronization Instance” select SPWFE01 where the associated user profile synchorinization service from this UPSA will run.</h3>
+<div class="MsoListParagraph"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/71cef-2.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/71cef-202ad.png?w=400&amp;h=221" width="400" height="221" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal amp-wp-inline-51c679c6c74ad3a49b85d945ad132f42"></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Now hit <b>create</b>, in my case I gave a specific mysite URL also here which is not shown above.</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Once this new service application is created, you can see that it’s listed in the service application page- OK so far so good.</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"></div>
+<div class="MsoNormal">Now we have to run this new UPSA in the SPWFE01. Go the <b>Manage Services in this server page </b>in the<b> Central Admin.</b></div>
+<div class="MsoNormal">Change the Server to SPWFE01; you will see that the User profile synchronization service is not running in this server. Click on <b>start</b></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/e880f-3.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/e880f-33191.png?w=400&amp;h=131" width="400" height="131" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="MsoNormal">In the next page you will now see there’s two UPSA appearing in the dropdown. The “User Profile Service 01” is already running in SPAPP01, so I will choose “User Profile Service 02” and put password and click <b>OK</b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/61165-4.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/61165-4254b.png?w=400&amp;h=142" width="400" height="142" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div></div>
+<div></div>
+<div>
+<p>You have to wait a few minutes now; you will see the status of the service is “<span class="amp-wp-inline-b97bbd3b1cd100fb50c71064ba1e20fa">Starting</span>“. After some time it should change to <span class="amp-wp-inline-b97bbd3b1cd100fb50c71064ba1e20fa">Started</span>.  Voila now have two different UPSA running in your farm.</p>
+<p><b>Troubleshoot : </b>I have tested above process few times and it worked always, but there could be some error appear always.</p>
+<p><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda"><b>Error</b>: User Profile synchronisation  service is stuck in ‘starting’ for long long time</span><br/><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda"><br/></span><span class="amp-wp-inline-b04c8cce0d1916c37f6eb6cbce716331"><b>Solution</b></span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">: </span>Most probably two forefront identity management services are not running in SPWFE01, go to services and check that, if not running  do a IISREST, restart SharePoint Timer Job and then start this 2 services. Now go and start the synchronisation service again.</p>
+<p><b><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">Error </span></b>: SP2010: FIMSynchronizationService errors when running Profile Synchronization,<span class="amp-wp-inline-6278e5ecc1cca864c84fa2909917a523">Profile import from AD fails. You are able to successfully create Synchronization Connection, but when trying to run Full or Incremental Profile Synchronization, you are greeted with errors in Application Event Log such as this:</span><br/><span class="amp-wp-inline-6278e5ecc1cca864c84fa2909917a523"><br/></span><i>The management agent “MOSSAD-[SYNCHRONIZATION CONNECTION NAME]” failed on run profile “DS_DELTAIMPORT” because of connectivity issues.</i><br/><i><br/></i><span class="amp-wp-inline-b04c8cce0d1916c37f6eb6cbce716331"><b>Solution</b></span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">:</span></p>
+<ol class="amp-wp-inline-6278e5ecc1cca864c84fa2909917a523"><li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Start FIM SSM (<span class="amp-wp-inline-8ba16089d0a213bea4158674457f1a1b">C:\Program Files\Microsoft Office Servers\14.0\Synchronization Service\UIShell\miisclient.exe)</span></li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Go to Management Agents screen, right click on MOSSAD-[SYNCHRONIZATION CONNECTION NAME] and select Properties</li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Go to Configure Directory Partitions and uncheck the directory partition that you didn’t define in SP2010</li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Click OK to close Properties window</li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Again, right click on MOSSAD-[SYNCHRONIZATION CONNECTION NAME] and select Configure Run Properties…</li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">On DS_FULLSYNC, DS_DELTASYNC, DS_FULLIMPORT, DS_DELTAIMPORT, delete step for the directory partition you removed on bullet 3. <span class="amp-wp-inline-664264bf1698968d0ed65318a036c7aa">NOTE! You must only remove the step for the directory partition you removed earlier on bullet 3. I.e., if the removed directory partition was 3rd on the list, you should delete 3rd Step.</span></li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Click OK</li>
+<li class="amp-wp-inline-23c9e6d316ce78ca406ca2bd9f3bd107">Re-run profile synchronization from Central Admin</li>
+</ol><div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/9b93a-1.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/9b93a-1da5b.jpg?w=400&amp;h=306" width="400" height="306" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/11/ef2db-2.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/11/ef2db-210b0.jpg?w=400&amp;h=330" width="400" height="330" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div><span class="amp-wp-inline-c0c3bd41ff684a960e51ef694b1e0c7e"><span class="amp-wp-inline-791720fca115c8038913d7ac547a84f7"> </span></span></div>
+</div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a>, <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>, <a href="../../../../../tag/upsa/index.html" rel="tag">UPSA</a>, <a href="../../../../../tag/user-profile-service/index.html" rel="tag">User Profile Service</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b42e7.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=33&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b00cd.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDk1Nj1zRHJMdCxUVE4wbDIyOTA2NUVKSCtkTT11ek89fEQrZ1k%2FZHVCR3JnJUxsZnBjTiZFOVNOLTFaYV1fWU4uZktvaGFTbk1LUVZqQWZ%2BR3JiSS4wZ0pHNmVlWVsz"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/11/06/how-to-create-multiple-user-profile-service-application-in-sharepoint-2010/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:42 GMT -->
+</html>

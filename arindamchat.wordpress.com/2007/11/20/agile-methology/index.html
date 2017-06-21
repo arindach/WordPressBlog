@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Mirrored from arindamchat.wordpress.com/2007/11/20/agile-methology/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:51:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="../../../../xmlrpc.php">
+
+<title>Agile Methology &#8211; Arindam&#039;s Blog</title>
+<link rel='dns-prefetch' href='http://s2.wp.com/' />
+<link rel='dns-prefetch' href='http://s1.wp.com/' />
+<link rel='dns-prefetch' href='http://s0.wp.com/' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Agile Methology Comments Feed" href="feed/index.html" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8-RC2-40878"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJyFkNFOwzAMRX+IYG2MCh4mviVJrc5bHFu1q21/v5QKEBsqL5GvdY+vYzhryFIdqwNPQcs0UDU4axYOxlTweqees9kT/I0VOqHBEV1jPoVP9WBPRYafHBn72BsMRVIsa6NHLNGxDyrmd2oNyzJi67NGnx2MPUUsyM22hrF2X9RcHtp3VmOWC6WkI5qF9jJNHPzQgv5Zj+dVllNBM/7uLChBFadG23fxMHOJAp0S0IWkgvm14Gz74P1m995tu9e3zcvxBtrkuko=' type='text/css' media='all' />
+<link rel='stylesheet' id='ixion-fonts-archivo-css'  href='http://fonts.googleapis.com/css?family=Archivo+Narrow%3A400%2C400i%2C700%2C700i&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9jUsKwzAMRC9UV6Skv0XpWRyjOCq2ZSyFpLevszOEZjePmcfAko3jpJgUdMKIAnkegFbiBFYEVWCsvYBjzlgmXEj17ERO0KhxNjnMnpKAx4SFavEn7tzdLSUHot+AZsmO4/EZm8DO6ua1YMZgqRypBYfAvkYPddXgJr3jq+vvj2t/eXa3zw92gm4m' type='text/css' media='all' />
+<link rel='stylesheet' id='print-css-3-1' href='../../../../../s0.wp.com/wp-content/mu-plugins/global-print/global-print6805.css?m=1465851035h' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-4-1' href='https://s2.wp.com/_static/??-eJx9i9EKwjAMRX/IGoVN54P4LVnp2kialCbD3xcfRGTi0z0XzoFHC1HFkzjUNTReM4kBRieVGfuH9tFsB7/1puZhYaQOVrCT5Pf+q0wjIQfWrN9nE3lJNRmUATLrjPwSbvV6HC6H83Qap/H+BMWZScE=' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='../../../../../s1.wp.com/wp-content/mu-plugins/highlander-comments/style0196.css?m=1377793621h' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Previous Post' href='../../19/65/index.html' />
+<link rel='next' title='SharePoint 2010 Document Set functionalities' href='../../../../2011/04/26/sharepoint-2010-document-set-functionalities/index.html' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='http://wp.me/p4VKgf-12' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Agile Methology" />
+<meta property="og:url" content="https://arindamchat.wordpress.com/2007/11/20/agile-methology/" />
+<meta property="og:description" content="IntroductionDuring the 90s a number of different people realized that things had somehow changed. These people became interested in developing software methodologies that were a better fit with the…" />
+<meta property="article:published_time" content="2007-11-20T08:30:00+00:00" />
+<meta property="article:modified_time" content="2014-08-13T10:23:35+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="https://arindamchat.files.wordpress.com/2007/11/40436-pic2-bmp.jpg?w=300" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Agile Methology" />
+<meta name="twitter:image" content="https://arindamchat.files.wordpress.com/2007/11/679a6-pic1-bmp.jpg?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=114" />
+<link rel='openid.server' href='../../../../indexdd8f.html?openidserver=1' />
+<link rel='openid.delegate' href='../../../../index.html' />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../osd.xml" title="Arindam&#039;s Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f5f0e9" />
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Arindam&#039;s Blog" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://arindamchat.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Agile Methology | Arindam&#039;s Blog on WordPress.com" />
+<meta name="description" content="IntroductionDuring the 90s a number of different people realized that things had somehow changed. These people became interested in developing software methodologies that were a better fit with the new business environment – more nimble, easier to maneuver through a turbulent business environment. Although the details of these methodologies differ, they all share certain underlying&hellip;" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f0e9; }
+</style>
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'arindamchat.wordpress.com',
+				pageURL: 'https://arindamchat.wordpress.com/2007/11/20/agile-methology/'
+			};
+		</script>
+ 		<script type="text/javascript" src="../../../../../s.pubmine.com/head.js"></script>
+		<script type="text/javascript" src="../../../../../static.criteo.net/js/ld/publishertag.js"></script><link rel="amphtml" href="amp/index.html" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{color:#fff}.site-description,.featured-content .hentry .entry-title a{color:#fff}.comment-author,.footer-widgets .widget a,body,button,input,select,textarea{color:#192930}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:#eeece8}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:rgba(238,236,232,.3)}.comment-metadata,.entry-footer,.entry-meta,.footer-widgets .widget-title,.main-navigation ul>li.current-menu-item>a,.main-navigation ul>li.current_page_item>a,.more-recent-posts,.more-recent-posts:visited,.more-testimonials,.more-testimonials:visited,.search-form-icon:before,.site-header .jetpack-social-navigation a,.site-info,div#jp-relatedposts h3.jp-relatedposts-headline{color:#67655f}.search-form-icon:before,.search-form .search-field{border-color:#a5a29d}.search-form-icon:before,.search-form .search-field{border-color:rgba(165,162,157,.3)}body,ins,mark,.site-header .search-form-icon:before,.site-header .search-form .search-field,.footer-widgets .widget{background-color:#f5f0e9}.entry-author,.widget,hr,.testimonials .hentry{background-color:#f0e9df}.featured-content .hentry,.header-overlay{background-color:#42566a}.header-overlay:before{background-color:#42566a}.header-overlay:before{background-color:rgba(66,86,106,.7)}h1,h2,h3,h4,h5,h6,.entry-title a,.entry-title a:visited,.entry-title,.page-title,.widget-title,.site-title,.comments-title,.site-title a,.site-title a:visited{color:#42566a}#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"]{background-color:#a84c38}#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{background-color:#954331}.main-navigation ul ul{border-top-color:#a84c38}.main-navigation ul ul:before{color:#a84c38}.comment-metadata .edit-link a,.site-header .jetpack-social-navigation a:hover,a,a:visited,.main-navigation .nav-menu>li>a,.testimonials .edit-link a,.testimonials .edit-link a:visited{color:#a44a36}a:hover,a:focus,a:active{color:#a84c38}.featured-content .hentry:hover .entry-title a{color:#e8d0c9}</style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-64 single-format-standard custom-background mp6 customizer-styles-applied singular has-description no-featured-posts highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="utility-container">
+						
+<form role="search" method="get" class="search-form" action="https://arindamchat.wordpress.com/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field"
+		placeholder="Search &hellip;"
+		value="" name="s"
+		title="Search for:" />
+		<span class="search-form-icon"></span>
+	</label>
+	<input type="submit" class="search-submit"
+		value="Search" />
+</form>
+		</div>
+
+		<div class="branding-container">
+					<div class="site-branding">
+			
+								<p class="site-title"><a href="../../../../index.html" rel="home">Arindam&#039;s Blog</a></p>
+					</div><!-- .site-branding -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+	<div class="menu-top-menu-for-the-site-container"><ul id="top-menu" class="menu"><li id="menu-item-205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-205"><a href="../../../../index.html">Home</a></li>
+<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-523"><a href="../../../../category/azure/index.html">Azure</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-526"><a href="../../../../category/fast/index.html">FAST</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-527"><a href="../../../../category/sharepoint/index.html">SharePoint</a>
+<ul  class="sub-menu">
+	<li id="menu-item-532" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532"><a href="../../../../category/sharepoint/sharepoint-2016/index.html">SharePoint 2016</a></li>
+	<li id="menu-item-530" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-530"><a href="../../../../category/sharepoint/sharepoint-2013/index.html">SharePoint 2013</a></li>
+	<li id="menu-item-531" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-531"><a href="../../../../category/sharepoint/sharepoint-2010/index.html">SharePoint 2010</a></li>
+</ul>
+</li>
+<li id="menu-item-528" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-528"><a href="../../../../category/net/index.html">.NET</a>
+<ul  class="sub-menu">
+	<li id="menu-item-533" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533"><a href="../../../../category/net/smart-client/index.html">Smart Client</a></li>
+	<li id="menu-item-534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534"><a href="../../../../category/net/click-once/index.html">Click Once</a></li>
+</ul>
+</li>
+<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href="../../../../zabout-me/index.html">About Me</a></li>
+</ul></div></nav>
+		</div>
+
+	</header>
+
+	
+	<div id="content" class="site-content">
+		<div class="entry-meta">
+			<span class="posted-on"><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2007-11-20T08:30:00+00:00">November 20, 2007</time><time class="updated" datetime="2014-08-13T10:23:35+00:00">August 13, 2014</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="../../../../author/arindach/index.html">Arindam C</a></span></span> <span class="cat-links"><a href="../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a></span>					</div><!-- .entry-meta -->
+<h1 class="entry-title">Agile Methology</h1>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-64" class="post-64 post type-post status-publish format-standard hentry category-microsoft-technologies no-featured-image">
+	<div class="entry-body">
+		<header class="entry-header">
+					</header>
+		<div class="entry-content">
+			<p><span style="font-family:times new roman;font-size:130%;"><strong>Introduction</strong></span><br /><span style="font-family:times new roman;"><span style="font-size:85%;"><strong></strong><br />During the 90s a number of different people realized that things had somehow changed. These people became interested in developing software methodologies that were a better fit with the new business environment – more nimble, easier to maneuver through a turbulent business environment. Although the details of these methodologies differ, they all share certain underlying principles, to the extent that these methodologies are often now grouped under the title “agile methodologies”.</p>
+<p>Taichi Ohno was the first to implement this technique in Toyota production system.</p>
+<p>The Fundamental agile principle is: Eliminating waste.</p>
+<p><strong><span style="font-size:130%;">Problem with older approaches</span></strong></p>
+<p>There have been a lot of Software Development Processes created over the years. With exception of Code-and-Fix, these processes have few things in common – they assume that software development is analogous to defined industrial process; they are based on typical engineering processes, Physical engineering processes consist of distinct phases like design phase, planning for the construction phase etc. and same were being followed by software development process also.</p>
+<p>But the problem in software development is that, not all requirements can be defined up front as is needed in BDUF (Big Design Up Front) approach. Also, a tendency to overbuild (add features that are never used) and over-engineer the infrastructure exists, and the most common complaint is “the problem with this project is that the user keeps changing his mind”.</p>
+<p>In traditional methodologies it is very expensive to make changes after a certain point.<br />While predictability may be very desirable, it can only be achieved by seriously compromising other qualities – particularly the fit of final results to the real (emerging) requirements.</p>
+<p><strong><span style="font-size:130%;">Why we need Agile</span></strong></p>
+<p>Given these flaws in traditional software development methodologies, it’s worthwhile asking why they ever worked, and if they worked in the past, why abandon them now. Has something changed?<br />Fundamentally, the business world has changed. Existing businesses change direction just as quickly in response. Product cycles are shorter, and consumers are fickle. It’s no surprise that methodologies that were adequate in the 70s, when product and business cycles were much longer, are being stretched to the point of failure in the 80s and 90s.</p>
+<p>So why use Agile? Here are the points</p>
+<p>• A growing number of software projects operates in extremely dynamic environments.<br />• Project team challenges often include the integration of leading edge technologies.<br />• The need to respond to erratic requirements changes.<br />• Increasingly short time to market cycles.<br />• Projects may have relatively clear objectives, but the specific requirements can be volatile and evolving as customers<br />and development teams alike explore the unknown.<br />• The projects with the above attributes are called high-exploration factor projects, often fall short of expectations when developed using overly rigorous, plan-driven (Waterfall) methods. To implement these kinds of projects with the above attributes, we use Agile.</p>
+<p><strong>Agile approach is recommended when:</strong><br /><strong></strong></p>
+<p>Domain &amp; Technology are evolving<br />Requirements change<br />Short timelines for delivery</p>
+<p><strong><span style="font-size:130%;">Spirit of Agile</span></strong></p>
+<p>• The highest priority to satisfy the customer through early and continuous delivery of Software</p>
+<p>• Welcome changing requirements. Agile processes harness changes for customer’s competitive advantages</p>
+<p>• Deliver-working software frequently, from couple of months to couple of weeks, with a preference for shorter time scale</p>
+<p>• Business people and developers must work together throughout the project</p>
+<p>• Build projects around motivated people. Give them the environment and support to get the job done</p>
+<p>• Most effective method of getting information around in the team is “face-to-face” conversations</p>
+<p>• Working software is the primary measure of progress</p>
+<p>• Maintain a constant work pace</p>
+<p>• Continuous attention to technical excellence</p>
+<p></span></span></p>
+<p><strong><span style="font-size:130%;">Existing Agile Methodologies &amp; selection of Agile Methods</strong></span><br /><span style="font-family:times new roman;font-size:85%;"><br />Agile Methods have much in common, such as what they value, but they also differ in the practices they suggest.</p>
+<p>• Dynamic System Development Method (Dane Faulkner)<br />• Adaptive Software Development (Jim Highsmith)<br />• Crystal (Alistair Cockburn)<br />• SCRUM (Ken Schwaber)<br />• XP (Kent Beck)<br />• Lean Software Development (Mary Poppendieck)<br />• Feature Driven Development (Jeff DeLuca)</p>
+<p><strong><span style="font-size:130%;">Agile Principles</span></strong></p>
+<p>There are certain principles are followed in all the different methodologies. Basically seven Principles that make Agile successful.</p>
+<p>Eliminate waste<br />Amplify learning<br />Decide as late as possible<br />Deliver as fast as possible<br />Empower the team<br />Build integrity<br />See the whole</p>
+<p><strong><span style="font-size:130%;">Key concepts</span></strong></p>
+<p><strong>Story cards</strong></p>
+<p>At the start of each iteration, customers, managers, and developers meet to flesh out, estimate, and prioritize requirements for the next release. The requirements are called “user stories” and are captured on “story cards” in a language understandable by all parties.</p>
+<p><strong>Small Releases</strong><br />&gt;<a href="../../../../../arindamchat.files.wordpress.com/2007/11/679a6-pic1-bmp.jpg"><img id="BLOGGER_PHOTO_ID_5134843561843308082" alt="" src="../../../../../arindamchat.files.wordpress.com/2007/11/679a6-pic1-bmpc6eb.jpg?w=300" border="0" /></a><br /><strong>Refactoring</strong></p>
+<p>As developers work, the design should be evolved to keep it as simple as possible.</p>
+<p><strong>Pair Programming</strong></p>
+<p>Two developers sitting at the same machine write all code, some finding of pair programming is</p>
+<p>· Economics: 15% higher, not 100%<br />· Improved design quality<br />· Continuous reviews<br />· Collective code ownerships<br />· Learning and problem solving<br />· Improves team communication<br />· More people understand each piece of the system<br />· Nominated several times as an improved way of developing software</p>
+<p><strong>Continuous Integration</strong></p>
+<p>Developers integrate new code into the system as often as possible. All functional tests must still pass after integration or the new code is discarded. The salient points are</p>
+<p>· Keep a single place where all the source code lives and from where anyone can obtain the current sources from (and previous versions)<br />· Automate the build process so that anyone can use a single command to build the system from the sources<br />· Automate the testing so that anyone can run a suite of test systems with a single command<br />· Make sure anyone can get a current executable which is best executable so far</p>
+<p><strong>Collective ownership<br /></strong><br />The code is owned by all developers, and they may make changes anywhere in the code at anytime they feel necessary.</p>
+<p><strong>Stand up meetings</strong></p>
+<p>These meetings should be held on daily basis, they are short, 15 to 30 minutes long; should address obstacles but not define solutions</p>
+<p>Purpose:<br />· Communicate daily status, progress, plans to team and any observers<br />· Identify obstacles and remove them<br />· Set focus for the rest of the day</p>
+<p>Agenda: Same 3 questions asked –<br />· What is incomplete or backlog?<br />· What have you accomplished between the last meeting and now?<br />· What will you be doing between now and the next meeting?</p>
+<p>Benefits: Improves communication and helps integration of the team</p>
+<p><strong>Retrospectives: Looking Back to move forward,<br /></strong><br />A project retrospective is an honest and systematic look back at a recently completed project.<br />The objective is to identify lessons in a project and identify actions that can be taken to make the next project more successful, a retrospective must be safe for the attendees to voice their opinions. This is often difficult and takes time to get the team to open up.</p>
+<p><strong><span style="font-size:130%;">A project Execution Model</span></strong></p>
+<p>Different Phases in Agile Development are Strategy, Planning, Execution and Release</p>
+<p><span style="font-size:100%;"><strong>Strategy</strong><br /></span>To verify that the project is worth doing and the entire team independently understands the project direction.<br /></span></p>
+<p><span style="font-family:times new roman;font-size:85%;"><strong>Activities in Strategy Phase:</strong><br />Idea Generation :The business identifies product opportunities and drives formulating the business and financial plans by collaborating with support teams from other business areas and technology. Involvement of the appropriate individuals from horizontal teams and technology.</p>
+<p>Rationalization : In this phase the product owner presents new project or product idea to the innovation council.</p>
+<p>Prioritization :Upon approval the product owner works with the development team to ensure proper priorization.</p>
+<p>Pre-Project Planning : This phase begins to determine the sequencing / project trade-offs and project requirements for resources, and to provide a project vision document. A product manager prepares the vision document. The technical manager / director will assist in sequencing the project and the PM begins the work on the project.</p>
+<p></span><a name="_Toc149359612"><span style="font-family:times new roman;"><strong>Planning</strong></span></a><br /><span style="font-family:times new roman;font-size:85%;"><br />Planning phase sets the priority for the use cases or stories and an agreement of the contents of the releases will be made. Each sprint (iteration) will work either with a subset of use cases or with a vertical slice across all the use cases. The requirements will be rated on the scale of the priority and business criticality. The pieces of the requirements, which are rated high on the scale, will be delivered in the early sprints. The requirements to be delivered in each sprint will</p>
+<p></span><a name="_Toc149359613"><span style="font-family:times new roman;font-size:85%;"><strong>Release Planning</strong></span></a><br /><span style="font-family:times new roman;font-size:85%;">Release planning is the set of scoping and scheduling activities conducted by client and the development team, at the beginning of each release cycle<br /></span><a name="_Toc149359614"><span style="font-family:times new roman;font-size:85%;"></span></a><br /><span style="font-family:times new roman;font-size:85%;"><strong>Sprint (Iteration) Planning</strong><br />Sprint is a 2-4 week time-boxed period that:<br />· Produces a small, tested, integrated subset of the solution<br />· Produces potentially deployable functionality and functionality is validated by clients<br />and used as feedback for the next iteration</p>
+<p>This time-boxed planning involves low-level plan of the tasks and the functionalities to be implemented i.e. elaborated, designed, coded and tested.</p>
+<p><strong>Activities in Strategy Phase:</strong></p>
+<p>Project Kick off : The entire team discusses about the project. Introduce the business case to the team.</p>
+<p>User Stories : Requirements of the project broken into sizeable pieces. Each are independent, hold value, can be estimated and tested.</p>
+<p>Backlog :An ordered collection of deliverables for a project. The requirements are written in User-story format.</p>
+<p>Project Release Plan :Used to determine the time frames for implementing various features. The implementation can be staged if it makes sense.</p>
+<p><strong><span style="font-size:100%;">Execution</span></strong><br /><a href="../../../../../arindamchat.files.wordpress.com/2007/11/40436-pic2-bmp.jpg"><img id="BLOGGER_PHOTO_ID_5134843690692326978" alt="" src="../../../../../arindamchat.files.wordpress.com/2007/11/40436-pic2-bmpc6eb.jpg?w=300" border="0" /></a></p>
+<p></span></p>
+<p><strong>Activities in Execution Phase:</strong></p>
+<p>Iteration Plan :Select User stories, Leveling User Stories, Break into Tasks &amp; Estimate Tasks.</p>
+<p>Iteration Execution :Monitor &amp; control iterations, Analysis &amp; Design, Code, Test, Review, Integrate &amp; Regress, Certify &amp; Accept.</p>
+<p>Iteration Closeout :Demonstrate, Measure Team Velocity, Retrospective (Lessons Learned), Inspect, and Adapt &amp; Plan.</p>
+<p><strong><span style="font-size:100%;">Release</span></strong></p>
+<p><strong>The activities in the Release Phase are:<br /></strong><br />Merge to Release:Merge the project code into the main Release branch.</p>
+<p>Functional Test :The functional testing is used to help insure the integrity, functionality and “fitness” of development team software products before the software products are placed into Release Regression testing.</p>
+<p>Regress/Accept Test:The release regression team executes a planned set of featured acceptance tests for the entire release. The release co-coordinator provides the regression test plan for manual and automation QA testing teams.</p>
+<p>Implementation :The implementation activities are the final phases of the Release Cycle and place the project product into production.</p>
+<p>Post Imp :Verification of the project product in the production environment.</p>
+<p><strong>More Reading : <a href="http://www.agilejournal.com/">http://www.agilejournal.com/</a></strong></p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type='text/javascript' id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script>
+				</div>
+				        <div id="crt-185266148" style="width:300px;height:250px;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-185266148');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-185266148",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-185266148'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-64" class="share-twitter sd-button share-icon" href="index9a7b.html?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-64" class="share-facebook sd-button share-icon" href="index5a58.html?share=facebook" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-64" class="share-google-plus-1 sd-button share-icon" href="index386f.html?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-72867871-64-594a78f669838' data-src='//widgets.wp.com/likes/#blog_id=72867871&amp;post_id=64&amp;origin=arindamchat.wordpress.com&amp;obj_id=72867871-64-594a78f669838' data-name='like-post-frame-72867871-64-594a78f669838'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>		</div><!-- .entry-content -->
+
+			<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+			<div class="entry-author">
+		<div class="author-avatar">
+			<img alt='' src='https://2.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=60&amp;d=identicon&amp;r=G' class='avatar avatar-60' height='60' width='60' />		</div><!-- .author-avatar -->
+
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Arindam C</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+			Experience in Office 365 ,SharePoint,SCOM 2012, Azure Application Insight, Azure Log Analysis, MS CRM, ASP.NET,C# Angular JS . 
+Check Linked In : https://www.linkedin.com/in/arindamchat			<a class="author-link" href="../../../../author/arindach/index.html" rel="author">
+				View all posts by Arindam C			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+	</div> <!-- .entry-body -->
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://arindamchat.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="5b63f46314" /><input type="hidden" name="_wp_http_referer" value="/2007/11/20/agile-methology/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="https://public-api.wordpress.com/connect/?googleplus-sign-in=https%3A%2F%2Farindamchat.wordpress.com" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='64' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="481620511e" /></p>
+<input type="hidden" name="genseq" value="1498052854" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="239"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../../19/65/index.html" rel="prev">Previous Post</a></div><div class="nav-next"><a href="../../../../2011/04/26/sharepoint-2010-document-set-functionalities/index.html" rel="next">SharePoint 2010 Document Set functionalities</a></div></div>
+	</nav>
+		</main>
+	</div>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="archives-5" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='../../../../2017/05/index.html'>May 2017</a></li>
+	<li><a href='../../../../2017/01/index.html'>January 2017</a></li>
+	<li><a href='../../../../2016/11/index.html'>November 2016</a></li>
+	<li><a href='../../../../2014/07/index.html'>July 2014</a></li>
+	<li><a href='../../../../2014/03/index.html'>March 2014</a></li>
+	<li><a href='../../../../2014/02/index.html'>February 2014</a></li>
+	<li><a href='../../../../2013/06/index.html'>June 2013</a></li>
+	<li><a href='../../../../2013/03/index.html'>March 2013</a></li>
+	<li><a href='../../../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../../../2012/07/index.html'>July 2012</a></li>
+	<li><a href='../../../../2011/12/index.html'>December 2011</a></li>
+	<li><a href='../../../../2011/04/index.html'>April 2011</a></li>
+	<li><a href='../../index.html'>November 2007</a></li>
+		</ul>
+		</section></aside>
+
+	</div>
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+	<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+	
+	</div><!-- .site-info -->	</footer>
+</div>
+<!--  -->
+<script type='text/javascript' src='../../../../../0.gravatar.com/js/gprofiles12f0.js?ver=201725y'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgrohoc3b6.js?m=1380573781h'></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e1684c9e7b0368aff778803d73e2c883">
+	</div>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/arindamchat.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?action=logout&_wpnonce=cbdb9fe6ca","homeURL":"https:\/\/arindamchat.wordpress.com\/","postID":"64","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s2.wp.com/_static/index1575.html??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="72867871" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://arindamchat.wordpress.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Arindam&#039;s Blog" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0193bea543" /><input type="hidden" name="_wp_http_referer" value="/2007/11/20/agile-methology/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/arindamchat.wordpress.com\/2007\/11\/20\/agile-methology\/":64};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/akismet-3.0/_inc/formcd10.js?m=1404442431h'></script>
+<link rel='stylesheet' id='all-css-0-3' href='../../../../../s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carouselaccd.css?m=1481571546h' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"72867871","siteName":"Arindam's Blog","siteURL":"http:\/\/arindamchat.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/ixion","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F","themeURL":"https:\/\/wordpress.com\/theme\/ixion\/","xhrURL":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bbaaeffc0c","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5c13a7b39d\" \/>","referer":"https:\/\/arindamchat.wordpress.com\/2007\/11\/20\/agile-methology\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/arindamchat.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F","postID":"64","shortlink":"http:\/\/wp.me\/p4VKgf-12","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/arindamchat.wordpress.com\/64","statsLink":"https:\/\/wordpress.com\/stats\/post\/64\/arindamchat.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Ixion","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"099d9bc6ed","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2007%2F11%2F20%2Fagile-methology%2F","blog_id":"72867871","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=72867871&v=wpcom&tz=0&user_id=0&subd=arindamchat","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJyVkdtOwzAMhl+I1Ns0gbhAPIubuq3bnIiTbnt7UmClg6nSrmz99ucjnILS3iVyCQaBhibWFM7VIE+wCtmsgskdOwHDIwl8ZMrUo2sMxY1k7a0tkvqGhpmuQU4c6BHoRvgLpp5sSQu5Bj6zd4AilL44hxN3mIr4ACQjh9LJjar1OotqebkGO21ycztTpGAuleV/LVYLYVPiqsYIFiVRLJ7yE8XIc7FF26qg5y3mCot3bygJv3Os9aG8K15+TLXOund+jD4LGRgoBdSjugobTPCSVGuQI0iPkV13tQV6t2/74+tht3veH16GT3zz6s8='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='../../../../wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "arindamchat.wordpress.com";
+	</script>
+	<script type="text/javascript" defer src="../../../../../s.skimresources.com/js/725X1342.skimlinks.js"></script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<p class="robots-nocontent"><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /></p>
+		</noscript><script src="../../../../../stats.wp.com/w9f61.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'72867871','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'72867871','v':'wpcom','tz':'0','user_id':'0','post':'64','subd':'arindamchat'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDlienE9WUdJfHB0ZV9dRHk4fCxnNVQ5anBObnJ1UlBWS2U9az0lJV8lWmYvWzFlTXczbywrVGRqbXlyZzEyWE8lMmRLW092Ji1DcmR1aHJiVjZuaTE9QVs1cCVpRlYyMjlpMHxkNTNUNnY3bGVwRzNWQnN8bW9kTU5TeWN6UUQ5'}]);
+_stq.push([ 'clickTrackerInit', '72867871', '64' ]);
+	</script>
+<noscript><img src="../../../../../pixel.wp.com/b0b80.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2007/11/20/agile-methology/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:51:35 GMT -->
+</html>

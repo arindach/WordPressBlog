@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:44:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="../../../../xmlrpc.php">
+
+<title>Deploy ASP.NET MVC5 Grid View Application to Azure App Service &#8211; Arindam&#039;s Blog</title>
+<link rel='dns-prefetch' href='http://s2.wp.com/' />
+<link rel='dns-prefetch' href='http://s1.wp.com/' />
+<link rel='dns-prefetch' href='http://s0.wp.com/' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Deploy ASP.NET MVC5 Grid View Application to Azure App Service Comments Feed" href="feed/index.html" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8-RC2-40878"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJyFkNFOwzAMRX+IYG2MCh4mviVJrc5bHFu1q21/v5QKEBsqL5GvdY+vYzhryFIdqwNPQcs0UDU4axYOxlTweqees9kT/I0VOqHBEV1jPoVP9WBPRYafHBn72BsMRVIsa6NHLNGxDyrmd2oNyzJi67NGnx2MPUUsyM22hrF2X9RcHtp3VmOWC6WkI5qF9jJNHPzQgv5Zj+dVllNBM/7uLChBFadG23fxMHOJAp0S0IWkgvm14Gz74P1m995tu9e3zcvxBtrkuko=' type='text/css' media='all' />
+<link rel='stylesheet' id='ixion-fonts-archivo-css'  href='http://fonts.googleapis.com/css?family=Archivo+Narrow%3A400%2C400i%2C700%2C700i&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9jUsKwzAMRC9UV6Skv0XpWRyjOCq2ZSyFpLevszOEZjePmcfAko3jpJgUdMKIAnkegFbiBFYEVWCsvYBjzlgmXEj17ERO0KhxNjnMnpKAx4SFavEn7tzdLSUHot+AZsmO4/EZm8DO6ua1YMZgqRypBYfAvkYPddXgJr3jq+vvj2t/eXa3zw92gm4m' type='text/css' media='all' />
+<link rel='stylesheet' id='print-css-3-1' href='../../../../../s0.wp.com/wp-content/mu-plugins/global-print/global-print6805.css?m=1465851035h' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-4-1' href='https://s2.wp.com/_static/??-eJx9i9EKwjAMRX/IGoVN54P4LVnp2kialCbD3xcfRGTi0z0XzoFHC1HFkzjUNTReM4kBRieVGfuH9tFsB7/1puZhYaQOVrCT5Pf+q0wjIQfWrN9nE3lJNRmUATLrjPwSbvV6HC6H83Qap/H+BMWZScE=' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='../../../../../s1.wp.com/wp-content/mu-plugins/highlander-comments/style0196.css?m=1377793621h' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)' href='../../../01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/index.html' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='http://wp.me/p4VKgf-6t' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Deploy ASP.NET MVC5 Grid View Application to Azure App Service" />
+<meta property="og:url" content="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/" />
+<meta property="og:description" content="Hello guys, here I&#8217;m going to describe how to create and deploy an ASP MVC application to Azure using Visual Studio, Azure SQL, MS TFS in a Prod-QA-Dev scenario. This is the first of a 3 seri…" />
+<meta property="article:published_time" content="2017-05-15T09:28:27+00:00" />
+<meta property="article:modified_time" content="2017-05-15T09:39:50+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="https://arindamchat.files.wordpress.com/2017/05/39.png" />
+<meta property="og:image:width" content="482" />
+<meta property="og:image:height" content="351" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Deploy ASP.NET MVC5 Grid View Application to Azure App Service" />
+<meta name="twitter:image" content="https://arindamchat.files.wordpress.com/2017/05/1.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=114" />
+<link rel='openid.server' href='../../../../indexdd8f.html?openidserver=1' />
+<link rel='openid.delegate' href='../../../../index.html' />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../osd.xml" title="Arindam&#039;s Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f5f0e9" />
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Arindam&#039;s Blog" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://arindamchat.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="Deploy ASP.NET MVC5 Grid View Application to Azure App Service | Arindam&#039;s Blog on WordPress.com" />
+<meta name="description" content="Hello guys, here I&#039;m going to describe how to create and deploy an ASP MVC application to Azure using Visual Studio, Azure SQL, MS TFS in a Prod-QA-Dev scenario. This is the first of a 3 series article. I’ll describe below points in these 3 parts. Part 1- Create a MVC Azure Web App Create&hellip;" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f0e9; }
+</style>
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'arindamchat.wordpress.com',
+				pageURL: 'https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/'
+			};
+		</script>
+ 		<script type="text/javascript" src="../../../../../s.pubmine.com/head.js"></script>
+		<script type="text/javascript" src="../../../../../static.criteo.net/js/ld/publishertag.js"></script><link rel="amphtml" href="amp/index.html" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{color:#fff}.site-description,.featured-content .hentry .entry-title a{color:#fff}.comment-author,.footer-widgets .widget a,body,button,input,select,textarea{color:#192930}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:#eeece8}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:rgba(238,236,232,.3)}.comment-metadata,.entry-footer,.entry-meta,.footer-widgets .widget-title,.main-navigation ul>li.current-menu-item>a,.main-navigation ul>li.current_page_item>a,.more-recent-posts,.more-recent-posts:visited,.more-testimonials,.more-testimonials:visited,.search-form-icon:before,.site-header .jetpack-social-navigation a,.site-info,div#jp-relatedposts h3.jp-relatedposts-headline{color:#67655f}.search-form-icon:before,.search-form .search-field{border-color:#a5a29d}.search-form-icon:before,.search-form .search-field{border-color:rgba(165,162,157,.3)}body,ins,mark,.site-header .search-form-icon:before,.site-header .search-form .search-field,.footer-widgets .widget{background-color:#f5f0e9}.entry-author,.widget,hr,.testimonials .hentry{background-color:#f0e9df}.featured-content .hentry,.header-overlay{background-color:#42566a}.header-overlay:before{background-color:#42566a}.header-overlay:before{background-color:rgba(66,86,106,.7)}h1,h2,h3,h4,h5,h6,.entry-title a,.entry-title a:visited,.entry-title,.page-title,.widget-title,.site-title,.comments-title,.site-title a,.site-title a:visited{color:#42566a}#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"]{background-color:#a84c38}#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{background-color:#954331}.main-navigation ul ul{border-top-color:#a84c38}.main-navigation ul ul:before{color:#a84c38}.comment-metadata .edit-link a,.site-header .jetpack-social-navigation a:hover,a,a:visited,.main-navigation .nav-menu>li>a,.testimonials .edit-link a,.testimonials .edit-link a:visited{color:#a44a36}a:hover,a:focus,a:active{color:#a84c38}.featured-content .hentry:hover .entry-title a{color:#e8d0c9}</style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-401 single-format-standard custom-background mp6 customizer-styles-applied singular has-description no-featured-posts highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="utility-container">
+						
+<form role="search" method="get" class="search-form" action="https://arindamchat.wordpress.com/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field"
+		placeholder="Search &hellip;"
+		value="" name="s"
+		title="Search for:" />
+		<span class="search-form-icon"></span>
+	</label>
+	<input type="submit" class="search-submit"
+		value="Search" />
+</form>
+		</div>
+
+		<div class="branding-container">
+					<div class="site-branding">
+			
+								<p class="site-title"><a href="../../../../index.html" rel="home">Arindam&#039;s Blog</a></p>
+					</div><!-- .site-branding -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+	<div class="menu-top-menu-for-the-site-container"><ul id="top-menu" class="menu"><li id="menu-item-205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-205"><a href="../../../../index.html">Home</a></li>
+<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-523"><a href="../../../../category/azure/index.html">Azure</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-526"><a href="../../../../category/fast/index.html">FAST</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-527"><a href="../../../../category/sharepoint/index.html">SharePoint</a>
+<ul  class="sub-menu">
+	<li id="menu-item-532" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532"><a href="../../../../category/sharepoint/sharepoint-2016/index.html">SharePoint 2016</a></li>
+	<li id="menu-item-530" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-530"><a href="../../../../category/sharepoint/sharepoint-2013/index.html">SharePoint 2013</a></li>
+	<li id="menu-item-531" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-531"><a href="../../../../category/sharepoint/sharepoint-2010/index.html">SharePoint 2010</a></li>
+</ul>
+</li>
+<li id="menu-item-528" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-528"><a href="../../../../category/net/index.html">.NET</a>
+<ul  class="sub-menu">
+	<li id="menu-item-533" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533"><a href="../../../../category/net/smart-client/index.html">Smart Client</a></li>
+	<li id="menu-item-534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534"><a href="../../../../category/net/click-once/index.html">Click Once</a></li>
+</ul>
+</li>
+<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href="../../../../zabout-me/index.html">About Me</a></li>
+</ul></div></nav>
+		</div>
+
+	</header>
+
+	
+	<div id="content" class="site-content">
+		<div class="entry-meta">
+			<span class="posted-on"><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2017-05-15T09:28:27+00:00">May 15, 2017</time><time class="updated" datetime="2017-05-15T09:39:50+00:00">May 15, 2017</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="../../../../author/arindach/index.html">Arindam C</a></span></span> <span class="cat-links"><a href="../../../../category/azure/index.html" rel="category tag">Azure</a></span>					</div><!-- .entry-meta -->
+<h1 class="entry-title">Deploy ASP.NET MVC5 Grid View Application to Azure App Service</h1>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-401" class="post-401 post type-post status-publish format-standard hentry category-azure tag-azure tag-mvc no-featured-image">
+	<div class="entry-body">
+		<header class="entry-header">
+					</header>
+		<div class="entry-content">
+			<p>Hello guys, here I&#8217;m going to describe how to create and deploy an ASP MVC application to Azure using Visual Studio, Azure SQL, MS TFS in a Prod-QA-Dev scenario.</p>
+<p>This is the first of a 3 series article. I’ll describe below points in these 3 parts.</p>
+<h1>Part 1- Create a MVC Azure Web App</h1>
+<ul>
+<li>Create ASP MVC application using Visual Studio</li>
+<li>Create App Service and App Service Plan in Azure</li>
+<li>Create Azure SQL Database.</li>
+<li>Connect to Azure Database</li>
+<li>Deploy code to Azure using Visual Studio.</li>
+</ul>
+<h1>Part 2- Define Azure Deployment Strategy</h1>
+<ul>
+<li>Create a Prod, Stage and Dev App Service in Azure</li>
+<li>Create Deployment Slots</li>
+<li>Show how to do a zero downtime Deployment.</li>
+</ul>
+<h1>Part 3- Use Source Control in Azure</h1>
+<ul>
+<li>Use Source Control with Azure App Service</li>
+<li>Create continuous deployment plan to Azure</li>
+</ul>
+<h1>Create a MVC Azure Web App</h1>
+<p>You probably know that Azure App Service is a platform-as-a-service (PaaS) offering of Microsoft Azure. You can create web and mobile apps for any platform or device using .NET, Node.js, PHP, Python, and Java. You can integrate your apps with SaaS solutions, connect with on-premises applications or use other Azure service like Azure SQL Server etc. etc.  You can check more in the MS Azure <a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/managed-web-app/basic-web-app">Website</a></p>
+<p>Here I’m going to describe how to deploy an ASP.NET MVC application as Azure App Service and use an Azure SQL Server as back end.</p>
+<p>I hope that you already have an Azure Subscription before going to next sections.</p>
+<h2><span style="color:#993300;"><strong>The ASP.NET MVC Application</strong></span></h2>
+<p>As it’s not the purpose of this demo to show how to create a MVC application from scratch, so I used this nice article named “<strong><a href="https://www.codeproject.com/Articles/1114208/Beginners-Guide-for-Creating-GridView-in-ASP-NET-M">Beginners Guide for Creating GridView in ASP.NET MVC 5</a></strong>” created by <a href="https://www.codeproject.com/script/Membership/View.aspx?mid=9711012">Ehsan Sajjad</a>, and published in <a href="https://www.codeproject.com/Articles/1114208/Beginners-Guide-for-Creating-GridView-in-ASP-NET-M">CodeProject</a>. This nice article has the source code and the SQL scripts to create SQL tables and insert data to that. What could have been better than that?</p>
+<p>Now, before you start creating necessary things in Azure, my suggestion will be to test this application locally first, see the article, follow the steps, create the DB locally and test it once.  I did it and this is working fine in my local machine.</p>
+<p><img data-attachment-id="419" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/1-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/1.png?w=712" data-orig-size="1912,1046" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="1" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/1.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/1.png?w=712?w=712" class="alignnone size-full wp-image-419" src="../../../../../arindamchat.files.wordpress.com/2017/05/1bc78.png?w=712" alt="1" srcset="https://arindamchat.files.wordpress.com/2017/05/1.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h2><strong><span style="color:#993300;">Understanding the Azure App Service</span></strong></h2>
+<p>Now let’s talk a little about things necessary to publish this application to Azure.  There are different options, we can create our own Virtual Machines, install IIS, .NET framework, SQL server and then install the application code, and this is the approach we are used to. Here you have to control and manage everything by yourself, the application VMs and SQL VMs.</p>
+<p>But we have a better option also available in Azure, that is called Azure Web Apps, here we will not create a VM or install any software but will use the Azure infra to deploy out code. We have to decide how powerful infra we need to Application and Azure VM and have to pay accordingly. We will be using this approach here.</p>
+<p><strong>Azure Web App</strong> has two main components, <strong>App Service Plan</strong> and<strong> Azure App Service</strong>.</p>
+<p>Azure App Service is the application/ code which runs on an App Service Plan. You can think App Service Plan as the selection of hardware on which your App Service i.e. the application code will run.</p>
+<p>You can add your own code and subsequent modifications on an App Service and based on the App Service plan chosen, Azure will decide where the App Service will be deployed and we don’t have to bother about that. This why this is sometimes called as <strong>server less deployment</strong>.</p>
+<p>In Azure it’s very easy to scale up or scale out an App Service plan based on your App Service need, if you need more performance for your App Service you can choose a premium App Service plan at any point of time in future.</p>
+<p>App Service will have the application URL. Below diagram loosely shows the architecture I’m going to use, <u>the blob storage is not used in this demo though</u>.</p>
+<p>Note that other than SQL and Blob, I there is “deployment slot” and Source control. I’ll also describe them in the following articles.</p>
+<h2><img data-attachment-id="420" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/2-6/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/2.png?w=712" data-orig-size="742,531" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="2" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/2.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/2.png?w=712?w=712" class="alignnone size-full wp-image-420" src="../../../../../arindamchat.files.wordpress.com/2017/05/2bc78.png?w=712" alt="2" srcset="https://arindamchat.files.wordpress.com/2017/05/2.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/2.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/2.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/2.png 742w" sizes="(max-width: 712px) 100vw, 712px"   /><span style="color:#993300;"><strong>Create the App Service</strong></span></h2>
+<p>First thing we need is to create the App Service on Azure.  Log in to Azure portal <a href="https://portal.azure.com/">https://portal.azure.com/</a>  using your subscription details. Now click on the App Service icon.</p>
+<p><img data-attachment-id="421" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/3-5/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/3.png?w=712" data-orig-size="414,397" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="3" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/3.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/3.png?w=712?w=414" class="alignnone size-full wp-image-421" src="../../../../../arindamchat.files.wordpress.com/2017/05/3bc78.png?w=712" alt="3" srcset="https://arindamchat.files.wordpress.com/2017/05/3.png 414w, https://arindamchat.files.wordpress.com/2017/05/3.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/3.png?w=300 300w" sizes="(max-width: 414px) 100vw, 414px"   /></p>
+<p>When you click on the Add icon, you will see there are various App Service Templates available as below.</p>
+<p><img data-attachment-id="422" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/4-5/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/4.png?w=712" data-orig-size="931,1037" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="4" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/4.png?w=712?w=269" data-large-file="https://arindamchat.files.wordpress.com/2017/05/4.png?w=712?w=712" class="alignnone size-full wp-image-422" src="../../../../../arindamchat.files.wordpress.com/2017/05/4bc78.png?w=712" alt="4" srcset="https://arindamchat.files.wordpress.com/2017/05/4.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=135 135w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=269 269w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/4.png 931w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Chose a specific App Service, lets choose <strong>Asp.Net Starter Service </strong>for this demo<strong>.</strong></p>
+<p><img data-attachment-id="423" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/5-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/5.png?w=712" data-orig-size="439,494" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="5" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/5.png?w=712?w=267" data-large-file="https://arindamchat.files.wordpress.com/2017/05/5.png?w=712?w=439" class="alignnone size-full wp-image-423" src="../../../../../arindamchat.files.wordpress.com/2017/05/5bc78.png?w=712" alt="5" srcset="https://arindamchat.files.wordpress.com/2017/05/5.png 439w, https://arindamchat.files.wordpress.com/2017/05/5.png?w=133 133w, https://arindamchat.files.wordpress.com/2017/05/5.png?w=267 267w" sizes="(max-width: 439px) 100vw, 439px"   /></p>
+<p>Fill the App service with desired name; remember that this name has to be unique in the azurewebsites.net. Note that I have chosen a new <strong>Resource group</strong> also here; this is a good idea to create a new resource group and keep everything inside that.</p>
+<p>Notice that The App Service already chose a new <strong>App Service Plan</strong>, this can be used  but we want more control over it and we will create our own App Service plan.</p>
+<p><img data-attachment-id="424" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/6-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/6.png?w=712" data-orig-size="969,1064" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="6" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/6.png?w=712?w=273" data-large-file="https://arindamchat.files.wordpress.com/2017/05/6.png?w=712?w=712" class="alignnone size-full wp-image-424" src="../../../../../arindamchat.files.wordpress.com/2017/05/6bc78.png?w=712" alt="6" srcset="https://arindamchat.files.wordpress.com/2017/05/6.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=137 137w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=273 273w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/6.png 969w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>So click on <strong>Create New,</strong> this will open the New App Service Plan blade, give desired name, now we can choose difference pricing plan here, based on the infra you choose you need to pay, for now I will choose Free plan, this will have shared hardware and custom domain names can’t be used, but this will service our purpose for this demo. If you choose a more powerful plan, the processes I’m going to describe below will not change.</p>
+<p>So Select the <strong>Free tier</strong> and click on OK</p>
+<p><img data-attachment-id="425" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/7-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/7.png?w=712" data-orig-size="913,1004" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="7" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/7.png?w=712?w=273" data-large-file="https://arindamchat.files.wordpress.com/2017/05/7.png?w=712?w=712" class="alignnone size-full wp-image-425" src="../../../../../arindamchat.files.wordpress.com/2017/05/7bc78.png?w=712" alt="7" srcset="https://arindamchat.files.wordpress.com/2017/05/7.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=136 136w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=273 273w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/7.png 913w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Now you can see the newly created App Service plan has been selected for our App. Click on <strong>Create</strong>, this will create the new Azure Web App.</p>
+<p><img data-attachment-id="426" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/8-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/8.png?w=712" data-orig-size="425,1042" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="8" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/8.png?w=712?w=122" data-large-file="https://arindamchat.files.wordpress.com/2017/05/8.png?w=712?w=418" class="alignnone size-full wp-image-426" src="../../../../../arindamchat.files.wordpress.com/2017/05/8bc78.png?w=712" alt="8" srcset="https://arindamchat.files.wordpress.com/2017/05/8.png 425w, https://arindamchat.files.wordpress.com/2017/05/8.png?w=61 61w, https://arindamchat.files.wordpress.com/2017/05/8.png?w=122 122w" sizes="(max-width: 425px) 100vw, 425px"   /></p>
+<p>The process of creating a new App Service will take a bit of time; you can see the progress in the notification area on the top right corner.</p>
+<p><img data-attachment-id="427" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/9-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/9.png?w=712" data-orig-size="440,244" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="9" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/9.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/9.png?w=712?w=440" class="alignnone size-full wp-image-427" src="../../../../../arindamchat.files.wordpress.com/2017/05/9bc78.png?w=712" alt="9" srcset="https://arindamchat.files.wordpress.com/2017/05/9.png 440w, https://arindamchat.files.wordpress.com/2017/05/9.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/9.png?w=300 300w" sizes="(max-width: 440px) 100vw, 440px"   /></p>
+<p>And when done, you can see the success.</p>
+<p><img data-attachment-id="428" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/10-4/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/10.png?w=712" data-orig-size="422,224" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="10" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/10.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/10.png?w=712?w=422" class="alignnone size-full wp-image-428" src="../../../../../arindamchat.files.wordpress.com/2017/05/10bc78.png?w=712" alt="10" srcset="https://arindamchat.files.wordpress.com/2017/05/10.png 422w, https://arindamchat.files.wordpress.com/2017/05/10.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/10.png?w=300 300w" sizes="(max-width: 422px) 100vw, 422px"   /></p>
+<p>Click on the message and this will take you to the details of our newly created App Service, you can see Azure already added some monitoring also which is great for troubleshooting.</p>
+<p><img data-attachment-id="429" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/11-5/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/11.png?w=712" data-orig-size="1507,1039" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="11" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/11.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/11.png?w=712?w=712" class="alignnone size-full wp-image-429" src="../../../../../arindamchat.files.wordpress.com/2017/05/11bc78.png?w=712" alt="11" srcset="https://arindamchat.files.wordpress.com/2017/05/11.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Note that now we have a URL for out app which is <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a> , if you click on the link you will see a blank website as below. But this shows that our new App Service is up and running.</p>
+<p><img data-attachment-id="430" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/12-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/12.png?w=712" data-orig-size="1537,630" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="12" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/12.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/12.png?w=712?w=712" class="alignnone size-full wp-image-430" src="../../../../../arindamchat.files.wordpress.com/2017/05/12bc78.png?w=712" alt="12" srcset="https://arindamchat.files.wordpress.com/2017/05/12.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h2><strong><span style="color:#993300;">Use Visual Studio to connect to Azure.</span></strong></h2>
+<p>Since we have the code already in my local Visual Studio, I can use this great tool to connect and then deploy to Azure also.  Go to Visual Studio (note that I’m using Visual Studio 2015) and go to <strong>View </strong><strong>&#8211;&gt; Cloud Explorer</strong></p>
+<p><strong> <img data-attachment-id="431" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/13-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/13.png?w=712" data-orig-size="483,299" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="13" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/13.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/13.png?w=712?w=483" class="alignnone size-full wp-image-431" src="../../../../../arindamchat.files.wordpress.com/2017/05/13bc78.png?w=712" alt="13" srcset="https://arindamchat.files.wordpress.com/2017/05/13.png 483w, https://arindamchat.files.wordpress.com/2017/05/13.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/13.png?w=300 300w" sizes="(max-width: 483px) 100vw, 483px"   /></strong></p>
+<p><strong>Note:</strong> <u>If you don’t see the cloud explorer of even if you see the option makes sure to have the latest version of this , for that go to <strong>Tools</strong></u><strong><u>à Extension and Updates</u></strong><u> and check if the Cloud Explorer for Visual Studio is installed, make sure to check Automatically update. If this is not done, you might get error in next steps.</u></p>
+<p><img data-attachment-id="432" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/14-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/14.png?w=712" data-orig-size="942,311" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="14" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/14.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/14.png?w=712?w=712" class="alignnone size-full wp-image-432" src="../../../../../arindamchat.files.wordpress.com/2017/05/14bc78.png?w=712" alt="14" srcset="https://arindamchat.files.wordpress.com/2017/05/14.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/14.png 942w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Since I have already connected to my Azure subscription, I can see the connection details here, for you enter Azure subscription details here to connect to Azure.</p>
+<p><strong> <img data-attachment-id="433" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/15-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/15.png?w=712" data-orig-size="502,435" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="15" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/15.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/15.png?w=712?w=502" class="alignnone size-full wp-image-433" src="../../../../../arindamchat.files.wordpress.com/2017/05/15bc78.png?w=712" alt="15" srcset="https://arindamchat.files.wordpress.com/2017/05/15.png 502w, https://arindamchat.files.wordpress.com/2017/05/15.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/15.png?w=300 300w" sizes="(max-width: 502px) 100vw, 502px"   /></strong></p>
+<p>Once connection is done, you should be able to view the newly created App Service here.</p>
+<p><img data-attachment-id="434" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/16-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/16.png?w=712" data-orig-size="519,417" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="16" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/16.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/16.png?w=712?w=519" class="alignnone size-full wp-image-434" src="../../../../../arindamchat.files.wordpress.com/2017/05/16bc78.png?w=712" alt="16" srcset="https://arindamchat.files.wordpress.com/2017/05/16.png 519w, https://arindamchat.files.wordpress.com/2017/05/16.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/16.png?w=300 300w" sizes="(max-width: 519px) 100vw, 519px"   /></p>
+<h2><strong><span style="color:#993300;">Deploy the code to Azure</span></strong></h2>
+<p>Now that your Visual studio is connected, let’s deploy the code to Azure App Service i.e. AC-ASPMVC. <strong>Right click</strong> on the solution and choose <strong>Publish</strong></p>
+<p><img data-attachment-id="435" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/17-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/17.png?w=712" data-orig-size="569,374" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="17" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/17.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/17.png?w=712?w=569" class="alignnone size-full wp-image-435" src="../../../../../arindamchat.files.wordpress.com/2017/05/17bc78.png?w=712" alt="17" srcset="https://arindamchat.files.wordpress.com/2017/05/17.png 569w, https://arindamchat.files.wordpress.com/2017/05/17.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/17.png?w=300 300w" sizes="(max-width: 569px) 100vw, 569px"   /></p>
+<p>This will open the Publishing Wizard and you can see there is an option to deploy in Azure App Service. <strong>Click</strong> on that.</p>
+<p><img data-attachment-id="436" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/18-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/18.png?w=712&#038;h=554" data-orig-size="712,554" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="18" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/18.png?w=712&#038;h=554?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/18.png?w=712&#038;h=554?w=712" class="alignnone size-full wp-image-436" src="../../../../../arindamchat.files.wordpress.com/2017/05/182da7.png?w=712&amp;h=554" alt="18" width="712" height="554" srcset="https://arindamchat.files.wordpress.com/2017/05/18.png 712w, https://arindamchat.files.wordpress.com/2017/05/18.png?w=150&amp;h=117 150w, https://arindamchat.files.wordpress.com/2017/05/18.png?w=300&amp;h=233 300w" sizes="(max-width: 712px) 100vw, 712px" /></p>
+<p>Now you can see that our App Service AC-ASPMVC is available, select that and click <strong>OK</strong></p>
+<p><strong>Note: Here you can create a new App Service also to be deployed in the Azure, in that case a new App Service and App Service Plan will be created and then deployment will happen, but this is not needed here as we want to deploy on our existing App Service.</strong></p>
+<p>Now, you can see that it’s trying to connect to the Azure, the User name and password is important thing, but this will be discussed in more details in next article, for now click on<strong> Validate.</strong></p>
+<p><img data-attachment-id="437" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/19-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/19.png?w=712" data-orig-size="711,554" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="19" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/19.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/19.png?w=712?w=711" class="alignnone size-full wp-image-437" src="../../../../../arindamchat.files.wordpress.com/2017/05/19bc78.png?w=712" alt="19" srcset="https://arindamchat.files.wordpress.com/2017/05/19.png 711w, https://arindamchat.files.wordpress.com/2017/05/19.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/19.png?w=300 300w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>If validation is successful, click on next, here if your code is using any file service you can configure that here, but the most important thing is the connection sting, you can specify the DB connection string here, since we don’t have the Azure DB yet, we will leave it as is. Click on <strong>Publish</strong></p>
+<p><img data-attachment-id="438" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/20-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/20.png?w=712" data-orig-size="714,555" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/20.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/20.png?w=712?w=712" class="alignnone size-full wp-image-438" src="../../../../../arindamchat.files.wordpress.com/2017/05/20bc78.png?w=712" alt="20" srcset="https://arindamchat.files.wordpress.com/2017/05/20.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/20.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/20.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/20.png 714w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>You can see the build has been started and you can see the output.</p>
+<p><img data-attachment-id="439" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/21-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/21.png?w=712" data-orig-size="586,209" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="21" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/21.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/21.png?w=712?w=586" class="alignnone size-full wp-image-439" src="../../../../../arindamchat.files.wordpress.com/2017/05/21bc78.png?w=712" alt="21" srcset="https://arindamchat.files.wordpress.com/2017/05/21.png 586w, https://arindamchat.files.wordpress.com/2017/05/21.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/21.png?w=300 300w" sizes="(max-width: 586px) 100vw, 586px"   /></p>
+<p>If deployment is successful, this will open our App Service URL i.e. <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a>  and you can see a big error here.</p>
+<p><img data-attachment-id="440" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/22-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/22.png?w=712" data-orig-size="437,430" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="22" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/22.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/22.png?w=712?w=437" class="alignnone size-full wp-image-440" src="../../../../../arindamchat.files.wordpress.com/2017/05/22bc78.png?w=712" alt="22" srcset="https://arindamchat.files.wordpress.com/2017/05/22.png 437w, https://arindamchat.files.wordpress.com/2017/05/22.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/22.png?w=300 300w" sizes="(max-width: 437px) 100vw, 437px"   /></p>
+<p>This is fine, as we don’t have the DB configured yet, so we have this error, but the deployment  worked here.</p>
+<h2><strong><span style="color:#993300;">Create Azure SQL Database.</span></strong></h2>
+<p>This application is using a database, so let’s create an azure SQL database. Now when we create a database in Azure, along with the database name, a ‘server’ name is also required.  This ‘server’ is not a physical or even a virtual server, this is basically a logical container name which can hold multiple databases, and where the actual databases are stored in Azure is not our concern, because we can use the logical container or logical server name to connect to any of the database it’s holding and this server name can also be used in a connection string.</p>
+<p>So from the Azure menu, click on <strong>SQL Databases</strong>.</p>
+<p><img data-attachment-id="441" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/23-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/23.png?w=712" data-orig-size="397,344" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="23" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/23.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/23.png?w=712?w=397" class="alignnone size-full wp-image-441" src="../../../../../arindamchat.files.wordpress.com/2017/05/23bc78.png?w=712" alt="23" srcset="https://arindamchat.files.wordpress.com/2017/05/23.png 397w, https://arindamchat.files.wordpress.com/2017/05/23.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/23.png?w=300 300w" sizes="(max-width: 397px) 100vw, 397px"   /></p>
+<p>The application I have downloaded from code project is using the database name as “<strong>GridExampleMVC</strong>”, so I’ll keep the same DB name here also; I’ll not create a new resource group, but will use the existing one. Now you can see that you can either create a blank DB or restore from a backup of create a sample DB. Let’s choose blank DB.</p>
+<p>SQL elastic pool is not required here, as we are just going to use it for demo purpose, though practically other than huge Db, this option is not required as the associated cost is too high.</p>
+<p>Now click on the arrow of Server-Configure required settings. This will let us know the logical server name.</p>
+<p><img data-attachment-id="442" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/24-3/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/24.png?w=712" data-orig-size="956,607" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="24" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/24.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/24.png?w=712?w=712" class="alignnone size-full wp-image-442" src="../../../../../arindamchat.files.wordpress.com/2017/05/24bc78.png?w=712" alt="24" srcset="https://arindamchat.files.wordpress.com/2017/05/24.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/24.png 956w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Fill the details, you can choose your desired user ID here, remember this will be SQL Admin login for all your SQL Dbs under this server. There’s no option for windows authentication in Azure DB.</p>
+<p><img data-attachment-id="443" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/25-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/25.png?w=712" data-orig-size="769,628" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="25" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/25.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/25.png?w=712?w=712" class="alignnone size-full wp-image-443" src="../../../../../arindamchat.files.wordpress.com/2017/05/25bc78.png?w=712" alt="25" srcset="https://arindamchat.files.wordpress.com/2017/05/25.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/25.png 769w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>On creation, you can see the server <strong>‘ac-aspmvs-sql’</strong> is now selected. Now click on the Pricing Tier arrow, here you can choose different options, for now select the <strong>Basic</strong></p>
+<p><img data-attachment-id="444" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/26-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/26.png?w=712" data-orig-size="823,624" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="26" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/26.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/26.png?w=712?w=712" class="alignnone size-full wp-image-444" src="../../../../../arindamchat.files.wordpress.com/2017/05/26bc78.png?w=712" alt="26" srcset="https://arindamchat.files.wordpress.com/2017/05/26.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/26.png 823w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>The configuration looks like below, now click on the <strong>Create</strong> button.</p>
+<p><img data-attachment-id="445" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/27-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/27.png?w=712" data-orig-size="290,599" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="27" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/27.png?w=712?w=145" data-large-file="https://arindamchat.files.wordpress.com/2017/05/27.png?w=712?w=290" class="alignnone size-full wp-image-445" src="../../../../../arindamchat.files.wordpress.com/2017/05/27bc78.png?w=712" alt="27" srcset="https://arindamchat.files.wordpress.com/2017/05/27.png 290w, https://arindamchat.files.wordpress.com/2017/05/27.png?w=73 73w" sizes="(max-width: 290px) 100vw, 290px"   /></p>
+<p>Again this will take some time to be created, you can check in the notification area and also verify that deployment is done.</p>
+<p><img data-attachment-id="446" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/28-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/28.png?w=712" data-orig-size="410,199" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="28" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/28.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/28.png?w=712?w=410" class="alignnone size-full wp-image-446" src="../../../../../arindamchat.files.wordpress.com/2017/05/28bc78.png?w=712" alt="28" srcset="https://arindamchat.files.wordpress.com/2017/05/28.png 410w, https://arindamchat.files.wordpress.com/2017/05/28.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/28.png?w=300 300w" sizes="(max-width: 410px) 100vw, 410px"   /><img data-attachment-id="447" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/29-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/29.png?w=712" data-orig-size="407,231" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="29" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/29.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/29.png?w=712?w=407" class="alignnone size-full wp-image-447" src="../../../../../arindamchat.files.wordpress.com/2017/05/29bc78.png?w=712" alt="29" srcset="https://arindamchat.files.wordpress.com/2017/05/29.png 407w, https://arindamchat.files.wordpress.com/2017/05/29.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/29.png?w=300 300w" sizes="(max-width: 407px) 100vw, 407px"   /></p>
+<p>Now go back to the newly created DB details. This looks like below, and the interesting thing is here you can see the DB name and connection details.</p>
+<p><img data-attachment-id="448" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/30-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/30.png?w=712" data-orig-size="1222,504" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="30" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/30.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/30.png?w=712?w=712" class="alignnone size-full wp-image-448" src="../../../../../arindamchat.files.wordpress.com/2017/05/30bc78.png?w=712" alt="30" srcset="https://arindamchat.files.wordpress.com/2017/05/30.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/05/30.png 1222w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Click on Show Database Connection String and you can see the connection below.</p>
+<p><img data-attachment-id="449" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/31-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/31.png?w=712" data-orig-size="638,338" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="31" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/31.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/31.png?w=712?w=638" class="alignnone size-full wp-image-449" src="../../../../../arindamchat.files.wordpress.com/2017/05/31bc78.png?w=712" alt="31" srcset="https://arindamchat.files.wordpress.com/2017/05/31.png 638w, https://arindamchat.files.wordpress.com/2017/05/31.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/31.png?w=300 300w" sizes="(max-width: 638px) 100vw, 638px"   /></p>
+<p>Note that this is not the working connection string; you need to fill the user name and password here. But we will do this latter.</p>
+<h2><strong><span style="color:#993300;">Connect to Azure Database via sql management studio.</span></strong></h2>
+<p>Now we need to create the tables and insert some records, we can use <strong>SQL Management Studio to connect to Azure</strong>, but before that we need to modify the firewall rule for the azure database. Azure DB won’t allow connection otherwise. To do that click on the <strong>Set Server Firewall</strong></p>
+<p><img data-attachment-id="450" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/32-2/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/32.png?w=712" data-orig-size="665,171" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="32" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/32.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/32.png?w=712?w=665" class="alignnone size-full wp-image-450" src="../../../../../arindamchat.files.wordpress.com/2017/05/32bc78.png?w=712" alt="32" srcset="https://arindamchat.files.wordpress.com/2017/05/32.png 665w, https://arindamchat.files.wordpress.com/2017/05/32.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/32.png?w=300 300w" sizes="(max-width: 665px) 100vw, 665px"   /></p>
+<p>You need to add client IP in the firewall, you can see the client IP already there. Click on the <strong>Add client IP, </strong>this will add the client IP in the rule. Don’t forget to <strong>Save</strong> the change.</p>
+<p><img data-attachment-id="451" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/33/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/33.png?w=712" data-orig-size="578,391" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="33" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/33.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/33.png?w=712?w=578" class="alignnone size-full wp-image-451" src="../../../../../arindamchat.files.wordpress.com/2017/05/33bc78.png?w=712" alt="33" srcset="https://arindamchat.files.wordpress.com/2017/05/33.png 578w, https://arindamchat.files.wordpress.com/2017/05/33.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/33.png?w=300 300w" sizes="(max-width: 578px) 100vw, 578px"   /></p>
+<p>From the Azure portal we know that the server name is “<strong>ac-aspmvc-sql.database.windows.net</strong>”, so try to connect to that as Server, remember that we created the SQL Admin user id and password beforehand, use that. Now you will have the Azure DB opened.</p>
+<p><img data-attachment-id="452" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/34/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/34.png?w=712" data-orig-size="483,319" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="34" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/34.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/34.png?w=712?w=483" class="alignnone size-full wp-image-452" src="../../../../../arindamchat.files.wordpress.com/2017/05/34bc78.png?w=712" alt="34" srcset="https://arindamchat.files.wordpress.com/2017/05/34.png 483w, https://arindamchat.files.wordpress.com/2017/05/34.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/34.png?w=300 300w" sizes="(max-width: 483px) 100vw, 483px"   /></p>
+<h2> <strong><span style="color:#993300;">Connect to Azure Database using azure tool.</span></strong></h2>
+<p>We can also use the Azure portal tool, this is still in preview, but I want to show you the usage, we will upload a SQL script to create a table and insert data. Open the Azure SQL database blade and you can see <strong>tools</strong> on the top ,click on that.</p>
+<p><img data-attachment-id="453" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/35/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/35.png?w=712" data-orig-size="918,364" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="35" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/35.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/35.png?w=712?w=712" class="alignnone size-full wp-image-453" src="../../../../../arindamchat.files.wordpress.com/2017/05/35bc78.png?w=712" alt="35" srcset="https://arindamchat.files.wordpress.com/2017/05/35.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/35.png 918w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Choose Query Editor</p>
+<p><img data-attachment-id="454" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/36/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/36.png?w=712" data-orig-size="473,256" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="36" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/36.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/36.png?w=712?w=473" class="alignnone size-full wp-image-454" src="../../../../../arindamchat.files.wordpress.com/2017/05/36bc78.png?w=712" alt="36" srcset="https://arindamchat.files.wordpress.com/2017/05/36.png 473w, https://arindamchat.files.wordpress.com/2017/05/36.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/36.png?w=300 300w" sizes="(max-width: 473px) 100vw, 473px"   /></p>
+<p>It will ask for authentication, use the same SQL Admin user ID and password.</p>
+<p><strong> <img data-attachment-id="455" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/37/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/37.png?w=712" data-orig-size="684,590" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="37" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/37.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/37.png?w=712?w=684" class="alignnone size-full wp-image-455" src="../../../../../arindamchat.files.wordpress.com/2017/05/37bc78.png?w=712" alt="37" srcset="https://arindamchat.files.wordpress.com/2017/05/37.png 684w, https://arindamchat.files.wordpress.com/2017/05/37.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/37.png?w=300 300w" sizes="(max-width: 684px) 100vw, 684px"   /></strong></p>
+<p>I have already saved the DB related scripts from Code Project; we will now upload this to run.</p>
+<p><img data-attachment-id="456" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/38/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/38.png?w=712" data-orig-size="807,695" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="38" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/38.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/38.png?w=712?w=712" class="alignnone size-full wp-image-456" src="../../../../../arindamchat.files.wordpress.com/2017/05/38bc78.png?w=712" alt="38" srcset="https://arindamchat.files.wordpress.com/2017/05/38.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/38.png 807w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>Click on the<strong> Open Query </strong>and select the .sql script</p>
+<p><img data-attachment-id="457" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/39/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/39.png?w=712" data-orig-size="482,351" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="39" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/39.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/39.png?w=712?w=482" class="alignnone size-full wp-image-457" src="../../../../../arindamchat.files.wordpress.com/2017/05/39bc78.png?w=712" alt="39" srcset="https://arindamchat.files.wordpress.com/2017/05/39.png 482w, https://arindamchat.files.wordpress.com/2017/05/39.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/39.png?w=300 300w" sizes="(max-width: 482px) 100vw, 482px"   /></p>
+<p>Once this is loaded, click on RUN, the script will start executing and you can see the output that one table has been created and 1000 rows are inserted.</p>
+<p><img data-attachment-id="458" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/40/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/40.png?w=712" data-orig-size="653,675" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="40" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/40.png?w=712?w=290" data-large-file="https://arindamchat.files.wordpress.com/2017/05/40.png?w=712?w=653" class="alignnone size-full wp-image-458" src="../../../../../arindamchat.files.wordpress.com/2017/05/40bc78.png?w=712" alt="40" srcset="https://arindamchat.files.wordpress.com/2017/05/40.png 653w, https://arindamchat.files.wordpress.com/2017/05/40.png?w=145 145w, https://arindamchat.files.wordpress.com/2017/05/40.png?w=290 290w" sizes="(max-width: 653px) 100vw, 653px"   /></p>
+<p>Let’s check the DB with a small query, this you can type there. The below query will show the 100 records from Azure DB</p>
+<p><strong>Select top 100* from Assets</strong></p>
+<p><img data-attachment-id="459" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/41/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/41.png?w=712" data-orig-size="917,506" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="41" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/41.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/41.png?w=712?w=712" class="alignnone size-full wp-image-459" src="../../../../../arindamchat.files.wordpress.com/2017/05/41bc78.png?w=712" alt="41" srcset="https://arindamchat.files.wordpress.com/2017/05/41.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/41.png 917w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p><strong>Ok, so our DB is now ready to be used.</strong></p>
+<h2><strong><span style="color:#993300;">Use Connection STRING TO the Application</span></strong></h2>
+<p>So in previous steps we have seen the DB connection string in the portal, let’s copy that, you can see that we need to pass the SQL user name and password. For here I’ll use the admin username i.e. <strong>arindach</strong> and the password, <u>but in practical scenario you should create some other user and this Admin user should not be used with others.</u></p>
+<p><strong><em>Server=tcp:ac-aspmvc-sql.database.windows.net,1433;Initial Catalog=GridExampleMVC; Persist Security Info=False; User ID={<span style="color:#ff0000;">your_username</span>}; Password={<span style="color:#ff0000;">your_password</span>}; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</em></strong></p>
+<p>Now to add this connection string to Azure, go to the <strong>App Service</strong> and open the details blade of our Application.  You can see there is an <strong>Application settings</strong> option in the left menu, open this and scroll down.  There you can see a section for <strong>Connection Settings; </strong>we need to add the<strong> ‘DefaultConnection’ (</strong>as in the web.config of our application). Make sure to check the <strong>slot settings, </strong>this will ensure that when you publish this configuration will not be overridden by your local connection string.</p>
+<p><img data-attachment-id="460" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/42/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/42.png?w=712" data-orig-size="1496,562" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="42" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/42.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/42.png?w=712?w=712" class="alignnone size-full wp-image-460" src="../../../../../arindamchat.files.wordpress.com/2017/05/42bc78.png?w=712" alt="42" srcset="https://arindamchat.files.wordpress.com/2017/05/42.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=1421 1421w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<h2><strong><span style="color:#993300;">Check the application</span></strong></h2>
+<p>Now that we have DB connection string in place and we have a DB with all the records, let’s refresh the web browser with the Azure application URL i.e. <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a>  . And you can see that my application is up and running now.</p>
+<p><img data-attachment-id="461" data-permalink="https://arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/attachment/43/" data-orig-file="https://arindamchat.files.wordpress.com/2017/05/43.png?w=712" data-orig-size="1556,920" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="43" data-image-description="" data-medium-file="https://arindamchat.files.wordpress.com/2017/05/43.png?w=712?w=300" data-large-file="https://arindamchat.files.wordpress.com/2017/05/43.png?w=712?w=712" class="alignnone size-full wp-image-461" src="../../../../../arindamchat.files.wordpress.com/2017/05/43bc78.png?w=712" alt="43" srcset="https://arindamchat.files.wordpress.com/2017/05/43.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=1024 1024w" sizes="(max-width: 712px) 100vw, 712px"   /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type='text/javascript' id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script>
+				</div>
+				        <div id="crt-1940619617" style="width:300px;height:250px;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-1940619617');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-1940619617",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-1940619617'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-401" class="share-twitter sd-button share-icon" href="index9a7b.html?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-401" class="share-facebook sd-button share-icon" href="index5a58.html?share=facebook" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-401" class="share-google-plus-1 sd-button share-icon" href="index386f.html?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-72867871-401-594a782e933a2' data-src='//widgets.wp.com/likes/#blog_id=72867871&amp;post_id=401&amp;origin=arindamchat.wordpress.com&amp;obj_id=72867871-401-594a782e933a2' data-name='like-post-frame-72867871-401-594a782e933a2'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>		</div><!-- .entry-content -->
+
+			<footer class="entry-footer">
+		<span class="tags-links">Tagged <a href="../../../../tag/azure/index.html" rel="tag">Azure</a>, <a href="../../../../tag/mvc/index.html" rel="tag">MVC</a></span>	</footer><!-- .entry-footer -->
+			<div class="entry-author">
+		<div class="author-avatar">
+			<img alt='' src='https://2.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=60&amp;d=identicon&amp;r=G' class='avatar avatar-60' height='60' width='60' />		</div><!-- .author-avatar -->
+
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Arindam C</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+			Experience in Office 365 ,SharePoint,SCOM 2012, Azure Application Insight, Azure Log Analysis, MS CRM, ASP.NET,C# Angular JS . 
+Check Linked In : https://www.linkedin.com/in/arindamchat			<a class="author-link" href="../../../../author/arindach/index.html" rel="author">
+				View all posts by Arindam C			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+	</div> <!-- .entry-body -->
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://arindamchat.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="5b63f46314" /><input type="hidden" name="_wp_http_referer" value="/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="https://public-api.wordpress.com/connect/?googleplus-sign-in=https%3A%2F%2Farindamchat.wordpress.com" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='401' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4d6be98aba" /></p>
+<input type="hidden" name="genseq" value="1498052654" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="112"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../../../01/27/azure-log-search-dashboard-and-designer-in-operations-manager-suits-oms/index.html" rel="prev">Azure Log Search, Dashboard and Designer in Operations Manager Suits (OMS)</a></div></div>
+	</nav>
+		</main>
+	</div>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="archives-5" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='../../index.html'>May 2017</a></li>
+	<li><a href='../../../01/index.html'>January 2017</a></li>
+	<li><a href='../../../../2016/11/index.html'>November 2016</a></li>
+	<li><a href='../../../../2014/07/index.html'>July 2014</a></li>
+	<li><a href='../../../../2014/03/index.html'>March 2014</a></li>
+	<li><a href='../../../../2014/02/index.html'>February 2014</a></li>
+	<li><a href='../../../../2013/06/index.html'>June 2013</a></li>
+	<li><a href='../../../../2013/03/index.html'>March 2013</a></li>
+	<li><a href='../../../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../../../2012/07/index.html'>July 2012</a></li>
+	<li><a href='../../../../2011/12/index.html'>December 2011</a></li>
+	<li><a href='../../../../2011/04/index.html'>April 2011</a></li>
+	<li><a href='../../../../2007/11/index.html'>November 2007</a></li>
+		</ul>
+		</section></aside>
+
+	</div>
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+	<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+	
+	</div><!-- .site-info -->	</footer>
+</div>
+<!--  -->
+<script type='text/javascript' src='../../../../../0.gravatar.com/js/gprofiles12f0.js?ver=201725y'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgrohoc3b6.js?m=1380573781h'></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e1684c9e7b0368aff778803d73e2c883">
+	</div>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/arindamchat.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?action=logout&_wpnonce=cbdb9fe6ca","homeURL":"https:\/\/arindamchat.wordpress.com\/","postID":"401","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s2.wp.com/_static/index1575.html??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="72867871" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://arindamchat.wordpress.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Arindam&#039;s Blog" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0193bea543" /><input type="hidden" name="_wp_http_referer" value="/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/arindamchat.wordpress.com\/2017\/05\/15\/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service\/":401};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/akismet-3.0/_inc/formcd10.js?m=1404442431h'></script>
+<link rel='stylesheet' id='all-css-0-3' href='../../../../../s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carouselaccd.css?m=1481571546h' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"72867871","siteName":"Arindam's Blog","siteURL":"http:\/\/arindamchat.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/ixion","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F","themeURL":"https:\/\/wordpress.com\/theme\/ixion\/","xhrURL":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bbaaeffc0c","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5c13a7b39d\" \/>","referer":"https:\/\/arindamchat.wordpress.com\/2017\/05\/15\/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/arindamchat.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F","postID":"401","shortlink":"http:\/\/wp.me\/p4VKgf-6t","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/arindamchat.wordpress.com\/401","statsLink":"https:\/\/wordpress.com\/stats\/post\/401\/arindamchat.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Ixion","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"099d9bc6ed","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2017%2F05%2F15%2Fdeploy-asp-net-mvc5-grid-view-application-to-azure-app-service%2F","blog_id":"72867871","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=72867871&v=wpcom&tz=0&user_id=0&subd=arindamchat","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJyVkdtOwzAMhl+I1Ns0gbhAPIubuq3bnIiTbnt7UmClg6nSrmz99ucjnILS3iVyCQaBhibWFM7VIE+wCtmsgskdOwHDIwl8ZMrUo2sMxY1k7a0tkvqGhpmuQU4c6BHoRvgLpp5sSQu5Bj6zd4AilL44hxN3mIr4ACQjh9LJjar1OotqebkGO21ycztTpGAuleV/LVYLYVPiqsYIFiVRLJ7yE8XIc7FF26qg5y3mCot3bygJv3Os9aG8K15+TLXOund+jD4LGRgoBdSjugobTPCSVGuQI0iPkV13tQV6t2/74+tht3veH16GT3zz6s8='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='../../../../wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "arindamchat.wordpress.com";
+	</script>
+	<script type="text/javascript" defer src="../../../../../s.skimresources.com/js/725X1342.skimlinks.js"></script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<p class="robots-nocontent"><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /></p>
+		</noscript><script src="../../../../../stats.wp.com/w9f61.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'72867871','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'72867871','v':'wpcom','tz':'0','user_id':'0','post':'401','subd':'arindamchat'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDlIPXNESjFfSWdXcENaQk54cTMuWS1Ubm5LdUFZS1dEfHUyMncsW1V3U0xzTGxhN2hmOXg3bV9IaUc4RUk9bHQ2d0dia2dpUnZSd1hqLCVYQnd0bUswNndINTJvYV02eG12aE5salg1fDYsK1dGcXhEL0R6Uzd6YTdyPURGREhC'}]);
+_stq.push([ 'clickTrackerInit', '72867871', '401' ]);
+	</script>
+<noscript><img src="../../../../../pixel.wp.com/b0b80.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:45:26 GMT -->
+</html>

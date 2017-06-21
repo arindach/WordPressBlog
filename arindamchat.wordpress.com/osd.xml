@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<ShortName>arindamchat</ShortName>
+	<Description>Search Arindam&#039;s Blog - A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM</Description>
+	<Contact>help@wordpress.com</Contact>
+	<Url type="application/atom+xml" template="https://arindamchat.wordpress.com/?s={searchTerms}&amp;feed=atom"/>
+	<Url type="application/rss+xml"  template="https://arindamchat.wordpress.com/?s={searchTerms}&amp;feed=rss2"/>
+	<Url type="text/html"            template="https://arindamchat.wordpress.com/?s={searchTerms}" method="GET" />
+	<Url type="application/opensearchdescription+xml" rel="self" template="/osd.xml" />
+	<LongName>Arindam&#039;s Blog</LongName>
+	<Image height="16" width="16" type="image/vnd.microsoft.icon">https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16&#038;d=https%3A%2F%2Farindamchat.wordpress.com%2Ffavicon.ico</Image>
+	<Image height="64" width="64" type="image/jpeg">https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=64&#038;d=https%3A%2F%2Fs-ssl.wordpress.com%2Fi%2Flogo%2Fgray-white-transparent-64.png</Image>
+	<Query role="example" searchTerms="photography" />
+	<Tags>sharepoint-2010 azure iislogs logs sharepoint-2013 oms operations-management-suite log-analysis log-search iis-logs</Tags>
+	<Developer>Automattic</Developer>
+	<SyndicationRight>open</SyndicationRight>
+	<AdultContent>false</AdultContent>
+	<Language>en</Language>
+	<OutputEncoding>UTF-8</OutputEncoding>
+	<InputEncoding>UTF-8</InputEncoding>
+	<moz:SearchForm>https://arindamchat.wordpress.com</moz:SearchForm>
+</OpenSearchDescription>

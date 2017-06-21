@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:47:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="../../../../xmlrpc.php">
+
+<title>SharePoint Library with Tree View &#8211; Arindam&#039;s Blog</title>
+<link rel='dns-prefetch' href='http://s2.wp.com/' />
+<link rel='dns-prefetch' href='http://s1.wp.com/' />
+<link rel='dns-prefetch' href='http://s0.wp.com/' />
+<link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Arindam&#039;s Blog &raquo; SharePoint Library with Tree View Comments Feed" href="feed/index.html" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1496863874h&ver=4.8-RC2-40878"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,56826,8203,55356,56819),0,0),c=j.toDataURL(),b===c&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55358,56794,8205,9794,65039),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55358,56794,8203,9794,65039),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='all-css-0-1' href='https://s1.wp.com/_static/??-eJyFkNFOwzAMRX+IYG2MCh4mviVJrc5bHFu1q21/v5QKEBsqL5GvdY+vYzhryFIdqwNPQcs0UDU4axYOxlTweqees9kT/I0VOqHBEV1jPoVP9WBPRYafHBn72BsMRVIsa6NHLNGxDyrmd2oNyzJi67NGnx2MPUUsyM22hrF2X9RcHtp3VmOWC6WkI5qF9jJNHPzQgv5Zj+dVllNBM/7uLChBFadG23fxMHOJAp0S0IWkgvm14Gz74P1m995tu9e3zcvxBtrkuko=' type='text/css' media='all' />
+<link rel='stylesheet' id='ixion-fonts-archivo-css'  href='http://fonts.googleapis.com/css?family=Archivo+Narrow%3A400%2C400i%2C700%2C700i&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='all-css-2-1' href='https://s1.wp.com/_static/??-eJx9jUsKwzAMRC9UV6Skv0XpWRyjOCq2ZSyFpLevszOEZjePmcfAko3jpJgUdMKIAnkegFbiBFYEVWCsvYBjzlgmXEj17ERO0KhxNjnMnpKAx4SFavEn7tzdLSUHot+AZsmO4/EZm8DO6ua1YMZgqRypBYfAvkYPddXgJr3jq+vvj2t/eXa3zw92gm4m' type='text/css' media='all' />
+<link rel='stylesheet' id='print-css-3-1' href='../../../../../s0.wp.com/wp-content/mu-plugins/global-print/global-print6805.css?m=1465851035h' type='text/css' media='print' />
+<link rel='stylesheet' id='all-css-4-1' href='https://s2.wp.com/_static/??-eJx9i9EKwjAMRX/IGoVN54P4LVnp2kialCbD3xcfRGTi0z0XzoFHC1HFkzjUNTReM4kBRieVGfuH9tFsB7/1puZhYaQOVrCT5Pf+q0wjIQfWrN9nE3lJNRmUATLrjPwSbvV6HC6H83Qap/H+BMWZScE=' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s1.wp.com/_static/??-eJyFj90KwjAMhV/IrAw6xQvxWWoXS2r/bNoNfXo70At1KARCTr4cTsScgIJ2dUQWttW1Yr49W2d5I34B4MlkVbDzFF6wjqFgKAvr44kcQmXMyjStGZ3jCpciF4/MDVrZvkeiMBHOfzGLJSl9gYxM9y9XXyG5aiiwyOjaAyMsGT6mdnX0h17uh36Qcre1DyuucHk='></script>
+<link rel='stylesheet' id='all-css-0-2' href='../../../../../s1.wp.com/wp-content/mu-plugins/highlander-comments/style0196.css?m=1377793621h' type='text/css' media='all' />
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Different App-Hosting Option in SharePoint 2013' href='../../../../2013/06/12/different-app-hosting-option-in-sharepoint-2013/index.html' />
+<link rel='next' title='Create SharePoint Custom Error Page and Access Denied Page' href='../../../03/01/create-sharepoint-custom-error-page-and-access-denied-page/index.html' />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='http://wp.me/p4VKgf-8' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SharePoint Library with Tree View" />
+<meta property="og:url" content="https://arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/" />
+<meta property="og:description" content="Recently I was working in a project where the requirement was to show a tree view structure along with a SharePoint 2010 document library. Let’s describe the actual requirements: ·         In this …" />
+<meta property="article:published_time" content="2014-02-15T14:14:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:50:41+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="https://arindamchat.files.wordpress.com/2014/02/f44c3-lib.gif" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="SharePoint Library with Tree View" />
+<meta name="twitter:image" content="https://arindamchat.files.wordpress.com/2014/02/7fd98-111.gif?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=32" sizes="16x16" />
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=114" />
+<link rel='openid.server' href='../../../../indexdd8f.html?openidserver=1' />
+<link rel='openid.delegate' href='../../../../index.html' />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../osd.xml" title="Arindam&#039;s Blog" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<meta name="theme-color" content="#f5f0e9" />
+		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="application-name" content="Arindam&#039;s Blog" /><meta name="msapplication-window" content="width=device-width;height=device-height" /><meta name="msapplication-tooltip" content="A Blog On Microsoft Technologies like Azure, SharePoint, ASP.NET, C#, MS CRM" /><meta name="msapplication-task" content="name=Subscribe;action-uri=https://arindamchat.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/6fec2d116f8d27e63ee3e0e9473feaa7?s=16" /><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico" /><meta name="title" content="SharePoint Library with Tree View | Arindam&#039;s Blog on WordPress.com" />
+<meta name="description" content="Recently I was working in a project where the requirement was to show a tree view structure along with a SharePoint 2010 document library. Let’s describe the actual requirements: ·         In this project whenever a record will be generated a new folder with record ID will be created inside document library. ·         Inside the Record&hellip;" />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f0e9; }
+</style>
+ 		<script type="text/javascript">
+		var _ipw_custom = {
+				wordAds: '0',
+				adSafe: '0',
+				domain: 'arindamchat.wordpress.com',
+				pageURL: 'https://arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/'
+			};
+		</script>
+ 		<script type="text/javascript" src="../../../../../s.pubmine.com/head.js"></script>
+		<script type="text/javascript" src="../../../../../static.criteo.net/js/ld/publishertag.js"></script><link rel="amphtml" href="amp/index.html" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+<style type="text/css" id="custom-colors-css">#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{color:#fff}.site-description,.featured-content .hentry .entry-title a{color:#fff}.comment-author,.footer-widgets .widget a,body,button,input,select,textarea{color:#192930}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:#eeece8}#respond h3,.comments-title,.featured-content,.hentry,.page-header,.recent-posts-header,.singular .entry-title,.site-header,.utility-container,.recent-posts:after,.site-footer,.site-info,.site-header .search-form .search-field,.site-header .search-form-icon:before,.site-header .jetpack-social-navigation a:before{border-color:rgba(238,236,232,.3)}.comment-metadata,.entry-footer,.entry-meta,.footer-widgets .widget-title,.main-navigation ul>li.current-menu-item>a,.main-navigation ul>li.current_page_item>a,.more-recent-posts,.more-recent-posts:visited,.more-testimonials,.more-testimonials:visited,.search-form-icon:before,.site-header .jetpack-social-navigation a,.site-info,div#jp-relatedposts h3.jp-relatedposts-headline{color:#67655f}.search-form-icon:before,.search-form .search-field{border-color:#a5a29d}.search-form-icon:before,.search-form .search-field{border-color:rgba(165,162,157,.3)}body,ins,mark,.site-header .search-form-icon:before,.site-header .search-form .search-field,.footer-widgets .widget{background-color:#f5f0e9}.entry-author,.widget,hr,.testimonials .hentry{background-color:#f0e9df}.featured-content .hentry,.header-overlay{background-color:#42566a}.header-overlay:before{background-color:#42566a}.header-overlay:before{background-color:rgba(66,86,106,.7)}h1,h2,h3,h4,h5,h6,.entry-title a,.entry-title a:visited,.entry-title,.page-title,.widget-title,.site-title,.comments-title,.site-title a,.site-title a:visited{color:#42566a}#infinite-handle span,.button,.comment-navigation .nav-next a,.comment-navigation .nav-previous a,.main-navigation .menu-toggle,.post-navigation .nav-next a,.post-navigation .nav-previous a,.posts-navigation .nav-next a,.posts-navigation .nav-previous a,button,input[type="button"],input[type="reset"],input[type="submit"]{background-color:#a84c38}#infinite-handle span:active,#infinite-handle span:focus,#infinite-handle span:hover,.button:active,.button:focus,.button:hover,button:active,button:focus,button:hover,input[type="button"]:active,input[type="button"]:focus,input[type="button"]:hover,input[type="reset"]:active,input[type="reset"]:focus,input[type="reset"]:hover,input[type="submit"]:active,input[type="submit"]:focus,input[type="submit"]:hover{background-color:#954331}.main-navigation ul ul{border-top-color:#a84c38}.main-navigation ul ul:before{color:#a84c38}.comment-metadata .edit-link a,.site-header .jetpack-social-navigation a:hover,a,a:visited,.main-navigation .nav-menu>li>a,.testimonials .edit-link a,.testimonials .edit-link a:visited{color:#a44a36}a:hover,a:focus,a:active{color:#a84c38}.featured-content .hentry:hover .entry-title a{color:#e8d0c9}</style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-8 single-format-standard custom-background mp6 customizer-styles-applied singular has-description no-featured-posts highlander-enabled highlander-light">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="utility-container">
+						
+<form role="search" method="get" class="search-form" action="https://arindamchat.wordpress.com/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field"
+		placeholder="Search &hellip;"
+		value="" name="s"
+		title="Search for:" />
+		<span class="search-form-icon"></span>
+	</label>
+	<input type="submit" class="search-submit"
+		value="Search" />
+</form>
+		</div>
+
+		<div class="branding-container">
+					<div class="site-branding">
+			
+								<p class="site-title"><a href="../../../../index.html" rel="home">Arindam&#039;s Blog</a></p>
+					</div><!-- .site-branding -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">Menu</button>
+	<div class="menu-top-menu-for-the-site-container"><ul id="top-menu" class="menu"><li id="menu-item-205" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-205"><a href="../../../../index.html">Home</a></li>
+<li id="menu-item-523" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-523"><a href="../../../../category/azure/index.html">Azure</a></li>
+<li id="menu-item-526" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-526"><a href="../../../../category/fast/index.html">FAST</a></li>
+<li id="menu-item-527" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-has-children menu-item-527"><a href="../../../../category/sharepoint/index.html">SharePoint</a>
+<ul  class="sub-menu">
+	<li id="menu-item-532" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532"><a href="../../../../category/sharepoint/sharepoint-2016/index.html">SharePoint 2016</a></li>
+	<li id="menu-item-530" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-530"><a href="../../../../category/sharepoint/sharepoint-2013/index.html">SharePoint 2013</a></li>
+	<li id="menu-item-531" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-531"><a href="../../../../category/sharepoint/sharepoint-2010/index.html">SharePoint 2010</a></li>
+</ul>
+</li>
+<li id="menu-item-528" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-528"><a href="../../../../category/net/index.html">.NET</a>
+<ul  class="sub-menu">
+	<li id="menu-item-533" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533"><a href="../../../../category/net/smart-client/index.html">Smart Client</a></li>
+	<li id="menu-item-534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534"><a href="../../../../category/net/click-once/index.html">Click Once</a></li>
+</ul>
+</li>
+<li id="menu-item-554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-554"><a href="../../../../zabout-me/index.html">About Me</a></li>
+</ul></div></nav>
+		</div>
+
+	</header>
+
+	
+	<div id="content" class="site-content">
+		<div class="entry-meta">
+			<span class="posted-on"><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2014-02-15T14:14:00+00:00">February 15, 2014</time><time class="updated" datetime="2017-05-17T10:50:41+00:00">May 17, 2017</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="../../../../author/arindach/index.html">Arindam C</a></span></span> <span class="cat-links"><a href="../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a>, <a href="../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a></span>					</div><!-- .entry-meta -->
+<h1 class="entry-title">SharePoint Library with Tree View</h1>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+<article id="post-8" class="post-8 post type-post status-publish format-standard hentry category-microsoft-technologies category-sharepoint-2010 tag-sharepoint-2010 tag-treeview no-featured-image">
+	<div class="entry-body">
+		<header class="entry-header">
+					</header>
+		<div class="entry-content">
+			<div dir="ltr" style="text-align:left;">
+<div class="MsoNormal">Recently I was working in a project where the requirement was to show a tree view structure along with a SharePoint 2010 document library.</div>
+<div class="MsoNormal">Let’s describe the actual requirements:</div>
+<div class="MsoListParagraphCxSpFirst" style="text-indent:-.25in;"><!-- [if !supportLists]--><span style="font-family:Symbol;">·<span style="font-family:'Times New Roman';font-size:7pt;">         </span></span><!--[endif]-->In this project whenever a record will be generated a new folder with record ID will be created inside document library.</div>
+<div class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;"><!-- [if !supportLists]--><span style="font-family:Symbol;">·<span style="font-family:'Times New Roman';font-size:7pt;">         </span></span><!--[endif]-->Inside the Record Number folder a predefined folder structure will also be created.</div>
+<div class="MsoListParagraphCxSpMiddle" style="text-indent:-.25in;"><!-- [if !supportLists]--><span style="font-family:Symbol;">·<span style="font-family:'Times New Roman';font-size:7pt;">         </span></span><!--[endif]-->Users can add new folder to this structure but can’t delete the original structure.</div>
+<div class="MsoListParagraphCxSpLast" style="text-indent:-.25in;"><!-- [if !supportLists]--><span style="font-family:Symbol;">·<span style="font-family:'Times New Roman';font-size:7pt;">         </span></span><!--[endif]-->The folder structure will be shown as a tree-view left side and users can do normal SharePoint library operations.</div>
+<div class="separator" style="clear:both;text-align:center;"><a style="margin-left:1em;margin-right:1em;" href="../../../../../arindamchat.files.wordpress.com/2014/02/7fd98-111.gif"><img src="../../../../../arindamchat.files.wordpress.com/2014/02/7fd98-1111108.gif?w=400&amp;h=251" width="400" height="251" border="0" /></a></div>
+<p>&nbsp;</p>
+<div class="separator" style="clear:both;text-align:center;"></div>
+<p>Above diagram shows the look and feel. A probable way could have been using managed metadata as it gives you the tree view structure OOB. But here we need to show normal folders in the document library.</p>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">So I decided to create a new view and modify that to add the tree view.</div>
+<div class="MsoNormal">The important question was how to create a tree-view, there is nothing out of box here. So we need to create a custom control for this. Fortunately we were using Telerik control in the project and Telerik has an excellent tree view control. It’s called RadTreeView, you can check it here: <a href="http://demos.telerik.com/aspnet-ajax/treeview/examples/overview/defaultcs.aspx">http://demos.telerik.com/aspnet-ajax/treeview/examples/overview/defaultcs.aspx</a></div>
+<div class="MsoNormal">Now in this control may not be available to you. So you have to create a custom control of your own.</div>
+<div class="MsoNormal">But the good thing here is I’ll show how you can generate a XML from SharePoint library which can be readily used with Telerik control as well as you create any custom control.</div>
+<div class="MsoNormal"><b><span style="font-size:14pt;line-height:115%;">Create XML for Tree-View from SharePoint folder library structure.</span></b></div>
+<div class="MsoNormal">I wrote a recursive method to loop through the folder structure and create a XML. The code is shown below.</div>
+<div class="MsoNormal"><b>LoadTreeView</b>: In this method I’m passing the record Id which will be the root folder. Then I’m calling CreateFolderXML() which is the recursive function.</div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:blue;font-family:Consolas;font-size:9pt;">protected</span><span style="font-family:Consolas;font-size:9pt;"> <span style="color:blue;">void</span> LoadTreeView(<span style="color:blue;">string</span> recordId)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">        {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:#2b91af;">SPSecurity</span>.RunWithElevatedPrivileges(<span style="color:blue;">delegate</span>()</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                <span style="color:#2b91af;">SPFolder</span> folder = <span style="color:#2b91af;">SPContext</span>.Current.Web.GetFolder(<span style="color:#2b91af;">SPContext</span>.Current.Web.ServerRelativeUrl + <span style="color:blue;">new</span> <span style="color:#2b91af;">CaseDocumentRepository</span>(<span style="color:#2b91af;">Convert</span>.ToInt32(caseId)).GetListName() + <span style="color:#a31515;">&#8220;/&#8221;</span> + recordId);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                <span style="color:blue;">var</span>xmlRoot = <span style="color:blue;">new</span> <span style="color:#2b91af;">XElement</span>(<span style="color:#a31515;">&#8220;Tree&#8221;</span>, <span style="color:#2b91af;">DocumentTreeViewService</span>.CreateFolderXML(folder, recordId));</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                <span style="color:blue;">var</span> doc = <span style="color:blue;">new</span><span style="color:#2b91af;">XDocument</span>(<span style="color:blue;">new</span><span style="color:#2b91af;">XDeclaration</span>(<span style="color:#a31515;">&#8220;1.0&#8221;</span>, <span style="color:#a31515;">&#8220;UTF-8&#8221;</span>, <span style="color:#a31515;">&#8220;yes&#8221;</span>), xmlRoot);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                RadTreeView1.LoadXml(doc.ToString());</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            });</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">        }</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>CreateFolderXML</b>: This is the recursive method which takes the root folder and loop through, it adds directory name and the tree-view node text and a folder image to show the yellow folder and then the URL for clicking.</div>
+<div class="MsoNormal">One important thing I want to note here, when you have a lots of folder in your library (in my case I have 70000 record ID as root folder so you can think about the load), this type of recursive call can take long time. So I used LINQ to query the SP folders instead on conventional CAML query or normal GetFolder as below</div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:#2b91af;font-family:Consolas;font-size:9pt;">List</span><span style="font-family:Consolas;font-size:9pt;">&lt;<span style="color:#2b91af;">SPFolder</span>&gt; folderList = dir.SubFolders.Cast&lt;<span style="color:#2b91af;">SPFolder</span>&gt;()</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                .Where(p =&gt; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_w&#8221;</span>&amp;&amp; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_t&#8221;</span>)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                .OrderBy(li =&gt; li.Name.Trim()).ToList();</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">Where(p =&gt; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_w&#8221;</span> &amp;&amp; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_t&#8221;</span>)- </span>this is used because you can use the same code on a picture library and exclude smaller thumbnalis which stored under _w or in _t folder ( when you uploads a picture in Picture library SharePoint create 3 copies of it)</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:blue;font-family:Consolas;font-size:9pt;">public</span><span style="font-family:Consolas;font-size:9pt;"> <span style="color:blue;">static</span> <span style="color:#2b91af;">XElement</span> CreateFolderXML(<span style="color:#2b91af;">SPFolder</span>dir, <span style="color:blue;">string</span> caseID)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">        {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:#2b91af;">XAttribute</span>[] content;</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:#2b91af;">XElement</span> xmlInfo;</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:blue;">if</span> (dir.Name == caseID)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>[4];</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[0] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;Text&#8221;</span>, dir.Name);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[1] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;Value&#8221;</span>, <span style="color:#a31515;">&#8220;/&#8221;</span> + dir.Url + <span style="color:#a31515;">&#8220;&amp;View=&#8221;</span> + dir.DocumentLibrary.DefaultView.ID);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[2] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;ImageUrl&#8221;</span>, <span style="color:#a31515;">&#8220;/_layouts/images/folder.gif&#8221;</span>);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[3] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;Expanded&#8221;</span>, <span style="color:#a31515;">&#8220;True&#8221;</span>);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            }</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:blue;">else</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>[3];</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[0] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;Text&#8221;</span>, dir.Name);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[1] = <span style="color:blue;">new</span><span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;Value&#8221;</span>, <span style="color:#a31515;">&#8220;/&#8221;</span> + dir.Url + <span style="color:#a31515;">&#8220;&amp;View=&#8221;</span> + dir.DocumentLibrary.DefaultView.ID);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                content[2] = <span style="color:blue;">new</span> <span style="color:#2b91af;">XAttribute</span>(<span style="color:#a31515;">&#8220;ImageUrl&#8221;</span>, <span style="color:#a31515;">&#8220;/_layouts/images/folder.gif&#8221;</span>);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            }</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            xmlInfo = <span style="color:blue;">new</span> <span style="color:#2b91af;">XElement</span>(<span style="color:#a31515;">&#8220;Node&#8221;</span>, content);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            </span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:#2b91af;">List</span>&lt;<span style="color:#2b91af;">SPFolder</span>&gt; folderList = dir.SubFolders.Cast&lt;<span style="color:#2b91af;">SPFolder</span>&gt;()</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                .Where(p =&gt; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_w&#8221;</span>&amp;&amp; p.Name.ToLower() != <span style="color:#a31515;">&#8220;_t&#8221;</span>)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                .OrderBy(li =&gt; li.Name.Trim()).ToList();</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            </span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:blue;">foreach</span> (<span style="color:#2b91af;">SPFolder</span>subDir <span style="color:blue;">in</span> folderList)</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">                xmlInfo.Add(CreateFolderXML(subDir, caseID));</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            }</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">            <span style="color:blue;">return</span> xmlInfo;</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9pt;">        }</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span style="font-size:14pt;line-height:115%;">Create a new Custom View </span></b></div>
+<div class="MsoNormal">You can modify default allitems.aspx, but I would say you create a new view and keep the default one. You can just use SharePoint designer to create a new view.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span style="font-size:14pt;line-height:115%;">Create Webpart for the TreeView</span></b></div>
+<div class="MsoNormal">Just create a new Visual webpart for RadTreeview, you can placed your own custom control here if you don’t use Telerik.</p>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:blue;font-family:Consolas;font-size:9.5pt;">&lt;</span><span style="color:maroon;font-family:Consolas;font-size:9.5pt;">script</span><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:red;">language</span><span style="color:blue;">=&#8221;javascript&#8221;</span> <span style="color:red;">type</span><span style="color:blue;">=&#8221;text/javascript&#8221;&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;">      <span style="color:blue;">function</span> selectNode(text) {</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;">          <span style="color:blue;">var</span> treeView = $find(<span style="color:maroon;">&#8220;<span style="background:yellow;">&lt;%</span>= RadTreeView1.ClientID <span style="background:yellow;">%&gt;</span>&#8220;</span>);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;">          <span style="color:blue;">var</span> node = treeView.findNodeByText(text);</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;">          node.select();</span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;">      }</span></div>
+<p>&nbsp;</p>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:blue;font-family:Consolas;font-size:9.5pt;">&lt;/</span><span style="color:maroon;font-family:Consolas;font-size:9.5pt;">script</span><span style="color:blue;font-family:Consolas;font-size:9.5pt;">&gt;</span></div>
+</div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="color:blue;font-family:Consolas;font-size:9.5pt;">&lt;</span><span style="color:maroon;font-family:Consolas;font-size:9.5pt;">table</span><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:red;">id</span><span style="color:blue;">=&#8221;tblRadTreeView&#8221;</span> <span style="color:red;">runat</span><span style="color:blue;">=&#8221;server&#8221;</span> <span style="color:red;">width</span><span style="color:blue;">=&#8221;100%&#8221;&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;</span><span style="color:maroon;">tr</span> <span style="color:red;">valign</span><span style="color:blue;">=&#8221;top&#8221;&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;</span><span style="color:maroon;">td</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;</span><span style="color:maroon;">telerik</span><span style="color:blue;">:</span><span style="color:maroon;">RadTreeView</span> <span style="color:red;">ID</span><span style="color:blue;">=&#8221;RadTreeView1&#8243;</span><span style="color:red;">runat</span><span style="color:blue;">=&#8221;server&#8221;</span><span style="color:red;">OnNodeClick</span><span style="color:blue;">=&#8221;RadTreeView1_NodeClick&#8221;</span><span style="color:red;">EnableViewState</span><span style="color:blue;">=&#8221;true&#8221;</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;/</span><span style="color:maroon;">telerik</span><span style="color:blue;">:</span><span style="color:maroon;">RadTreeView</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;/</span><span style="color:maroon;">td</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;/</span><span style="color:maroon;">tr</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal" style="margin-bottom:.0001pt;"><span style="font-family:Consolas;font-size:9.5pt;"> <span style="color:blue;">&lt;/</span><span style="color:maroon;">table</span><span style="color:blue;">&gt;</span></span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span style="font-size:14pt;line-height:115%;">Place the tree-view in the new custom view</span></b></div>
+<div class="MsoNormal">Here I’m not describing much of the customization you can or need to do in the custom view page but give what I did for my requirement.</div>
+<div class="separator" style="clear:both;text-align:center;"><a style="margin-left:1em;margin-right:1em;" href="../../../../../arindamchat.files.wordpress.com/2014/02/d654d-des.gif"><img src="../../../../../arindamchat.files.wordpress.com/2014/02/d654d-des501a.gif?w=640&amp;h=234" width="640" height="234" border="0" /></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span style="font-size:14pt;line-height:115%;">Final View</span></b></div>
+<p>&nbsp;</p>
+<div class="MsoNormal">And here how it’s looking now. Happy coding <span style="font-family:Wingdings;">J</span></div>
+<div class="separator" style="clear:both;text-align:center;"><a style="margin-left:1em;margin-right:1em;" href="../../../../../arindamchat.files.wordpress.com/2014/02/f44c3-lib.gif"><img src="../../../../../arindamchat.files.wordpress.com/2014/02/f44c3-lib9c8c.gif?w=400&amp;h=238" width="400" height="238" border="0" /></a></div>
+<div class="MsoNormal"><span style="font-family:Wingdings;"> </span></div>
+</div>
+			<style type="text/css">
+			div.wpmrec2x{max-width:610px;}
+			div.wpmrec2x div.u > div{float:left;margin-right:10px;}
+			div.wpmrec2x div.u > div:nth-child(3n){margin-right:0px;}
+			</style>		<div class="wpcnt">
+			<div class="wpa wpmrec wpmrec2x">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+								<script type='text/javascript' id="s26942">
+				(function(g,$){if("undefined"!=typeof g.__ATA){
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:26942, width:300, height:250});
+					g.__ATA.initAd({collapseEmpty:'after', sectionId:114160, width:300, height:250});
+				}})(window,jQuery);
+			</script>
+				</div>
+				        <div id="crt-2012137966" style="width:300px;height:250px;"></div>
+        <script type="text/javascript">
+        var o = document.getElementById('crt-2012137966');
+        if ("undefined"!=typeof Criteo) {
+            var p = o.parentNode;
+            p.style.setProperty('display', 'inline-block', 'important');
+            o.style.setProperty('display', 'block', 'important');
+            Criteo.DisplayAcceptableAdIfAdblocked({zoneid:388248,containerid:"crt-2012137966",collapseContainerIfNotAdblocked:true,"callifnotadblocked": function () {var o = document.getElementById('crt-2012137966'); o.style.setProperty('display','none','important');o.style.setProperty('visbility','hidden','important'); }
+        });
+        } else {
+            o.style.setProperty('display', 'none', 'important');
+            o.style.setProperty('visibility', 'hidden', 'important');
+        }
+        </script>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-8" class="share-twitter sd-button share-icon" href="index9a7b.html?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-8" class="share-facebook sd-button share-icon" href="index5a58.html?share=facebook" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-8" class="share-google-plus-1 sd-button share-icon" href="index386f.html?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-72867871-8-594a78463aefd' data-src='//widgets.wp.com/likes/#blog_id=72867871&amp;post_id=8&amp;origin=arindamchat.wordpress.com&amp;obj_id=72867871-8-594a78463aefd' data-name='like-post-frame-72867871-8-594a78463aefd'><h3 class='sd-title'>Like this:</h3><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class="loading">Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>		</div><!-- .entry-content -->
+
+			<footer class="entry-footer">
+		<span class="tags-links">Tagged <a href="../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>, <a href="../../../../tag/treeview/index.html" rel="tag">TreeView</a></span>	</footer><!-- .entry-footer -->
+			<div class="entry-author">
+		<div class="author-avatar">
+			<img alt='' src='https://2.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=60&amp;d=identicon&amp;r=G' class='avatar avatar-60' height='60' width='60' />		</div><!-- .author-avatar -->
+
+		<div class="author-heading">
+			<h2 class="author-title">Published by <span class="author-name">Arindam C</span></h2>
+		</div><!-- .author-heading -->
+
+		<p class="author-bio">
+			Experience in Office 365 ,SharePoint,SCOM 2012, Azure Application Insight, Azure Log Analysis, MS CRM, ASP.NET,C# Angular JS . 
+Check Linked In : https://www.linkedin.com/in/arindamchat			<a class="author-link" href="../../../../author/arindach/index.html" rel="author">
+				View all posts by Arindam C			</a>
+		</p><!-- .author-bio -->
+	</div><!-- .entry-auhtor -->
+	</div> <!-- .entry-body -->
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://arindamchat.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="5b63f46314" /><input type="hidden" name="_wp_http_referer" value="/2014/02/15/sharepoint-library-with-tree-view/" />
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest" />
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="https://public-api.wordpress.com/connect/?googleplus-sign-in=https%3A%2F%2Farindamchat.wordpress.com" width="24" height="24" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav" />
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text" value="" /></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url" value="" /></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" />
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" />
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" />
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" />
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" />
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" />
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google+ photo" width="25" class="no-grav" />
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" />
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" />
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"/> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='8' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="d257bca219" /></p>
+<input type="hidden" name="genseq" value="1498052678" />
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="136"/></p>			</form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../../../../2013/06/12/different-app-hosting-option-in-sharepoint-2013/index.html" rel="prev">Different App-Hosting Option in SharePoint 2013</a></div><div class="nav-next"><a href="../../../03/01/create-sharepoint-custom-error-page-and-access-denied-page/index.html" rel="next">Create SharePoint Custom Error Page and Access Denied Page</a></div></div>
+	</nav>
+		</main>
+	</div>
+
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="archives-5" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<ul>
+			<li><a href='../../../../2017/05/index.html'>May 2017</a></li>
+	<li><a href='../../../../2017/01/index.html'>January 2017</a></li>
+	<li><a href='../../../../2016/11/index.html'>November 2016</a></li>
+	<li><a href='../../../07/index.html'>July 2014</a></li>
+	<li><a href='../../../03/index.html'>March 2014</a></li>
+	<li><a href='../../index.html'>February 2014</a></li>
+	<li><a href='../../../../2013/06/index.html'>June 2013</a></li>
+	<li><a href='../../../../2013/03/index.html'>March 2013</a></li>
+	<li><a href='../../../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../../../2012/07/index.html'>July 2012</a></li>
+	<li><a href='../../../../2011/12/index.html'>December 2011</a></li>
+	<li><a href='../../../../2011/04/index.html'>April 2011</a></li>
+	<li><a href='../../../../2007/11/index.html'>November 2007</a></li>
+		</ul>
+		</section></aside>
+
+	</div>
+	<footer id="colophon" class="site-footer" role="contentinfo">
+				<div class="site-info">
+	<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+	
+	</div><!-- .site-info -->	</footer>
+</div>
+<!--  -->
+<script type='text/javascript' src='../../../../../0.gravatar.com/js/gprofiles12f0.js?ver=201725y'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgrohoc3b6.js?m=1380573781h'></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-e1684c9e7b0368aff778803d73e2c883">
+	</div>
+	</div>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/arindamchat.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?action=logout&_wpnonce=cbdb9fe6ca","homeURL":"https:\/\/arindamchat.wordpress.com\/","postID":"8","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../../s2.wp.com/_static/index1575.html??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1479964158j'></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post" />
+				<input type="hidden" id="carousel-reblog-blog-id" value="72867871" />
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://arindamchat.wordpress.com" />
+				<input type="hidden" id="carousel-reblog-blog-title" value="Arindam&#039;s Blog" />
+				<input type="hidden" id="carousel-reblog-post-url" value="" />
+				<input type="hidden" id="carousel-reblog-post-title" value="" />
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0193bea543" /><input type="hidden" name="_wp_http_referer" value="/2014/02/15/sharepoint-library-with-tree-view/" />		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/arindamchat.wordpress.com\/2014\/02\/15\/sharepoint-library-with-tree-view\/":8};
+	</script>
+		<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+			var windowOpen;
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				if ( 'undefined' !== typeof windowOpen ){ // If there's another sharing window open, close it.
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+		<script type='text/javascript' src='../../../../../s1.wp.com/wp-content/mu-plugins/akismet-3.0/_inc/formcd10.js?m=1404442431h'></script>
+<link rel='stylesheet' id='all-css-0-3' href='../../../../../s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carouselaccd.css?m=1481571546h' type='text/css' media='all' />
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript'>
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var actionbardata = {"siteID":"72867871","siteName":"Arindam's Blog","siteURL":"http:\/\/arindamchat.wordpress.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=50&d=https%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/ixion","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F","themeURL":"https:\/\/wordpress.com\/theme\/ixion\/","xhrURL":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"bbaaeffc0c","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5c13a7b39d\" \/>","referer":"https:\/\/arindamchat.wordpress.com\/2014\/02\/15\/sharepoint-library-with-tree-view\/","canFollow":"1","statusMessage":"","customizeLink":"https:\/\/arindamchat.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F","postID":"8","shortlink":"http:\/\/wp.me\/p4VKgf-8","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/arindamchat.wordpress.com\/8","statsLink":"https:\/\/wordpress.com\/stats\/post\/8\/arindamchat.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Ixion","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in the Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/arindamchat.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"099d9bc6ed","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/arindamchat.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Farindamchat.wordpress.com%2F2014%2F02%2F15%2Fsharepoint-library-with-tree-view%2F","blog_id":"72867871","local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=72867871&v=wpcom&tz=0&user_id=0&subd=arindamchat","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://s2.wp.com/_static/??-eJyVkdtOwzAMhl+I1Ns0gbhAPIubuq3bnIiTbnt7UmClg6nSrmz99ucjnILS3iVyCQaBhibWFM7VIE+wCtmsgskdOwHDIwl8ZMrUo2sMxY1k7a0tkvqGhpmuQU4c6BHoRvgLpp5sSQu5Bj6zd4AilL44hxN3mIr4ACQjh9LJjar1OotqebkGO21ycztTpGAuleV/LVYLYVPiqsYIFiVRLJ7yE8XIc7FF26qg5y3mCot3bygJv3Os9aG8K15+TLXOund+jD4LGRgoBdSjugobTPCSVGuQI0iPkV13tQV6t2/74+tht3veH16GT3zz6s8='></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='../../../../wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "arindamchat.wordpress.com";
+	</script>
+	<script type="text/javascript" defer src="../../../../../s.skimresources.com/js/725X1342.skimlinks.js"></script>		<iframe src='https://widgets.wp.com/likes/master.html?ver=20170206#ver=20170206' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+		<div id='likes-other-gravatars'><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script>
+			var _comscore = _comscore || [];
+			_comscore.push({
+				c1: "2",
+				c2: "7518284"
+			});
+			(function() {
+				var s = document.createElement("script"),
+					el = document.getElementsByTagName("script")[0];
+				s.defer = true;
+				s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<p class="robots-nocontent"><img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=7518284&amp;c3=&amp;c4=&amp;c5=&amp;c6=&amp;c15=&amp;cv=2.0&amp;cj=1" alt="" style="display:none;" width="1" height="1" /></p>
+		</noscript><script src="../../../../../stats.wp.com/w9f61.js?56" type="text/javascript" async defer></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'72867871','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'72867871','v':'wpcom','tz':'0','user_id':'0','post':'8','subd':'arindamchat'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0/MEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDlXay05dU5SYmpFZ0s5bzEyZGhQSG1dSGUmZWZlVS5pWHB+TCxyNEcydmtUMkNQb2YsaTZdOUlPVmJMLnk4P3B+PVVVLGFTcWk/NktGa3d6K0FZdlh4OCVhV2ZaV3MsM1o5PUtxdHJEPUJ2XzVFfExvWm0/Wm1xb0xMR3JyXVha'}]);
+_stq.push([ 'clickTrackerInit', '72867871', '8' ]);
+	</script>
+<noscript><img src="../../../../../pixel.wp.com/b0b80.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:47:52 GMT -->
+</html>

@@ -1,0 +1,646 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/09/03/troubleshooting-of-fast-search-configuration/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Troubleshooting of FAST Search Configuration" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="FAST search as we all know is one of the nicest things to work with. Here I&#8217;m not going to describe what FAST search is or how to install and configure it, I did it few days back and the prob…" />
+<meta property="article:published_time" content="2012-09-03T09:52:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:46:35+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2012/09/52130-8-bmp7c78.jpg?w=255" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Troubleshooting of FAST Search Configuration" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2012/09/cf357-1-bmpd209.jpg?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>Troubleshooting of FAST Search Configuration &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2012\/09\/03\/troubleshooting-of-fast-search-configuration\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"Troubleshooting of FAST Search Configuration","datePublished":"2012-09-03T09:52:00+00:00","dateModified":"2017-05-17T10:46:35+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2012\/09\/cf357-1-bmp.jpg","width":712,"height":298}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-c5584222ecfd93740ee1cd0c7ed0732c{text-indent:-22.5pt;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979{font-family:&#039;font-size:7pt;}.amp-wp-inline-a6ec8840dd8107f0c4f9cbd7d00cece0{text-align:center;}.amp-wp-inline-ce56edb6b5374d9a9a236a771c591f18{font-size:18pt;line-height:115%;}.amp-wp-inline-b04c8cce0d1916c37f6eb6cbce716331{color:#38761d;}.amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108{color:#00b050;font-size:14pt;line-height:115%;}.amp-wp-inline-86384b0e20ac09afa0084aec2224fdda{color:red;}.amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30{color:red;font-size:14pt;line-height:115%;}.amp-wp-inline-51d434530ec378daeb8d8b3f34de0394{margin-left:.25in;text-indent:-4.5pt;}.amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e{margin-left:.5in;text-indent:-.5in;}.amp-wp-inline-4e5305e806d4285324e76eb8df623a64{font-family:&#039;font-size:9.5pt;}.amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7{font-size:14pt;line-height:115%;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-d1a7e9b8a5bff174e66a720021693c53{color:#0070c0;}.amp-wp-inline-386e9277e4d23d55df0df7d905d91303{color:red;font-size:14pt;line-height:21px;}.amp-wp-inline-2fc53b30d99395d23d26bd281aa46b2a{font-size:14pt;line-height:21px;}.amp-wp-inline-21507e7500323d7b431dffade0db2874{text-indent:-.25in;}.amp-wp-inline-ced7a10948ea2eeb11a2be382f83215c{font-size:7pt;}.amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8{margin-left:40.5pt;}.amp-wp-inline-1c7cc4cd2c2b3e42153d95881a418c78{margin-left:76.5pt;text-indent:-.25in;}.amp-wp-inline-e4011106298de62f9593c7f780fde826{margin-left:.25in;}.amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6{line-height:115%;}.amp-wp-inline-791720fca115c8038913d7ac547a84f7{line-height:18px;}.amp-wp-inline-68ecce68b6462c889ea4baf0255eb58c{line-height:20px;}.amp-wp-inline-f66322e9ddf0fc43ef7c54825173f217{line-height:21px;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">Troubleshooting of FAST Search Configuration</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2012-09-03T09:52:00+00:00">
+		5 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6">FAST search as we all </span><span class="amp-wp-inline-f66322e9ddf0fc43ef7c54825173f217">know</span><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6"> is one of the </span><span class="amp-wp-inline-68ecce68b6462c889ea4baf0255eb58c">nicest</span><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6"> things to work with. Here I’m </span><span class="amp-wp-inline-791720fca115c8038913d7ac547a84f7">not</span><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6"> going to describe what FAST search is or how to install and configure it, I did it few days back and the problem  faced actually started after the installation is done. But I was </span><span class="amp-wp-inline-791720fca115c8038913d7ac547a84f7">victorious</span><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6"> at the end :).</span><br/><span class="amp-wp-inline-46dce28c4b445ed746a1a1702eb86dd6"><br/></span></div>
+<div class="MsoNormal">
+<div class="MsoNormal"><b><u><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">*</span>Note: </u></b><u>During configuration see the different parameters in the<b>D:/FASTSearch/</b> <b>Install_Info.txt, </b>you should use this during configuring FAST Search SSA or Query applications in Central Admin.</u></div>
+<div class="MsoNormal"><u> </u></div>
+</div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">FAST Configuration:</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal">The below article explains the configuration part very nicely, you should make sure that you follow <u>each step</u> as mentioned there. I liked this one.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><a href="http://community.bamboosolutions.com/blogs/sharepoint-2010/archive/2011/08/02/sharepoint-2010-cookbook-configuring-fast-search-server-2010-for-sharepoint.aspx">http://community.bamboosolutions.com/blogs/sharepoint-2010/archive/2011/08/02/sharepoint-2010-cookbook-configuring-fast-search-server-2010-for-sharepoint.aspx</a></div>
+<p> </p>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b>Now after configuration there could be many problems start appearing in the event logs, possible resolutions are mentioned below.</b></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 1: Failed to connect to </span></b><b><span class="amp-wp-inline-386e9277e4d23d55df0df7d905d91303">&lt;</span><span class="amp-wp-inline-2fc53b30d99395d23d26bd281aa46b2a"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">SERVER NAME:URL</span></span><span class="amp-wp-inline-386e9277e4d23d55df0df7d905d91303">&gt;</span></b> <b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">:9999 Failed to initialize session with document engine: Unable to resolve Contentdistributor</span></b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/cf357-1-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/cf357-1-bmp94b3.jpg?w=400&amp;h=167" width="400" height="167" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="MsoNormal"><!--[endif]--></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="MsoListParagraph amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]-->1&gt;<span class="amp-wp-inline-ced7a10948ea2eeb11a2be382f83215c">     </span><!--[endif]-->First Check the certificate validation ( possible you have used a self certified certificate which might have expired in a year)</div>
+<div class="MsoNormal amp-wp-inline-e4011106298de62f9593c7f780fde826"><b>Click Start and then type MMC in the Search box–&gt;Add/Remove Snap-in–&gt;Select Certificates–&gt;Select Computer account–&gt;Select Local computer–&gt;Click OK</b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/d0668-2-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/d0668-2-bmpe521.jpg?w=400&amp;h=91" width="400" height="91" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal amp-wp-inline-e4011106298de62f9593c7f780fde826"><b> </b></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]-->2&gt;<span class="amp-wp-inline-ced7a10948ea2eeb11a2be382f83215c">     </span><!--[endif]-->If you see the search certificate expired, renew it as follows</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-1c7cc4cd2c2b3e42153d95881a418c78"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Navigate to folder “\installer\scripts” and run the following script:</div>
+<div class="MsoNormal amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8"><b><i>               .\ReplaceDefaultCertificate.ps1 –generateNewCertificate $true</i></b></div>
+<div class="MsoListParagraph amp-wp-inline-1c7cc4cd2c2b3e42153d95881a418c78"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Check the data is updated</div>
+<div class="MsoNormal amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--><b><i></i></b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/97149-3-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/97149-3-bmp1bc8.jpg?w=400&amp;h=146" width="400" height="146" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8"></div>
+<div class="MsoListParagraph amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]-->3&gt;<span class="amp-wp-inline-ced7a10948ea2eeb11a2be382f83215c">     </span><!--[endif]-->After that run following power shell in “<b>SharePoint 2010 Server Management Shell</b>”  which should be run as Admin</div>
+<div class="MsoNormal"><b><i>D:\FASTSearch\installer\scripts\securefastsearchconnector.ps1 -certPath “D:\FASTSearch\data\data_security\cert\FASTSearchCert.pfx” -ssaName “<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">FAST Search SSA</span>” -userName “<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">EU\gbsaisemoss_btest</span>“</i></b></div>
+<div class="MsoNormal"><b><u><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">*</span>Note:</u></b><u> put correct Search service application and domain name for the <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">red</span> marked parameters.</u></div>
+<div class="MsoNormal">Output:</div>
+<div class="MsoNormal"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/e8089-4-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/e8089-4-bmp7d81.jpg?w=400&amp;h=123" width="400" height="123" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--><b></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 2:  Failed to connect to </span></b><b><span class="amp-wp-inline-386e9277e4d23d55df0df7d905d91303">&lt;</span><span class="amp-wp-inline-2fc53b30d99395d23d26bd281aa46b2a"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">SERVER NAME:URL</span></span><span class="amp-wp-inline-386e9277e4d23d55df0df7d905d91303">&gt;</span></b> <b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">:9178 Failed to create session with content distributor. Unknown collection ‘MyCollectionTest’</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">This happens when collection specified the SSA is not present in the FAST database. To check if your collection exist you can execute the following command on the FAST server (SharePoint 2010 Mgmt Shell)</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-d1a7e9b8a5bff174e66a720021693c53">Get-FASTSearchContentCollection -Name MyCollectionTest</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Output should be like this:</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/04112-5-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/04112-5-bmpe15b.jpg?w=400&amp;h=211" width="400" height="211" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">If the collection does not exist or else you can create a new collection with the following command</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-d1a7e9b8a5bff174e66a720021693c53">New-FASTSearchContentCollection -Name MyCollectionTest</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">For me it was not present hence gave me an error. For quick fix, I changed the collection name back to sp. It’s the default collection and was already present.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 3: Access Denied to the Default Content Access Account</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Access is denied. Verify that either the Default Content Access Account has access to this repository, or add a crawl rule to crawl this repository. If the repository being crawled is a SharePoint repository, verify that the account you are using has “Full Read” permissions on the SharePoint Web Application being crawled.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">This happens when the content access account does not have “Full Read” permissions on the SharePoint web application being crawled. You can add a crawl rule to access the repository with specific account.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">1. Go to New Crawl Rule -&gt; add the Url</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">2. Check the radio button for Specify a different content access account</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">3. Enter the credentials for the account with which you want to crawl.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">4. Click Ok and start the crawl.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Also make sure there is an entry for DisableLoopbackCheck in the registry. If it’s not present follow the below steps:</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">1. Go to command window and type regedit.exe</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">2. Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">3. Right click on LSA and create a new 32bit DWORD value</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">4. Name it as “DisableLoopBackCheck” and modify its value to 1</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">5. Close the registry and crawl the content.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 4: Error communicating to the server</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">The crawler could not communicate with the server. Check that the server is available and that the firewall access is configured correctly. If the repository was temporarily unavailable, an incremental crawl will fix this error.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">This happens when crawler is not able to connect to the server. Make sure server name is correct. Couple of steps to troubleshoot it</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">1. You should be able to ping the server from the server having crawl component. Make sure there is an entry for the server in the host file under c:\Windows\System32\drivers\etc folder.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Ping</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">2. You should be able to connect to the server using telnet command</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">Telnet</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 5: Failed to connect to &lt;</span><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">SERVER NAME:URL</span></span><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">&gt;:9178 couldn’t locate certificate: CA89C82790724B01602616F9F7FCE7D74B886A12</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">                  </span>i.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">Open the MMC as mentioned in Issue 1</span></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">                 </span>ii.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">Go to the FastSearchCertificate</span></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">               </span>iii.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">Expand the<span class="apple-converted-space"> </span><strong>Personal</strong><span class="apple-converted-space"> </span>folder and then click the<span class="apple-converted-space"> </span><strong>Certificates</strong><span class="apple-converted-space"> </span>folder. Double-click the CA signed certificate.</span></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">               </span>iv.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">Open the<span class="apple-converted-space"> </span><strong>Details</strong><span class="apple-converted-space"> </span>tab and then click<span class="apple-converted-space"> </span><strong>Thumbprint</strong>.</span></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">                 </span>v.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">Check if this matched with the above error GUID i.e.  A89C82790724B01602616F9F7FCE7D74B886A12</span></div>
+<div class="amp-wp-inline-aaa2a1ece3607b4f9bf2df08863f9e3e"><!-- [if !supportLists]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64"><span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">               </span>vi.<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">   </span></span><!--[endif]--><span class="amp-wp-inline-4e5305e806d4285324e76eb8df623a64">If not update the certificate as below </span></div>
+<div class="MsoNormal amp-wp-inline-51d434530ec378daeb8d8b3f34de0394"><b><i>D:\FASTSearch\installer\scripts\securefastsearchconnector.ps1 -certPath “D:\FASTSearch\data\data_security\cert\FASTSearchCert.pfx” -ssaName “<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">FAST Search SSA</span>” -userName “<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">EU\gbsaisemoss_btest</span>“</i></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-c164aa2c1a1ec5fe3281a3f29f438a30">Issue 6: Search in not working in any site, getting message: </span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">The search request was unable to connect to the Search Service (FAST Search Server 2010 for SharePoint)</span></b><b> </b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-f207fe70062c5abbe0ac9291e6ccd108">Solution:</span></b></div>
+<div class="MsoNormal">This message appears when you search any item in any site and you made sure that none of the above issues are appearing. Follow the steps mentioned here:</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><a href="http://technet.microsoft.com/en-us/library/ff393738.aspx">http://technet.microsoft.com/en-us/library/ff393738.aspx</a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">After you follow the step in above attached document, the MMC for certificate should look like below</div>
+<div class="MsoNormal"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/c98cc-6-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/c98cc-6-bmpc364.jpg?w=400&amp;h=203" width="400" height="203" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/34ad3-7-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/34ad3-7-bmp03b2.jpg?w=400&amp;h=328" width="400" height="328" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><!-- [if gte vml 1]&gt; &lt;![endif]--><!-- [if !vml]--><!--[endif]--></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><i>Here I’m including the Powell command that you will be needed.</i></b></div>
+<div class="MsoNormal"><b class="amp-wp-inline-a6ec8840dd8107f0c4f9cbd7d00cece0"><i><span class="amp-wp-inline-ce56edb6b5374d9a9a236a771c591f18"> </span></i></b></div>
+<div class="MsoNormal"><b class="amp-wp-inline-a6ec8840dd8107f0c4f9cbd7d00cece0"><span class="amp-wp-inline-ce56edb6b5374d9a9a236a771c591f18"><span class="amp-wp-inline-b04c8cce0d1916c37f6eb6cbce716331"><u>Power shell Reference</u></span></span></b></div>
+<div class="MsoNormal"><b class="amp-wp-inline-a6ec8840dd8107f0c4f9cbd7d00cece0"><i><span class="amp-wp-inline-ce56edb6b5374d9a9a236a771c591f18"> </span></i></b></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-c5584222ecfd93740ee1cd0c7ed0732c"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">            </span></span><!--[endif]-->MS cmdlets : <a href="http://technet.microsoft.com/en-us/library/ff608013.aspx">http://technet.microsoft.com/en-us/library/ff608013.aspx</a></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-c5584222ecfd93740ee1cd0c7ed0732c"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">            </span></span><!--[endif]-->If PS1 is not running use the full path ******** See : <a href="http://technet.microsoft.com/en-us/library/ee176949.aspx" rel="nofollow">http://technet.microsoft.com/en-us/library/ee176949.aspx</a></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-c5584222ecfd93740ee1cd0c7ed0732c"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">            </span></span><!--[endif]-->FAST Errors : <a href="http://www.sharepointblog.co.uk/2012/06/sharepoint-2010-fast-search-unable-resolve-contentdistributor/">http://www.sharepointblog.co.uk/2012/06/sharepoint-2010-fast-search-unable-resolve-contentdistributor/</a></div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-c5584222ecfd93740ee1cd0c7ed0732c"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">            </span></span><!--[endif]-->Run is SharePoint 2010 Mgmt shell</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2012/09/52130-8-bmp.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2012/09/52130-8-bmp7376.jpg?w=544&amp;h=640" width="544" height="640" sizes="(min-width: 544px) 544px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/fast/index.html" rel="category tag">FAST</a>, <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/fast/index.html" rel="tag">FAST</a>, <a href="../../../../../tag/fast-search/index.html" rel="tag">FAST Search</a>, <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/bbcee.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=52&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/be974.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDl4Z3V5fixyVzYvOXpBeUEsQjNmbk9INU0xVEFKP0VoenZRLmdifDUrSSxGNjhVOE9hX1JqQkImQkNpdVFkRUdFOHx2TEVNY3MxbXYuZj1mVWg%2FVW5BZS11Z2JXP0N%2B"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2012/09/03/troubleshooting-of-fast-search-configuration/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:33 GMT -->
+</html>

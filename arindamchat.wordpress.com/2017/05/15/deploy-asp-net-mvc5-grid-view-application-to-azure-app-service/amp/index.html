@@ -1,0 +1,650 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:50:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Deploy ASP.NET MVC5 Grid View Application to Azure App Service" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="Hello guys, here I&#8217;m going to describe how to create and deploy an ASP MVC application to Azure using Visual Studio, Azure SQL, MS TFS in a Prod-QA-Dev scenario. This is the first of a 3 seri…" />
+<meta property="article:published_time" content="2017-05-15T09:28:27+00:00" />
+<meta property="article:modified_time" content="2017-05-15T09:39:50+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2017/05/39.png" />
+<meta property="og:image:width" content="482" />
+<meta property="og:image:height" content="351" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Deploy ASP.NET MVC5 Grid View Application to Azure App Service" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2017/05/1d209.png?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>Deploy ASP.NET MVC5 Grid View Application to Azure App Service &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2017\/05\/15\/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"Deploy ASP.NET MVC5 Grid View Application to Azure App Service","datePublished":"2017-05-15T09:28:27+00:00","dateModified":"2017-05-15T09:39:50+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2017\/05\/43.png","width":712,"height":421}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-3018e71240503208f084404f5ee41972{color:#993300;}.amp-wp-inline-56f42f65bf44ab0aee57f36713c8bf49{color:#ff0000;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">Deploy ASP.NET MVC5 Grid View Application to Azure App Service</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2017-05-15T09:28:27+00:00">
+		1 month ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<p>Hello guys, here I’m going to describe how to create and deploy an ASP MVC application to Azure using Visual Studio, Azure SQL, MS TFS in a Prod-QA-Dev scenario.</p>
+<p>This is the first of a 3 series article. I’ll describe below points in these 3 parts.</p>
+<h1>Part 1- Create a MVC Azure Web App</h1>
+<ul><li>Create ASP MVC application using Visual Studio</li>
+<li>Create App Service and App Service Plan in Azure</li>
+<li>Create Azure SQL Database.</li>
+<li>Connect to Azure Database</li>
+<li>Deploy code to Azure using Visual Studio.</li>
+</ul><h1>Part 2- Define Azure Deployment Strategy</h1>
+<ul><li>Create a Prod, Stage and Dev App Service in Azure</li>
+<li>Create Deployment Slots</li>
+<li>Show how to do a zero downtime Deployment.</li>
+</ul><h1>Part 3- Use Source Control in Azure</h1>
+<ul><li>Use Source Control with Azure App Service</li>
+<li>Create continuous deployment plan to Azure</li>
+</ul><h1>Create a MVC Azure Web App</h1>
+<p>You probably know that Azure App Service is a platform-as-a-service (PaaS) offering of Microsoft Azure. You can create web and mobile apps for any platform or device using .NET, Node.js, PHP, Python, and Java. You can integrate your apps with SaaS solutions, connect with on-premises applications or use other Azure service like Azure SQL Server etc. etc.  You can check more in the MS Azure <a href="https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/managed-web-app/basic-web-app">Website</a></p>
+<p>Here I’m going to describe how to deploy an ASP.NET MVC application as Azure App Service and use an Azure SQL Server as back end.</p>
+<p>I hope that you already have an Azure Subscription before going to next sections.</p>
+<h2><span class="amp-wp-inline-3018e71240503208f084404f5ee41972"><strong>The ASP.NET MVC Application</strong></span></h2>
+<p>As it’s not the purpose of this demo to show how to create a MVC application from scratch, so I used this nice article named “<strong><a href="https://www.codeproject.com/Articles/1114208/Beginners-Guide-for-Creating-GridView-in-ASP-NET-M">Beginners Guide for Creating GridView in ASP.NET MVC 5</a></strong>” created by <a href="https://www.codeproject.com/script/Membership/View.aspx?mid=9711012">Ehsan Sajjad</a>, and published in <a href="https://www.codeproject.com/Articles/1114208/Beginners-Guide-for-Creating-GridView-in-ASP-NET-M">CodeProject</a>. This nice article has the source code and the SQL scripts to create SQL tables and insert data to that. What could have been better than that?</p>
+<p>Now, before you start creating necessary things in Azure, my suggestion will be to test this application locally first, see the article, follow the steps, create the DB locally and test it once.  I did it and this is working fine in my local machine.</p>
+<p><amp-img class="alignnone size-full wp-image-419 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/1bc78.png?w=712" alt="1" srcset="https://arindamchat.files.wordpress.com/2017/05/1.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/1.png?w=1024 1024w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="390"></amp-img></p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Understanding the Azure App Service</span></strong></h2>
+<p>Now let’s talk a little about things necessary to publish this application to Azure.  There are different options, we can create our own Virtual Machines, install IIS, .NET framework, SQL server and then install the application code, and this is the approach we are used to. Here you have to control and manage everything by yourself, the application VMs and SQL VMs.</p>
+<p>But we have a better option also available in Azure, that is called Azure Web Apps, here we will not create a VM or install any software but will use the Azure infra to deploy out code. We have to decide how powerful infra we need to Application and Azure VM and have to pay accordingly. We will be using this approach here.</p>
+<p><strong>Azure Web App</strong> has two main components, <strong>App Service Plan</strong> and<strong> Azure App Service</strong>.</p>
+<p>Azure App Service is the application/ code which runs on an App Service Plan. You can think App Service Plan as the selection of hardware on which your App Service i.e. the application code will run.</p>
+<p>You can add your own code and subsequent modifications on an App Service and based on the App Service plan chosen, Azure will decide where the App Service will be deployed and we don’t have to bother about that. This why this is sometimes called as <strong>server less deployment</strong>.</p>
+<p>In Azure it’s very easy to scale up or scale out an App Service plan based on your App Service need, if you need more performance for your App Service you can choose a premium App Service plan at any point of time in future.</p>
+<p>App Service will have the application URL. Below diagram loosely shows the architecture I’m going to use, <u>the blob storage is not used in this demo though</u>.</p>
+<p>Note that other than SQL and Blob, I there is “deployment slot” and Source control. I’ll also describe them in the following articles.</p>
+<h2><amp-img class="alignnone size-full wp-image-420 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/2bc78.png?w=712" alt="2" srcset="https://arindamchat.files.wordpress.com/2017/05/2.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/2.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/2.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/2.png 742w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="510"></amp-img><span class="amp-wp-inline-3018e71240503208f084404f5ee41972"><strong>Create the App Service</strong></span></h2>
+<p>First thing we need is to create the App Service on Azure.  Log in to Azure portal <a href="https://portal.azure.com/">https://portal.azure.com/</a>  using your subscription details. Now click on the App Service icon.</p>
+<p><amp-img class="alignnone size-full wp-image-421 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/3bc78.png?w=712" alt="3" srcset="https://arindamchat.files.wordpress.com/2017/05/3.png 414w, https://arindamchat.files.wordpress.com/2017/05/3.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/3.png?w=300 300w" sizes="(min-width: 414px) 414px, 100vw" width="414" height="397"></amp-img></p>
+<p>When you click on the Add icon, you will see there are various App Service Templates available as below.</p>
+<p><amp-img class="alignnone size-full wp-image-422 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/4bc78.png?w=712" alt="4" srcset="https://arindamchat.files.wordpress.com/2017/05/4.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=135 135w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=269 269w, https://arindamchat.files.wordpress.com/2017/05/4.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/4.png 931w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="793"></amp-img></p>
+<p>Chose a specific App Service, lets choose <strong>Asp.Net Starter Service </strong>for this demo<strong>.</strong></p>
+<p><amp-img class="alignnone size-full wp-image-423 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/5bc78.png?w=712" alt="5" srcset="https://arindamchat.files.wordpress.com/2017/05/5.png 439w, https://arindamchat.files.wordpress.com/2017/05/5.png?w=133 133w, https://arindamchat.files.wordpress.com/2017/05/5.png?w=267 267w" sizes="(min-width: 439px) 439px, 100vw" width="439" height="494"></amp-img></p>
+<p>Fill the App service with desired name; remember that this name has to be unique in the azurewebsites.net. Note that I have chosen a new <strong>Resource group</strong> also here; this is a good idea to create a new resource group and keep everything inside that.</p>
+<p>Notice that The App Service already chose a new <strong>App Service Plan</strong>, this can be used  but we want more control over it and we will create our own App Service plan.</p>
+<p><amp-img class="alignnone size-full wp-image-424 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/6bc78.png?w=712" alt="6" srcset="https://arindamchat.files.wordpress.com/2017/05/6.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=137 137w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=273 273w, https://arindamchat.files.wordpress.com/2017/05/6.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/6.png 969w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="782"></amp-img></p>
+<p>So click on <strong>Create New,</strong> this will open the New App Service Plan blade, give desired name, now we can choose difference pricing plan here, based on the infra you choose you need to pay, for now I will choose Free plan, this will have shared hardware and custom domain names can’t be used, but this will service our purpose for this demo. If you choose a more powerful plan, the processes I’m going to describe below will not change.</p>
+<p>So Select the <strong>Free tier</strong> and click on OK</p>
+<p><amp-img class="alignnone size-full wp-image-425 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/7bc78.png?w=712" alt="7" srcset="https://arindamchat.files.wordpress.com/2017/05/7.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=136 136w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=273 273w, https://arindamchat.files.wordpress.com/2017/05/7.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/7.png 913w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="783"></amp-img></p>
+<p>Now you can see the newly created App Service plan has been selected for our App. Click on <strong>Create</strong>, this will create the new Azure Web App.</p>
+<p><amp-img class="alignnone size-full wp-image-426 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/8bc78.png?w=712" alt="8" srcset="https://arindamchat.files.wordpress.com/2017/05/8.png 425w, https://arindamchat.files.wordpress.com/2017/05/8.png?w=61 61w, https://arindamchat.files.wordpress.com/2017/05/8.png?w=122 122w" sizes="(min-width: 425px) 425px, 100vw" width="425" height="1042"></amp-img></p>
+<p>The process of creating a new App Service will take a bit of time; you can see the progress in the notification area on the top right corner.</p>
+<p><amp-img class="alignnone size-full wp-image-427 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/9bc78.png?w=712" alt="9" srcset="https://arindamchat.files.wordpress.com/2017/05/9.png 440w, https://arindamchat.files.wordpress.com/2017/05/9.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/9.png?w=300 300w" sizes="(min-width: 440px) 440px, 100vw" width="440" height="244"></amp-img></p>
+<p>And when done, you can see the success.</p>
+<p><amp-img class="alignnone size-full wp-image-428 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/10bc78.png?w=712" alt="10" srcset="https://arindamchat.files.wordpress.com/2017/05/10.png 422w, https://arindamchat.files.wordpress.com/2017/05/10.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/10.png?w=300 300w" sizes="(min-width: 422px) 422px, 100vw" width="422" height="224"></amp-img></p>
+<p>Click on the message and this will take you to the details of our newly created App Service, you can see Azure already added some monitoring also which is great for troubleshooting.</p>
+<p><amp-img class="alignnone size-full wp-image-429 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/11bc78.png?w=712" alt="11" srcset="https://arindamchat.files.wordpress.com/2017/05/11.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/11.png?w=1024 1024w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="491"></amp-img></p>
+<p>Note that now we have a URL for out app which is <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a> , if you click on the link you will see a blank website as below. But this shows that our new App Service is up and running.</p>
+<p><amp-img class="alignnone size-full wp-image-430 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/12bc78.png?w=712" alt="12" srcset="https://arindamchat.files.wordpress.com/2017/05/12.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/12.png?w=1024 1024w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="292"></amp-img></p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Use Visual Studio to connect to Azure.</span></strong></h2>
+<p>Since we have the code already in my local Visual Studio, I can use this great tool to connect and then deploy to Azure also.  Go to Visual Studio (note that I’m using Visual Studio 2015) and go to <strong>View </strong><strong>–&gt; Cloud Explorer</strong></p>
+<p><strong> <amp-img class="alignnone size-full wp-image-431 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/13bc78.png?w=712" alt="13" srcset="https://arindamchat.files.wordpress.com/2017/05/13.png 483w, https://arindamchat.files.wordpress.com/2017/05/13.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/13.png?w=300 300w" sizes="(min-width: 483px) 483px, 100vw" width="483" height="299"></amp-img></strong></p>
+<p><strong>Note:</strong> <u>If you don’t see the cloud explorer of even if you see the option makes sure to have the latest version of this , for that go to <strong>Tools</strong></u><strong><u>à Extension and Updates</u></strong><u> and check if the Cloud Explorer for Visual Studio is installed, make sure to check Automatically update. If this is not done, you might get error in next steps.</u></p>
+<p><amp-img class="alignnone size-full wp-image-432 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/14bc78.png?w=712" alt="14" srcset="https://arindamchat.files.wordpress.com/2017/05/14.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/14.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/14.png 942w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="235"></amp-img></p>
+<p>Since I have already connected to my Azure subscription, I can see the connection details here, for you enter Azure subscription details here to connect to Azure.</p>
+<p><strong> <amp-img class="alignnone size-full wp-image-433 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/15bc78.png?w=712" alt="15" srcset="https://arindamchat.files.wordpress.com/2017/05/15.png 502w, https://arindamchat.files.wordpress.com/2017/05/15.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/15.png?w=300 300w" sizes="(min-width: 502px) 502px, 100vw" width="502" height="435"></amp-img></strong></p>
+<p>Once connection is done, you should be able to view the newly created App Service here.</p>
+<p><amp-img class="alignnone size-full wp-image-434 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/16bc78.png?w=712" alt="16" srcset="https://arindamchat.files.wordpress.com/2017/05/16.png 519w, https://arindamchat.files.wordpress.com/2017/05/16.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/16.png?w=300 300w" sizes="(min-width: 519px) 519px, 100vw" width="519" height="417"></amp-img></p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Deploy the code to Azure</span></strong></h2>
+<p>Now that your Visual studio is connected, let’s deploy the code to Azure App Service i.e. AC-ASPMVC. <strong>Right click</strong> on the solution and choose <strong>Publish</strong></p>
+<p><amp-img class="alignnone size-full wp-image-435 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/17bc78.png?w=712" alt="17" srcset="https://arindamchat.files.wordpress.com/2017/05/17.png 569w, https://arindamchat.files.wordpress.com/2017/05/17.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/17.png?w=300 300w" sizes="(min-width: 569px) 569px, 100vw" width="569" height="374"></amp-img></p>
+<p>This will open the Publishing Wizard and you can see there is an option to deploy in Azure App Service. <strong>Click</strong> on that.</p>
+<p><amp-img class="alignnone size-full wp-image-436 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/182da7.png?w=712&amp;h=554" alt="18" width="712" height="554" srcset="https://arindamchat.files.wordpress.com/2017/05/18.png 712w, https://arindamchat.files.wordpress.com/2017/05/18.png?w=150&amp;h=117 150w, https://arindamchat.files.wordpress.com/2017/05/18.png?w=300&amp;h=233 300w" sizes="(min-width: 712px) 712px, 100vw"></amp-img></p>
+<p>Now you can see that our App Service AC-ASPMVC is available, select that and click <strong>OK</strong></p>
+<p><strong>Note: Here you can create a new App Service also to be deployed in the Azure, in that case a new App Service and App Service Plan will be created and then deployment will happen, but this is not needed here as we want to deploy on our existing App Service.</strong></p>
+<p>Now, you can see that it’s trying to connect to the Azure, the User name and password is important thing, but this will be discussed in more details in next article, for now click on<strong> Validate.</strong></p>
+<p><amp-img class="alignnone size-full wp-image-437 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/19bc78.png?w=712" alt="19" srcset="https://arindamchat.files.wordpress.com/2017/05/19.png 711w, https://arindamchat.files.wordpress.com/2017/05/19.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/19.png?w=300 300w" sizes="(min-width: 711px) 711px, 100vw" width="711" height="554"></amp-img></p>
+<p>If validation is successful, click on next, here if your code is using any file service you can configure that here, but the most important thing is the connection sting, you can specify the DB connection string here, since we don’t have the Azure DB yet, we will leave it as is. Click on <strong>Publish</strong></p>
+<p><amp-img class="alignnone size-full wp-image-438 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/20bc78.png?w=712" alt="20" srcset="https://arindamchat.files.wordpress.com/2017/05/20.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/20.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/20.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/20.png 714w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="553"></amp-img></p>
+<p>You can see the build has been started and you can see the output.</p>
+<p><amp-img class="alignnone size-full wp-image-439 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/21bc78.png?w=712" alt="21" srcset="https://arindamchat.files.wordpress.com/2017/05/21.png 586w, https://arindamchat.files.wordpress.com/2017/05/21.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/21.png?w=300 300w" sizes="(min-width: 586px) 586px, 100vw" width="586" height="209"></amp-img></p>
+<p>If deployment is successful, this will open our App Service URL i.e. <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a>  and you can see a big error here.</p>
+<p><amp-img class="alignnone size-full wp-image-440 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/22bc78.png?w=712" alt="22" srcset="https://arindamchat.files.wordpress.com/2017/05/22.png 437w, https://arindamchat.files.wordpress.com/2017/05/22.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/22.png?w=300 300w" sizes="(min-width: 437px) 437px, 100vw" width="437" height="430"></amp-img></p>
+<p>This is fine, as we don’t have the DB configured yet, so we have this error, but the deployment  worked here.</p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Create Azure SQL Database.</span></strong></h2>
+<p>This application is using a database, so let’s create an azure SQL database. Now when we create a database in Azure, along with the database name, a ‘server’ name is also required.  This ‘server’ is not a physical or even a virtual server, this is basically a logical container name which can hold multiple databases, and where the actual databases are stored in Azure is not our concern, because we can use the logical container or logical server name to connect to any of the database it’s holding and this server name can also be used in a connection string.</p>
+<p>So from the Azure menu, click on <strong>SQL Databases</strong>.</p>
+<p><amp-img class="alignnone size-full wp-image-441 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/23bc78.png?w=712" alt="23" srcset="https://arindamchat.files.wordpress.com/2017/05/23.png 397w, https://arindamchat.files.wordpress.com/2017/05/23.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/23.png?w=300 300w" sizes="(min-width: 397px) 397px, 100vw" width="397" height="344"></amp-img></p>
+<p>The application I have downloaded from code project is using the database name as “<strong>GridExampleMVC</strong>”, so I’ll keep the same DB name here also; I’ll not create a new resource group, but will use the existing one. Now you can see that you can either create a blank DB or restore from a backup of create a sample DB. Let’s choose blank DB.</p>
+<p>SQL elastic pool is not required here, as we are just going to use it for demo purpose, though practically other than huge Db, this option is not required as the associated cost is too high.</p>
+<p>Now click on the arrow of Server-Configure required settings. This will let us know the logical server name.</p>
+<p><amp-img class="alignnone size-full wp-image-442 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/24bc78.png?w=712" alt="24" srcset="https://arindamchat.files.wordpress.com/2017/05/24.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/24.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/24.png 956w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="452"></amp-img></p>
+<p>Fill the details, you can choose your desired user ID here, remember this will be SQL Admin login for all your SQL Dbs under this server. There’s no option for windows authentication in Azure DB.</p>
+<p><amp-img class="alignnone size-full wp-image-443 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/25bc78.png?w=712" alt="25" srcset="https://arindamchat.files.wordpress.com/2017/05/25.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/25.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/25.png 769w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="581"></amp-img></p>
+<p>On creation, you can see the server <strong>‘ac-aspmvs-sql’</strong> is now selected. Now click on the Pricing Tier arrow, here you can choose different options, for now select the <strong>Basic</strong></p>
+<p><amp-img class="alignnone size-full wp-image-444 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/26bc78.png?w=712" alt="26" srcset="https://arindamchat.files.wordpress.com/2017/05/26.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/26.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/26.png 823w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="540"></amp-img></p>
+<p>The configuration looks like below, now click on the <strong>Create</strong> button.</p>
+<p><amp-img class="alignnone size-full wp-image-445 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/27bc78.png?w=712" alt="27" srcset="https://arindamchat.files.wordpress.com/2017/05/27.png 290w, https://arindamchat.files.wordpress.com/2017/05/27.png?w=73 73w" sizes="(min-width: 290px) 290px, 100vw" width="290" height="599"></amp-img></p>
+<p>Again this will take some time to be created, you can check in the notification area and also verify that deployment is done.</p>
+<p><amp-img class="alignnone size-full wp-image-446 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/28bc78.png?w=712" alt="28" srcset="https://arindamchat.files.wordpress.com/2017/05/28.png 410w, https://arindamchat.files.wordpress.com/2017/05/28.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/28.png?w=300 300w" sizes="(min-width: 410px) 410px, 100vw" width="410" height="199"></amp-img><amp-img class="alignnone size-full wp-image-447 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/29bc78.png?w=712" alt="29" srcset="https://arindamchat.files.wordpress.com/2017/05/29.png 407w, https://arindamchat.files.wordpress.com/2017/05/29.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/29.png?w=300 300w" sizes="(min-width: 407px) 407px, 100vw" width="407" height="231"></amp-img></p>
+<p>Now go back to the newly created DB details. This looks like below, and the interesting thing is here you can see the DB name and connection details.</p>
+<p><amp-img class="alignnone size-full wp-image-448 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/30bc78.png?w=712" alt="30" srcset="https://arindamchat.files.wordpress.com/2017/05/30.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/30.png?w=1024 1024w, https://arindamchat.files.wordpress.com/2017/05/30.png 1222w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="294"></amp-img></p>
+<p>Click on Show Database Connection String and you can see the connection below.</p>
+<p><amp-img class="alignnone size-full wp-image-449 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/31bc78.png?w=712" alt="31" srcset="https://arindamchat.files.wordpress.com/2017/05/31.png 638w, https://arindamchat.files.wordpress.com/2017/05/31.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/31.png?w=300 300w" sizes="(min-width: 638px) 638px, 100vw" width="638" height="338"></amp-img></p>
+<p>Note that this is not the working connection string; you need to fill the user name and password here. But we will do this latter.</p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Connect to Azure Database via sql management studio.</span></strong></h2>
+<p>Now we need to create the tables and insert some records, we can use <strong>SQL Management Studio to connect to Azure</strong>, but before that we need to modify the firewall rule for the azure database. Azure DB won’t allow connection otherwise. To do that click on the <strong>Set Server Firewall</strong></p>
+<p><amp-img class="alignnone size-full wp-image-450 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/32bc78.png?w=712" alt="32" srcset="https://arindamchat.files.wordpress.com/2017/05/32.png 665w, https://arindamchat.files.wordpress.com/2017/05/32.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/32.png?w=300 300w" sizes="(min-width: 665px) 665px, 100vw" width="665" height="171"></amp-img></p>
+<p>You need to add client IP in the firewall, you can see the client IP already there. Click on the <strong>Add client IP, </strong>this will add the client IP in the rule. Don’t forget to <strong>Save</strong> the change.</p>
+<p><amp-img class="alignnone size-full wp-image-451 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/33bc78.png?w=712" alt="33" srcset="https://arindamchat.files.wordpress.com/2017/05/33.png 578w, https://arindamchat.files.wordpress.com/2017/05/33.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/33.png?w=300 300w" sizes="(min-width: 578px) 578px, 100vw" width="578" height="391"></amp-img></p>
+<p>From the Azure portal we know that the server name is “<strong>ac-aspmvc-sql.database.windows.net</strong>”, so try to connect to that as Server, remember that we created the SQL Admin user id and password beforehand, use that. Now you will have the Azure DB opened.</p>
+<p><amp-img class="alignnone size-full wp-image-452 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/34bc78.png?w=712" alt="34" srcset="https://arindamchat.files.wordpress.com/2017/05/34.png 483w, https://arindamchat.files.wordpress.com/2017/05/34.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/34.png?w=300 300w" sizes="(min-width: 483px) 483px, 100vw" width="483" height="319"></amp-img></p>
+<h2> <strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Connect to Azure Database using azure tool.</span></strong></h2>
+<p>We can also use the Azure portal tool, this is still in preview, but I want to show you the usage, we will upload a SQL script to create a table and insert data. Open the Azure SQL database blade and you can see <strong>tools</strong> on the top ,click on that.</p>
+<p><amp-img class="alignnone size-full wp-image-453 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/35bc78.png?w=712" alt="35" srcset="https://arindamchat.files.wordpress.com/2017/05/35.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/35.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/35.png 918w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="282"></amp-img></p>
+<p>Choose Query Editor</p>
+<p><amp-img class="alignnone size-full wp-image-454 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/36bc78.png?w=712" alt="36" srcset="https://arindamchat.files.wordpress.com/2017/05/36.png 473w, https://arindamchat.files.wordpress.com/2017/05/36.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/36.png?w=300 300w" sizes="(min-width: 473px) 473px, 100vw" width="473" height="256"></amp-img></p>
+<p>It will ask for authentication, use the same SQL Admin user ID and password.</p>
+<p><strong> <amp-img class="alignnone size-full wp-image-455 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/37bc78.png?w=712" alt="37" srcset="https://arindamchat.files.wordpress.com/2017/05/37.png 684w, https://arindamchat.files.wordpress.com/2017/05/37.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/37.png?w=300 300w" sizes="(min-width: 684px) 684px, 100vw" width="684" height="590"></amp-img></strong></p>
+<p>I have already saved the DB related scripts from Code Project; we will now upload this to run.</p>
+<p><amp-img class="alignnone size-full wp-image-456 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/38bc78.png?w=712" alt="38" srcset="https://arindamchat.files.wordpress.com/2017/05/38.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/38.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/38.png 807w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="613"></amp-img></p>
+<p>Click on the<strong> Open Query </strong>and select the .sql script</p>
+<p><amp-img class="alignnone size-full wp-image-457 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/39bc78.png?w=712" alt="39" srcset="https://arindamchat.files.wordpress.com/2017/05/39.png 482w, https://arindamchat.files.wordpress.com/2017/05/39.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/39.png?w=300 300w" sizes="(min-width: 482px) 482px, 100vw" width="482" height="351"></amp-img></p>
+<p>Once this is loaded, click on RUN, the script will start executing and you can see the output that one table has been created and 1000 rows are inserted.</p>
+<p><amp-img class="alignnone size-full wp-image-458 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/40bc78.png?w=712" alt="40" srcset="https://arindamchat.files.wordpress.com/2017/05/40.png 653w, https://arindamchat.files.wordpress.com/2017/05/40.png?w=145 145w, https://arindamchat.files.wordpress.com/2017/05/40.png?w=290 290w" sizes="(min-width: 653px) 653px, 100vw" width="653" height="675"></amp-img></p>
+<p>Let’s check the DB with a small query, this you can type there. The below query will show the 100 records from Azure DB</p>
+<p><strong>Select top 100* from Assets</strong></p>
+<p><amp-img class="alignnone size-full wp-image-459 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/41bc78.png?w=712" alt="41" srcset="https://arindamchat.files.wordpress.com/2017/05/41.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/41.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/41.png 917w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="393"></amp-img></p>
+<p><strong>Ok, so our DB is now ready to be used.</strong></p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Use Connection STRING TO the Application</span></strong></h2>
+<p>So in previous steps we have seen the DB connection string in the portal, let’s copy that, you can see that we need to pass the SQL user name and password. For here I’ll use the admin username i.e. <strong>arindach</strong> and the password, <u>but in practical scenario you should create some other user and this Admin user should not be used with others.</u></p>
+<p><strong><em>Server=tcp:ac-aspmvc-sql.database.windows.net,1433;Initial Catalog=GridExampleMVC; Persist Security Info=False; User ID={<span class="amp-wp-inline-56f42f65bf44ab0aee57f36713c8bf49">your_username</span>}; Password={<span class="amp-wp-inline-56f42f65bf44ab0aee57f36713c8bf49">your_password</span>}; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</em></strong></p>
+<p>Now to add this connection string to Azure, go to the <strong>App Service</strong> and open the details blade of our Application.  You can see there is an <strong>Application settings</strong> option in the left menu, open this and scroll down.  There you can see a section for <strong>Connection Settings; </strong>we need to add the<strong> ‘DefaultConnection’ (</strong>as in the web.config of our application). Make sure to check the <strong>slot settings, </strong>this will ensure that when you publish this configuration will not be overridden by your local connection string.</p>
+<p><amp-img class="alignnone size-full wp-image-460 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/42bc78.png?w=712" alt="42" srcset="https://arindamchat.files.wordpress.com/2017/05/42.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=1421 1421w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/42.png?w=1024 1024w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="267"></amp-img></p>
+<h2><strong><span class="amp-wp-inline-3018e71240503208f084404f5ee41972">Check the application</span></strong></h2>
+<p>Now that we have DB connection string in place and we have a DB with all the records, let’s refresh the web browser with the Azure application URL i.e. <a href="http://ac-aspmvc.azurewebsites.net/">http://ac-aspmvc.azurewebsites.net/</a>  . And you can see that my application is up and running now.</p>
+<p><amp-img class="alignnone size-full wp-image-461 amp-wp-enforced-sizes" src="../../../../../../arindamchat.files.wordpress.com/2017/05/43bc78.png?w=712" alt="43" srcset="https://arindamchat.files.wordpress.com/2017/05/43.png?w=712 712w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=1424 1424w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=150 150w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=300 300w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=768 768w, https://arindamchat.files.wordpress.com/2017/05/43.png?w=1024 1024w" sizes="(min-width: 712px) 712px, 100vw" width="712" height="421"></amp-img></p>
+<p> </p>
+<p> </p>
+<p> </p>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/azure/index.html" rel="category tag">Azure</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/azure/index.html" rel="tag">Azure</a>, <a href="../../../../../tag/mvc/index.html" rel="tag">MVC</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b4e5e.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=401&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b7d28.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDliOWNOcnJMdCxUVE4wbDIyOTA2NUVKSCtkTT11ek89fEQrZ1k%2FZHVCR3JnJUxsZnBjTiZFOVNOLTFaYV1fWU4uZktvaGFTbk1LUVZqQWZ%2BR3JiSS4wZ0paVlhmW2ZQ"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2017/05/15/deploy-asp-net-mvc5-grid-view-application-to-azure-app-service/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:50:30 GMT -->
+</html>

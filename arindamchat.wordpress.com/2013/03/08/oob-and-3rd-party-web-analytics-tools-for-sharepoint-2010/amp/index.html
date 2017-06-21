@@ -1,0 +1,669 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2013/03/08/oob-and-3rd-party-web-analytics-tools-for-sharepoint-2010/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="OOB and 3rd party web analytics tools for SharePoint 2010" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="Built In Web Analytic Reports in SharePoint 2010: In SharePoint 2010, there are set of Web Analytics reports that are available out-of-the-box, which will provide insights into the behavior of user…" />
+<meta property="article:published_time" content="2013-03-08T05:11:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:44:24+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2013/03/0274d-12c6eb.jpg?w=300" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="OOB and 3rd party web analytics tools for SharePoint 2010" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2013/03/b9733-1d209.jpg?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>OOB and 3rd party web analytics tools for SharePoint 2010 &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2013\/03\/08\/oob-and-3rd-party-web-analytics-tools-for-sharepoint-2010\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"OOB and 3rd party web analytics tools for SharePoint 2010","datePublished":"2013-03-08T05:11:00+00:00","dateModified":"2017-05-17T10:44:24+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2013\/03\/b9733-1.jpg","width":624,"height":377}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57{margin-left:.5in;text-indent:-.25in;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc{border-bottom:solid #4F81BD 1pt;border:none;padding:0 0 4pt;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-d6b0de78c4db42e1ab0f24efb8c43f3f{font-size:x-large;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-834a1ac729898218442c820faf8ec159{font-weight:normal;}.amp-wp-inline-c82766d3ec3ee835a7f03bebc9b37533{margin-left:.5in;}.amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8{margin-left:40.5pt;}.amp-wp-inline-5360bd06f2734fecc943eb6381d6cd97{margin-left:45pt;}.amp-wp-inline-e4011106298de62f9593c7f780fde826{margin-left:.25in;}.amp-wp-inline-464958b07e7af23686b8c677a0b505d4{margin-left:.75in;}.amp-wp-inline-c29d8417d8303d537faf908c6e7b4a61{margin-left:31.5pt;text-indent:-9pt;}.amp-wp-inline-d56481cfb1b3cc0f007bf137ee895f7a{background-color:blue;}.amp-wp-inline-2e1c03a099d57a9c1533caa107458117{background-color:white;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">OOB and 3rd party web analytics tools for SharePoint 2010</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2013-03-08T05:11:00+00:00">
+		4 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><!-- [if !mso]&gt;v\:* {behavior:url(#default#VML);} o\:* {behavior:url(#default#VML);} w\:* {behavior:url(#default#VML);} .shape {behavior:url(#default#VML);} &lt;![endif]--><br/><!-- [if gte mso 9]&gt;      &lt;![endif]--><!-- [if gte mso 9]&gt;   Normal  0  false        false  false  false    EN-US  X-NONE  X-NONE                                                                    &lt;![endif]--><!-- [if gte mso 9]&gt;                                                                                                                                                                                                                                                                                    &lt;![endif]--><!-- [if gte mso 10]&gt; /* Style Definitions */  table.MsoNormalTable 	{mso-style-name:"Table Normal"; 	mso-tstyle-rowband-size:0; 	mso-tstyle-colband-size:0; 	mso-style-noshow:yes; 	mso-style-priority:99; 	mso-style-parent:""; 	mso-padding-alt:0in 5.4pt 0in 5.4pt; 	mso-para-margin-top:0in; 	mso-para-margin-right:0in; 	mso-para-margin-bottom:10.0pt; 	mso-para-margin-left:0in; 	line-height:115%; 	mso-pagination:widow-orphan; 	font-size:11.0pt; 	font-family:"Calibri","sans-serif"; 	mso-ascii-font-family:Calibri; 	mso-ascii-theme-font:minor-latin; 	mso-hansi-font-family:Calibri; 	mso-hansi-theme-font:minor-latin;} &lt;![endif]--><div class="amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc">
+<h2 class="MsoTitle amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><span class="amp-wp-inline-d56481cfb1b3cc0f007bf137ee895f7a"><span class="amp-wp-inline-d6b0de78c4db42e1ab0f24efb8c43f3f"><b><span class="amp-wp-inline-2e1c03a099d57a9c1533caa107458117"><u><i><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">Built In Web Analytic Reports in SharePoint 2010:</span></i></u></span></b></span></span></h2>
+</div>
+<h5>In SharePoint 2010, there are set of Web Analytics reports that are available out-of-the-box, which will provide insights into the behavior of users and other aspects of a SharePoint sites.  All these reports can be downloaded to excel filtered on the fly and can be scheduled to deliver.</h5>
+<h5>There are three categories of reports that you will find as described below:</h5>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498974">Traffic Reports</a></h1>
+<h5>Traffic reports capture the user behavior information related to total clicks, frequent users, popular pages, and information about navigation to and from the current SharePoint component. These reports can be sub divided further as below.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498975">Trend Reports:</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Number of Page Views:</b> Total number of page views each day.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Number of Daily Unique Visitors:</b> Total number of unique visitors each day. SharePoint authenticated users and anonymous users (using IP address) are counted as visitors.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Number of Referrers:</b> Total number of unique URL’s external to the current entity (parent entity is treated as external as well), from where the users navigated to the current entity.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498976">Rank Reports:</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Pages:</b> Most viewed pages in the current entity.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Visitors:</b> Most frequent visitors of the current entity.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Referrers:</b> Top URL’s external to the current entity from where users navigated to the current entity.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Destinations:</b> Similar to Referrers, these are the top external URL’s that the user visited from the current entity.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Browsers:</b> Top browsers being used to visit the current entity.</h5>
+<div class="MsoListParagraph"></div>
+<h3>Sample reports for you reference is given below:</h3>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/b9733-1.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/b9733-1c46c.jpg?w=400&amp;h=241" width="400" height="241" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"></div>
+<h5>Figure:  Example of a Trend Report showing Number of Page Views for each day for a default period of 30 days.</h5>
+<div class="MsoNormal"><b>Note: There are various report types are available in left Navigation</b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/c9d6b-2.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/c9d6b-2c46c.jpg?w=400&amp;h=241" width="400" height="241" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"></div>
+<h5>Figure:  Example of a Rank Report showing the Top Pages sorted on the Number of Page Views for a default period of 30 days.</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/2935b-3.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/2935b-3f457.jpg?w=400&amp;h=200" width="400" height="200" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-5360bd06f2734fecc943eb6381d6cd97"></div>
+<h5>Figure: Various filter criteria.</h5>
+<div class="MsoNormal"></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498977">Search Reports</a></h1>
+<h5>SharePoint have very powerful search functionality.  It also provides various search related reports which helps Admins to fine tune various search settings and also provided a good insight of what users are looking for to the Content Editors. Below are the report categories.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498978">Trend Reports</a></h3>
+<h5 class="amp-wp-inline-c29d8417d8303d537faf908c6e7b4a61"><span lang="ES-MX" class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·   </span><b>No of Queries:</b> Total number of queries each day. <span lang="ES-MX">Site specific queries, total queries etc.</span></h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498979">Rank Reports</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Queries:</b> Most issued queries per day.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Failed Queries:</b> Most issued queries for which either there were no results or the user did not click on any results.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>No Result Queries:</b> Most issued queries for which no results were returned.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498980">Other Reports</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Best Bet Suggestion Report</b>: Recommends URLs as most likely results for particular search queries based on analysis of usage patterns. The site administrators can accept or reject these suggestions. If they accept, the corresponding query-URL pair is added to the search keywords list.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Best Bet Usage:</b> Shows how Best Bet suggestions are doing over time. For every Best Bet query issued, the report shows the percentage of clicks on the Best Bet URL compared to other URLs.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Best Bet Action History Report:</b> Tracks the actions performed by the site administrator on the ‘Best Bet Suggestion’ Report.</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/f11e5-4.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/f11e5-4a2a6.jpg?w=400&amp;h=262" width="400" height="262" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-c82766d3ec3ee835a7f03bebc9b37533"></div>
+<h5>Figure: Number of Queries report</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/906ed-5.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/906ed-5e15b.jpg?w=400&amp;h=211" width="400" height="211" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-464958b07e7af23686b8c677a0b505d4"></div>
+<h5>Figure: Top Queries Report</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/f004b-6.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/f004b-6e754.jpg?w=400&amp;h=248" width="400" height="248" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-e4011106298de62f9593c7f780fde826"></div>
+<h5></h5>
+<h5>Figure: No Results Queries report</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/62e84-7.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/62e84-741f3.png?w=400&amp;h=292" width="400" height="292" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-5360bd06f2734fecc943eb6381d6cd97"></div>
+<h5></h5>
+<h5>Figure: Overall query latency report</h5>
+<div class="MsoNormal"></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498981">Inventory Reports</a></h1>
+<h5>Inventory reports are targeted to help the site administrators in managing the site by keeping track of the site structure and storage and version issues.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498982">Trend Reports</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Number of Site Collections:</b> Total number of site collections for each Web Service Application for each day.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Storage Usage:</b> Total storage used in Megabyte (MB) for a site collection and the ‘Maximum Storage Allowed’ in MB for each day.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Number of Sites:</b> Total number of sites within each Site Collection for each day.</h5>
+<h3></h3>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498983">Rank Reports</a></h3>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Site Product Versions:</b> The ‘Site Product Version’ sorted in the order of ‘Number of Sites’ or ‘Percentage of Overall’ sites using the corresponding version for this site collection.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><b>Top Site Languages:</b> The ‘Site Product Language’ sorted in the order of ‘Number of Sites’ or ‘Percentage of Overall’ sites using that language for this site collection.</h5>
+<h1 class="amp-wp-inline-2a24c757f5ca7a50fada5a22c52ba6d8"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498984"> </a></h1>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/35a03-8.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/35a03-85ad2.jpg?w=400&amp;h=307" width="400" height="307" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="MsoNormal amp-wp-inline-c82766d3ec3ee835a7f03bebc9b37533"></div>
+<div class="MsoNormal amp-wp-inline-c82766d3ec3ee835a7f03bebc9b37533"></div>
+<div class="MsoNormal amp-wp-inline-c82766d3ec3ee835a7f03bebc9b37533">Figure: Site collection Storage Report</div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498985">Custom Web Analytics Reports</a></h1>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498986">Customize OOB Reports:</a></h3>
+<h5>The out-of-the-box reports are useful to get a general understanding of what is happening on a SharePoint Portal.  However to get a deeper level of analysis, or to simply one can create own reports.  To get started, click on the Customize Report button under the Analyze tab in the Ribbon.  Clicking this button will export the data contained in this report to Excel.</h5>
+<h3><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498987">Custom Development:</a></h3>
+<h5>SharePoint exposes various Web Analytics libraries, using that any tailor made reports can be created with Visual Studio and .NET.</h5>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498988">Web Analytics Workflows</a></h1>
+<h5>Web Analytics Workflows is a powerful new feature set that enables you to get reports sent out either on a schedule or when specific conditions are met.  For example, you can set them up to receive an email every time the total number of pages views drop by 80% week over week.</h5>
+<div class="MsoNormal"></div>
+<h2 class="MsoTitle amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e"><span class="amp-wp-inline-d6b0de78c4db42e1ab0f24efb8c43f3f"><u><i>G<span class="amp-wp-inline-834a1ac729898218442c820faf8ec159">oogle Analytic and SharePoint 2010</span></i></u></span></span></h2>
+<div class="amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc"></div>
+<h5>Google analytics tool can be used on SharePoint. Though most of the  time SharePoint 2010 in built web analytics tool can provide sufficient reports to customers, but for some scenarios e.g. if you have a hosted SharePoint with no access to central admin, one can opt for this.</h5>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498989">How to Use:</a></h1>
+<h2><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498990">Using Google Code:</a></h2>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Register to Google Analytics</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/d09bc-9.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/d09bc-9ea45.jpg?w=400&amp;h=120" width="400" height="120" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"> <span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>You will receive a code block to paste in any web page.</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/63fc1-10.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/63fc1-10b636.jpg?w=400&amp;h=176" width="400" height="176" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Modify the master page of the SharePoint site collection for which you want the report. Place the code provided by Google in the page.</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/0d3a5-11.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/0d3a5-11e074.jpg?w=400&amp;h=162" width="400" height="162" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"> <span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Once this is inserted and saved you will need to go back to the Google portal and recheck the tracking code. Assuming all steps have gone successfully you should see Receiving Data and a tick next to your site name.</h5>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2013/03/0274d-12.jpg" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2013/03/0274d-12254b.jpg?w=400&amp;h=142" width="400" height="142" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"></h5>
+<h2><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498991">Codeplex:</a></h2>
+<h5>Codeplex provides a free toll for Google connector, you can find details here: <a href="http://spgoogleanalytics.codeplex.com/">SPGoogleAnalytics – Google Analytics connector for SharePoint 2010</a></h5>
+<div class="MsoNormal"></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498992">Points to Ponder:</a></h1>
+<h5>Goggle analytics tool provides good reports, but before you propose this to client think about various points.</h5>
+<h5>Majority of clients uses SharePoint as an intranet portal, for document management or content management systems. Security is also a big concern in most of the cases. So client may not agree to use Google as information from the intranet portal will be passed to Google. There also may be some legal barriers too. Another point is your client’s corporate network should allow Google Analytics tool via internet.</h5>
+<h2 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e"><span class="amp-wp-inline-d6b0de78c4db42e1ab0f24efb8c43f3f"><u><i>3rd Party Tools for SharePoint <span class="amp-wp-inline-d6b0de78c4db42e1ab0f24efb8c43f3f">analytic</span></i></u></span></span></h2>
+<div class="amp-wp-inline-4f3487e3be2b9432c89efe9bd2389dfc"></div>
+<h5>In the market there are lots of web analytics tool available, some are specific to SharePoint some are general for any web site. Here some of the good tools are summarized. Websites are also given for further exploration.</h5>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498993">CardioLog Analytics:</a></h1>
+<h5>CardioLog Analytics is designed for SharePoint (versions 2013, 2010, 2007 and 2003) and SharePoint Online. It enables to improve the usability of your intranet, drive portal collaboration, boost your ROI and enhance the overall productivity of your business. Features are:</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498994"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><span class="Heading3Char">Built for SharePoint:</span></a>  CardioLog Analytics is designed specifically for use with Microsoft SharePoint sites – including intranet portals, extranet and websites.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498995"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><span class="Heading3Char">On-premises and on-demand solution:</span></a> Can be used for on premise and for SharePoint Online taking advantage of cloud-based resources.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498996"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><span class="Heading3Char">Custom dashboards:</span></a> User-friendly dashboards display summaries of reports in the form of widgets on a single page, allowing user to track various metrics at once</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498997"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><span class="Heading3Char">Content drilldown:</span></a> Drill deep into a specific section or sub-section of a site, even down to the level of single pages and documents, for a richly detailed analysis.</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498998"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span><span class="Heading3Char">Integration with Active Directory and SharePoint user profiles:</span></a> CardioLog Analytics automatically imports information on the employees and partners who use intranet portal from the data stored in Active Directory and SharePoint user profiles. This enables you to easily filter and control the scope of your reports, and to create visitor segments that can be used to deliver personalized content.</h5>
+<h2><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350498999">Further Reading:</a></h2>
+<div class="MsoNormal"><a href="http://www.intlock.com/intlocksite/productsandservices/cardiolog/cardiolog.asp">http://www.intlock.com/intlocksite/productsandservices/cardiolog/cardiolog.asp</a></div>
+<div class="MsoNormal"><a href="http://www.intlock.com/intlocksite/productsandservices/cardiolog/cardiolog-vs-sharepoint-reports.asp">http://www.intlock.com/intlocksite/productsandservices/cardiolog/cardiolog-vs-sharepoint-reports.asp</a></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499000">Nintex Analytics 2010</a></h1>
+<h5>Nintex Analytics 2010 reports how your organization uses SharePoint 2010, providing valuable insight into content, collaboration and performance.</h5>
+<h5><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499001"><span class="Heading3Char">Reports for:</span></a><br/>
+• Content<br/>
+• Users and activity<br/>
+• System Performance</h5>
+<h5><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499002"><span class="Heading3Char">Report Methods:</span></a><br/>
+• On demand<br/>
+• Scheduled<br/>
+• via email Subscription</h5>
+<h5><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499003"><span class="Heading3Char">The ability to easily customize and configure:</span></a><br/>
+• Reports and webparts<br/>
+• Access to reports and data<br/>
+• Advanced reports using Excel</h5>
+<h2><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499004">Further Reading: </a><a href="https://www.nintex.com/en-US/Products/Pages/NintexAnalytics2010.aspx">https://www.nintex.com/en-US/Products/Pages/NintexAnalytics2010.aspx</a></h2>
+<div class="MsoNormal"></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499005">DocAve Report Center</a></h1>
+<h5>DocAve Report Center for Microsoft SharePoint presents administrators, business stakeholders, and content owners a comprehensive understanding of their SharePoint platform or site’s usage, topology, performance, and storage trends while generating customizable reports and alerts. These are the tools administrators need to obtain the knowledge vital for delivering optimal platform performance and successful strategic planning.</h5>
+<h5>DocAve Report Center simplifies administrative and management procedures to enables more proactive and intelligent decisions by:</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Reporting on SharePoint sites, users, storage, and activity in real-time or on a scheduled basis</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Producing actionable reports on SharePoint users, security, and content</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Enabling administrators to configure customizable, proactive alerts to be notified immediately if activity, storage, or network usage thresholds are met</h5>
+<h5 class="amp-wp-inline-7f5c37e819d5de45deabbb56e6a78f57"><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·         </span>Monitoring access to, and usage of, SharePoint and its content, delivering vital compliance intelligence based on enterprise governance policies</h5>
+<h2><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499006">Further Reading: </a><a href="http://www.avepoint.com/sharepoint-reporting-docave/">http://www.avepoint.com/sharepoint-reporting-docave/</a></h2>
+<div class="MsoNormal"></div>
+<h1><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499007">Webtrends Analytics for Microsoft SharePoint 2010</a></h1>
+<h5>Webtrends for SharePoint 2010 is developed as a unique data collection process for SharePoint 2010 that ensures that the right data is captured, enabling comprehensive reporting with little effort, including SharePoint-specific reporting on web parts, authenticated users, onsite search, breadcrumbs, and more.</h5>
+<h5>With the Webtrends Analytic s for SharePoint 2010 integration offering, organizations will be able to:</h5>
+<h5>• Effectively understand SharePoint site usage</h5>
+<h5>• Pinpoint areas for optimization, from system navigation and usability to content effectiveness and onsite search behavior</h5>
+<h5>• Facilitate collaboration and optimize communications.</h5>
+<div class="MsoNormal"></div>
+<h4 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"><a href="http://www.blogger.com/blogger.g?blogID=5815347674875583214" name="_Toc350499008">Further Reading: </a></h4>
+<h2 class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142"> <span class="MsoHyperlink"><a href="http://sharepoint.webtrends.com/pdf/Solution Brief - SharePoint.pdf" rel="nofollow">http://sharepoint.webtrends.com/pdf/Solution%20Brief%20-%20SharePoint.pdf</a></span></h2>
+<div class="MsoNormal"><b>Thanking Note: This <a href="http://blogs.msdn.com/b/ecm/archive/2010/03/21/introducing-web-analytics-in-sharepoint-2010.aspx" target="_blank" rel="noopener noreferrer">blog </a>helped me to summarize a few things. Thanks to </b><span class="profile-usercard-hover"><b><span class="user-name"><a class="internal-link view-user-profile" href="http://blogs.msdn.com/30794/ProfileUrlRedirect.ashx">Ryan Duguid</a></span></b></span></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a>, <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/sharepoint/index.html" rel="tag">SharePoint</a>, <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/b9c5a.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=27&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/b8e4a.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDlibTJdaVt3UHhCbXwyejg2b2ZycFBPUF15LWhhQ242X1p2RWFkVUg5cVthZmZ5dy5QZENjby1LN2xCRlYmLlhPd0dEcjU3LnY%2FOWlQfjZrbDQxfGEyV3c2RFUvbH4w"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2013/03/08/oob-and-3rd-party-web-analytics-tools-for-sharepoint-2010/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:41 GMT -->
+</html>

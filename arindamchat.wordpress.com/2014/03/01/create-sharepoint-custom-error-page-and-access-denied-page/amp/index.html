@@ -1,0 +1,680 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/03/01/create-sharepoint-custom-error-page-and-access-denied-page/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Create SharePoint Custom Error Page and Access Denied Page" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="I want to show here how easily you can set a custom error page and custom access denied page in your SharePoint site. Approach 1   In the first approach I’m showing how you can just use the OOB err…" />
+<meta property="article:published_time" content="2014-03-01T15:26:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:51:21+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2014/03/addca-444.gif" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="Create SharePoint Custom Error Page and Access Denied Page" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2014/03/08ade-222d209.gif?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>Create SharePoint Custom Error Page and Access Denied Page &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-anim" src="../../../../../../cdn.ampproject.org/v0/amp-anim-0.1.js" async></script>
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2014\/03\/01\/create-sharepoint-custom-error-page-and-access-denied-page\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"Create SharePoint Custom Error Page and Access Denied Page","datePublished":"2014-03-01T15:26:00+00:00","dateModified":"2017-05-17T10:51:21+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2014\/03\/08ade-222.gif","width":224,"height":149}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-1f5a7f2a621c1961d12f2e45f7d47705{font-size:12pt;line-height:115%;}.amp-wp-inline-05a3de982a6da7902bb154558fc13443{font-size:16pt;line-height:115%;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c{color:blue;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7{font-size:14pt;line-height:115%;}.amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69{font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-18b437614bed45025c4c295b9ac5faad{color:#a31515;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6{color:#2b91af;}.amp-wp-inline-b6b17766f6beeb75d23b3ebd1ffee9f1{background:yellow;}.amp-wp-inline-734041f39ba2e53841a6adf659c040e6{background:yellow;color:#2b91af;}.amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125{color:maroon;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-86384b0e20ac09afa0084aec2224fdda{color:red;}.amp-wp-inline-21507e7500323d7b431dffade0db2874{text-indent:-.25in;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979{font-family:&#039;font-size:7pt;}.amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681{color:maroon;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">Create SharePoint Custom Error Page and Access Denied Page</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2014-03-01T15:26:00+00:00">
+		3 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="MsoNormal">I want to show here how easily you can set a custom error page and custom access denied page in your SharePoint site.</div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443">Approach 1</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443"> </span></b></div>
+<div class="MsoNormal">In the first approach I’m showing how you can just use the OOB error page and OOB access denied page in your application with small change.</div>
+<div class="MsoNormal">Here I assume that you have a SharePoint Project to deploy your custom pages to 14 hive. Follow below steps</div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Create a new SharePoint project</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Add a “SharePoint Mapped” folder for Layouts (see below)</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/03/08ade-222.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/03/08ade-22254d6.gif?w=320&amp;h=212" width="320" height="212" sizes="(min-width: 320px) 320px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+<div></div>
+<p> </p>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Then copy the OOB error page and access denied page and add to your solution from C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\LAYOUTS</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Rename then as CustomError.aspx and CustomAccessDenied.aspx.</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/03/0e677-333.png" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-img src="../../../../../../arindamchat.files.wordpress.com/2014/03/0e677-3339c40.png?w=400&amp;h=105" width="400" height="105" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-img></a></div>
+<p> </p>
+<div class="MsoNormal">You can do very small amount of changes here like below</div>
+<div class="MsoNormal">For custom error page you make some changes here, be careful not to remove any control:</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">ContentTemplate</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">SharePoint</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">UIVersionedContent</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">         <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">h2</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">SharePoint</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">FormattedString</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">id</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”LabelMessage”</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">EncodeMethod</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”HtmlEncodeAllowSimpleTextFormatting”</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                     <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">asp</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">HyperLink</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">id</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”LinkContainedInMessage”</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">SharePoint</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">FormattedString</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">h2</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">p</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">       <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">br</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">               <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">asp</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">Label</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”RequestGuidText”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">Runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">p</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">p</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">               <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">asp</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">Label</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”DateTimeText”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">Runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">br</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">h3</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span>Please Contact support<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">h3</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">p</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">SharePoint</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">UIVersionedContent</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">UIVersion</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”3″</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">ContentTemplate</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">       <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">td</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">       <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">tr</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">table</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">ContentTemplate</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">SharePoint</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">UIVersionedContent</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">For Access Denied Page:</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ContentPlaceHolderId</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PlaceHolderMain”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">h2</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">Access Denied<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">h2</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">br</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>Advantage:</b></div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->You don’t need any coding, the page is ready to use.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->The page will have the same look and feel as other pages on your site as per master page set. So you can stop the nasty white error page with co-relation ID.</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Most importantly you can still show the co-relation ID in the error page, this will be immensely helpful for support guys.</div>
+<div class="MsoNormal"><b>Disadvantage:</b></div>
+<div class="MsoNormal">Since no major coding is possible (you can do some coding using script tag) since there is no code behind you can’t do much customization</div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443"> </span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443">Approach 2</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443"> </span></b></div>
+<div class="MsoNormal">Here I’ll show how you can create a more specific custom error page and show.</div>
+<div class="MsoNormal">In the way you create the SharePoint project above, add an “Application page” to the Layouts folder of you project.</div>
+<div class="MsoNormal">If not already added, add below in the HTML page</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PageHead”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ContentPlaceHolderID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PlaceHolderAdditionalPageHead”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">style</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">type</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”text/css”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">#s4-leftpanel</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> {<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">display</span>:<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">none</span>;}</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">#s4-leftpanel-content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> {<span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">display</span>:<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">none</span>;}</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">style</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”Main”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ContentPlaceHolderID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PlaceHolderMain”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Label</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”lblError”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">/&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PageTitle”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ContentPlaceHolderID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PlaceHolderPageTitle”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">My Error Page Title</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PageTitleInTitleArea”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ContentPlaceHolderID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”PlaceHolderPageTitleInTitleArea”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">My Error Page details</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">asp</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">:</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">Content</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal"><b>In the page load you add below: </b>I have highlighted the important section, you can improvise now<b></b></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">protected</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> Page_Load(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">object</span> sender, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">EventArgs</span>e)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">StringBuilder</span> sb = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">StringBuilder</span>();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            sb.Append(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">”
+<p></p></span></span></span>
+<h2>Error occured</h2>
+<p>”</p>
+<p><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">);</span></p></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-734041f39ba2e53841a6adf659c040e6">Exception</span><span class="amp-wp-inline-b6b17766f6beeb75d23b3ebd1ffee9f1">[] errors = Context.AllErrors;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">for</span> (<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">int</span> i = 0; i &lt; errors.Length; i++)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Exception</span> err = errors[i];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">ExceptionHandler</span>().LogException(err,<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“My Portal”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                sb.Append(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">”<br/>
+“</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                sb.Append(err.Message);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                sb.Append(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">”
+<p><b>Stack:</b><br/>
+“</p></span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                sb.Append(err.StackTrace);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (err.InnerException != <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">null</span> &amp;&amp; err.InnerException.Message != err.Message)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">                    sb.Append(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">”
+<p>“</p></span>+ err.InnerException.Message);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            sb.Append(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">”
+<p>Please Contact Support”</p></span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">            lblError.Text = sb.ToString();        </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">        }</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>Advantage:</b></div>
+<div class="MsoNormal">Any customization you might need can be done here.</div>
+<div class="MsoNormal"><b>Disadvantage</b></div>
+<div class="MsoNormal">Co-relation ID can’t be shown in the page when any error occurs.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Deployment and activation</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7"> </span></b></div>
+<div class="MsoNormal">Since the pages are added to Layouts folder they will be deployed when you deploy the WSP. But you need to override the OOB custom error page and access denied page setting.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>PowerShell:</b></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal">You can use PowerShell, this is the easy way of doing and suitable if you are deploying your code through PowerShell in Production environments.</div>
+<div class="MsoNormal">Use below PowerShell</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">Set-SPCustomLayoutsPage -Identity Error -RelativePath /_layouts/YourWeb/CustomError.aspx -WebApplication  $portalUrl</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">Set-SPCustomLayoutsPage -Identity AccessDenied -RelativePath /_layouts/YourWeb/CustomAccessDenied.aspx -WebApplication  $portalUrl</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>Feature:</b></div>
+<div class="MsoNormal"><b> </b></div>
+<div class="MsoNormal">You can also use feature to set this as below</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">public override void FeatureActivated(SPFeatureReceiverProperties properties)</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">{</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    stringCustomErrorPage = “/_layouts/CustomError.aspx”;</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    SPWebApplication webApp = (SPWebApplication)properties.Feature.Parent;</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    if(!webApp.UpdateMappedPage(SPWebApplication.SPCustomPage.Error, CustomErrorPage))</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    {</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">        throw newSystem.ApplicationException(“Cannot replace the current error page.”);</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    }</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    webApp.Update(true);</div>
+<div class="MsoNormal">}</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">public override void FeatureDeactivating(SPFeatureReceiverProperties properties)</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">{</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    if(!webApp.UpdateMappedPage(SPWebApplication.SPCustomPage.Error, null))</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    {</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">        throw newSystem.ApplicationException(“Cannot replace the current error page.”);</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    }</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76">    webApp.Update(true);</div>
+<div class="MsoNormal">}</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><u>Check below URL for custom error page Enums</u></div>
+<div class="MsoNormal"><a href="http://msdn.microsoft.com/en-us/library/microsoft.sharepoint.administration.spwebapplication.spcustompage.aspx">http://msdn.microsoft.com/en-us/library/microsoft.sharepoint.administration.spwebapplication.spcustompage.aspx</a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-05a3de982a6da7902bb154558fc13443">Output</span></b></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-1f5a7f2a621c1961d12f2e45f7d47705">Before:</span></b></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/03/d1ea8-555.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/03/d1ea8-555d9d2.gif?w=400&amp;h=196" width="400" height="196" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-1f5a7f2a621c1961d12f2e45f7d47705">After</span></b></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/03/addca-444.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/03/addca-444832e.gif?w=400&amp;h=180" width="400" height="180" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a>, <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#comments">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/ba9ed.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=6&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/beb39.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDliOS05dU5SYmpFZ0s5bzEyZGhQSG1dSGUmZWZlVS5pWHB%2BTCxyNEcydmtUMkNQb2YsaTZdOUlPVmJMLnk4P3B%2BPVVVLGFTcXBzSl1hLUc9YWUsVDk2Z3NBQXNjcEQ%3D"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/03/01/create-sharepoint-custom-error-page-and-access-denied-page/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:36 GMT -->
+</html>

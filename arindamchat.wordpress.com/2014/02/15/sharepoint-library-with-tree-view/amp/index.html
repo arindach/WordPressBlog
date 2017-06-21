@@ -1,0 +1,622 @@
+<!doctype html>
+<html amp lang="en">
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SharePoint Library with Tree View" />
+<meta property="og:url" content="../index.html" />
+<meta property="og:description" content="Recently I was working in a project where the requirement was to show a tree view structure along with a SharePoint 2010 document library. Let’s describe the actual requirements: ·         In this …" />
+<meta property="article:published_time" content="2014-02-15T14:14:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T10:50:41+00:00" />
+<meta property="og:site_name" content="Arindam&#039;s Blog" />
+<meta property="og:image" content="../../../../../../arindamchat.files.wordpress.com/2014/02/f44c3-lib.gif" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:site" content="@wordpressdotcom" />
+<meta name="twitter:text:title" content="SharePoint Library with Tree View" />
+<meta name="twitter:image" content="../../../../../../arindamchat.files.wordpress.com/2014/02/7fd98-111d209.gif?w=240" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:app_id" content="249643311490" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+	<title>SharePoint Library with Tree View &#8211; Arindam&#039;s Blog</title>
+		<link rel="canonical" href="../index.html" />
+			<script custom-element="amp-anim" src="../../../../../../cdn.ampproject.org/v0/amp-anim-0.1.js" async></script>
+			<script custom-element="amp-ad" src="../../../../../../cdn.ampproject.org/v0/amp-ad-0.1.js" async></script>
+		<script src="../../../../../../cdn.ampproject.org/v0.js" async></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+		<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+		<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"BlogPosting","mainEntityOfPage":"https:\/\/arindamchat.wordpress.com\/2014\/02\/15\/sharepoint-library-with-tree-view\/","publisher":{"@type":"Organization","name":"Arindam&#039;s Blog","logo":{"@type":"ImageObject","url":"https:\/\/secure.gravatar.com\/blavatar\/6fec2d116f8d27e63ee3e0e9473feaa7?s=60&d=https%3A%2F%2Fs2.wp.com%2Fi%2Ffavicons%2Fapple-touch-icon-60x60.png","width":60,"height":60}},"headline":"SharePoint Library with Tree View","datePublished":"2014-02-15T14:14:00+00:00","dateModified":"2017-05-17T10:50:41+00:00","author":{"@type":"Person","name":"Arindam C"},"image":{"@type":"ImageObject","url":"https:\/\/arindamchat.files.wordpress.com\/2014\/02\/7fd98-111.gif","width":538,"height":339}}</script>
+		<style amp-custom>
+		/* Generic WP styling */
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.amp-wp-enforced-sizes {
+	/** Our sizes fallback is 100vw, and we have a padding on the container; the max-width here prevents the element from overflowing. **/
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.amp-wp-unknown-size img {
+	/** Worst case scenario when we can't figure out dimensions for an image. **/
+	/** Force the image into a box of fixed dimensions and use object-fit to scale. **/
+	object-fit: contain;
+}
+
+/* Template Styles */
+
+.amp-wp-content,
+.amp-wp-title-bar div {
+		margin: 0 auto;
+	max-width: 712px;
+	}
+
+html {
+	background: #0a89c0;
+}
+
+body {
+	background: #fff;
+	color: #353535;
+	font-family: 'Merriweather', 'Times New Roman', Times, Serif;
+	font-weight: 300;
+	line-height: 1.75em;
+}
+
+p,
+ol,
+ul,
+figure {
+	margin: 0 0 1em;
+	padding: 0;
+}
+
+a,
+a:visited {
+	color: #0a89c0;
+}
+
+a:hover,
+a:active,
+a:focus {
+	color: #353535;
+}
+
+/* Quotes */
+
+blockquote {
+	color: #353535;
+	background: rgba(127,127,127,.125);
+	border-left: 2px solid #0a89c0;
+	margin: 8px 0 24px 0;
+	padding: 16px;
+}
+
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+/* UI Fonts */
+
+.amp-wp-meta,
+.amp-wp-header div,
+.amp-wp-title,
+.wp-caption-text,
+.amp-wp-tax-category,
+.amp-wp-tax-tag,
+.amp-wp-comments-link,
+.amp-wp-footer p,
+.back-to-top {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+
+.amp-wp-header {
+	background-color: #0a89c0;
+}
+
+.amp-wp-header div {
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: .875em 16px;
+	position: relative;
+}
+
+.amp-wp-header a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Site Icon */
+
+.amp-wp-header .amp-wp-site-icon {
+	/** site icon is 32px **/
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	position: absolute;
+	right: 18px;
+	top: 10px;
+}
+
+/* Article */
+
+.amp-wp-article {
+	color: #353535;
+	font-weight: 400;
+	margin: 1.5em auto;
+	max-width: 840px;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Article Header */
+
+.amp-wp-article-header {
+	align-items: center;
+	align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 1.5em 16px 1.5em;
+}
+
+.amp-wp-title {
+	color: #353535;
+	display: block;
+	flex: 1 0 100%;
+	font-weight: 900;
+	margin: 0 0 .625em;
+	width: 100%;
+}
+
+/* Article Meta */
+
+.amp-wp-meta {
+	color: #696969;
+	display: inline-block;
+	flex: 2 1 50%;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+.amp-wp-article-header .amp-wp-meta:last-of-type {
+	text-align: right;
+}
+
+.amp-wp-article-header .amp-wp-meta:first-of-type {
+	text-align: left;
+}
+
+.amp-wp-byline amp-img,
+.amp-wp-byline .amp-wp-author {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.amp-wp-byline amp-img {
+	border: 1px solid #0a89c0;
+	border-radius: 50%;
+	position: relative;
+	margin-right: 6px;
+}
+
+.amp-wp-posted-on {
+	text-align: right;
+}
+
+/* Featured image */
+
+.amp-wp-article-featured-image {
+	margin: 0 0 1em;
+}
+.amp-wp-article-featured-image amp-img {
+	margin: 0 auto;
+}
+.amp-wp-article-featured-image.wp-caption .wp-caption-text {
+	margin: 0 18px;
+}
+
+/* Article Content */
+
+.amp-wp-article-content {
+	margin: 0 16px;
+}
+
+.amp-wp-article-content ul,
+.amp-wp-article-content ol {
+	margin-left: 1em;
+}
+
+.amp-wp-article-content amp-img {
+	margin: 0 auto;
+}
+
+.amp-wp-article-content amp-img.alignright {
+	margin: 0 0 1em 16px;
+}
+
+.amp-wp-article-content amp-img.alignleft {
+	margin: 0 16px 1em 0;
+}
+
+/* Captions */
+
+.wp-caption {
+	padding: 0;
+}
+
+.wp-caption.alignleft {
+	margin-right: 16px;
+}
+
+.wp-caption.alignright {
+	margin-left: 16px;
+}
+
+.wp-caption .wp-caption-text {
+	border-bottom: 1px solid #c2c2c2;
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: .66em 10px .75em;
+}
+
+/* AMP Media */
+
+amp-carousel {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+amp-iframe,
+amp-youtube,
+amp-instagram,
+amp-vine {
+	background: #c2c2c2;
+	margin: 0 -16px 1.5em;
+}
+
+.amp-wp-article-content amp-carousel amp-img {
+	border: none;
+}
+
+amp-carousel > amp-img > img {
+	object-fit: contain;
+}
+
+.amp-wp-iframe-placeholder {
+	background: #c2c2c2 url( ../../../../../../s2.wp.com/wp-content/plugins/amp/assets/images/placeholder-icon.png) no-repeat center 40%;
+	background-size: 48px 48px;
+	min-height: 48px;
+}
+
+/* Article Footer Meta */
+
+.amp-wp-article-footer .amp-wp-meta {
+	display: block;
+}
+
+.amp-wp-tax-category,
+.amp-wp-tax-tag {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	margin: 1.5em 16px;
+}
+
+.amp-wp-comments-link {
+	color: #696969;
+	font-size: .875em;
+	line-height: 1.5em;
+	text-align: center;
+	margin: 2.25em 0 1.5em;
+}
+
+.amp-wp-comments-link a {
+	border-style: solid;
+	border-color: #c2c2c2;
+	border-width: 1px 1px 2px;
+	border-radius: 4px;
+	background-color: transparent;
+	color: #0a89c0;
+	cursor: pointer;
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+	margin: 0 auto;
+	max-width: 200px;
+	padding: 11px 16px;
+	text-decoration: none;
+	width: 50%;
+	-webkit-transition: background-color 0.2s ease;
+			transition: background-color 0.2s ease;
+}
+
+/* AMP Footer */
+
+.amp-wp-footer {
+	border-top: 1px solid #c2c2c2;
+	margin: calc(1.5em - 1px) 0 0;
+}
+
+.amp-wp-footer div {
+	margin: 0 auto;
+	max-width: calc(840px - 32px);
+	padding: 1.25em 16px 1.25em;
+	position: relative;
+}
+
+.amp-wp-footer h2 {
+	font-size: 1em;
+	line-height: 1.375em;
+	margin: 0 0 .5em;
+}
+
+.amp-wp-footer p {
+	color: #696969;
+	font-size: .8em;
+	line-height: 1.5em;
+	margin: 0 85px 0 0;
+}
+
+.amp-wp-footer a {
+	text-decoration: none;
+}
+
+.back-to-top {
+	bottom: 1.275em;
+	font-size: .8em;
+	font-weight: 600;
+	line-height: 2em;
+	position: absolute;
+	right: 16px;
+}
+				/* WordAds */
+		.wpcnt {
+			text-align: center;
+			line-height: 0;
+			display: block;
+			clear: both;
+			margin: 1em 0;
+		}
+
+		.rtl .wpcnt {
+			direction: ltr;
+		}
+
+		.wpa {
+			position: relative;
+			display: inline-block;
+			max-width: 100%;
+			text-align: left;
+			padding: 10px 0 0;
+			min-width: 300px;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+		}
+
+		.wpa-about {
+			position: absolute;
+			top: 5px;
+			left: 0;
+			right: 0;
+			display: block;
+			min-width: 160px;
+			border-bottom: none;
+			font: 10px/1 "Open Sans", Arial, sans-serif;
+			text-align: left;
+			text-decoration: none;
+			opacity: 0.85;
+		}
+
+		.wpa .u>div, .wpadvert>div>* {
+			display: block;
+			margin-top: 5px;
+			margin-bottom: 1em;
+		}
+
+		div.wpa>div {
+			margin-top: 10px;
+		}/* Inline styles */
+.amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142{text-align:left;}.amp-wp-inline-26da04586a0c58e3701ad7a6dabbdc3c{font-family:Wingdings;}.amp-wp-inline-9a8696467202e91c01706d4c3510dd46{clear:both;text-align:center;}.amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0{margin-left:1em;margin-right:1em;}.amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7{font-size:14pt;line-height:115%;}.amp-wp-inline-05ab307d38bdb379aa5333d572894a76{margin-bottom:.0001pt;}.amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69{font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e{color:blue;}.amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681{color:maroon;}.amp-wp-inline-86384b0e20ac09afa0084aec2224fdda{color:red;}.amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125{color:maroon;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c{color:blue;font-family:Consolas;font-size:9.5pt;}.amp-wp-inline-b6b17766f6beeb75d23b3ebd1ffee9f1{background:yellow;}.amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd{font-family:Consolas;font-size:9pt;}.amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6{color:#2b91af;}.amp-wp-inline-18b437614bed45025c4c295b9ac5faad{color:#a31515;}.amp-wp-inline-dfd5ff814fafa2ca08eb3ec4b372cc4b{color:blue;font-family:Consolas;font-size:9pt;}.amp-wp-inline-7ff96862f8e5dd3fb4e2399be3a454c6{color:#2b91af;font-family:Consolas;font-size:9pt;}.amp-wp-inline-21507e7500323d7b431dffade0db2874{text-indent:-.25in;}.amp-wp-inline-659e7702c3208302cb0833d991c5b3f9{font-family:Symbol;}.amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979{font-family:&#039;font-size:7pt;}	</style>
+</head>
+
+<body class="">
+
+<header id="#top" class="amp-wp-header">
+	<div>
+		<a href="../../../../../index.html">
+						Arindam&#039;s Blog		</a>
+	</div>
+</header>
+
+<article class="amp-wp-article">
+
+	<header class="amp-wp-article-header">
+		<h1 class="amp-wp-title">SharePoint Library with Tree View</h1>
+				<div class="amp-wp-meta amp-wp-byline">
+					<amp-img src="https://secure.gravatar.com/avatar/e1684c9e7b0368aff778803d73e2c883?s=24&amp;d=identicon&amp;r=g" width="24" height="24" layout="fixed"></amp-img>
+				<span class="amp-wp-author author vcard">Arindam C</span>
+	</div>
+<div class="amp-wp-meta amp-wp-posted-on">
+	<time datetime="2014-02-15T14:14:00+00:00">
+		3 years ago	</time>
+</div>
+	</header>
+
+	
+	<div class="amp-wp-article-content">
+		<div dir="ltr" class="amp-wp-inline-2b4d2be2e69fb2a80f3ea04ab4df1142">
+<div class="MsoNormal">Recently I was working in a project where the requirement was to show a tree view structure along with a SharePoint 2010 document library.</div>
+<div class="MsoNormal">Let’s describe the actual requirements:</div>
+<div class="MsoListParagraphCxSpFirst amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->In this project whenever a record will be generated a new folder with record ID will be created inside document library.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Inside the Record Number folder a predefined folder structure will also be created.</div>
+<div class="MsoListParagraphCxSpMiddle amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->Users can add new folder to this structure but can’t delete the original structure.</div>
+<div class="MsoListParagraphCxSpLast amp-wp-inline-21507e7500323d7b431dffade0db2874"><!-- [if !supportLists]--><span class="amp-wp-inline-659e7702c3208302cb0833d991c5b3f9">·<span class="amp-wp-inline-f35a7a481c12b35f9acbe5defc15c979">         </span></span><!--[endif]-->The folder structure will be shown as a tree-view left side and users can do normal SharePoint library operations.</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/02/7fd98-111.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/02/7fd98-1111108.gif?w=400&amp;h=251" width="400" height="251" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+<p> </p>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"></div>
+<p>Above diagram shows the look and feel. A probable way could have been using managed metadata as it gives you the tree view structure OOB. But here we need to show normal folders in the document library.</p>
+<div class="MsoNormal"></div>
+<div class="MsoNormal">So I decided to create a new view and modify that to add the tree view.</div>
+<div class="MsoNormal">The important question was how to create a tree-view, there is nothing out of box here. So we need to create a custom control for this. Fortunately we were using Telerik control in the project and Telerik has an excellent tree view control. It’s called RadTreeView, you can check it here: <a href="http://demos.telerik.com/aspnet-ajax/treeview/examples/overview/defaultcs.aspx">http://demos.telerik.com/aspnet-ajax/treeview/examples/overview/defaultcs.aspx</a></div>
+<div class="MsoNormal">Now in this control may not be available to you. So you have to create a custom control of your own.</div>
+<div class="MsoNormal">But the good thing here is I’ll show how you can generate a XML from SharePoint library which can be readily used with Telerik control as well as you create any custom control.</div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Create XML for Tree-View from SharePoint folder library structure.</span></b></div>
+<div class="MsoNormal">I wrote a recursive method to loop through the folder structure and create a XML. The code is shown below.</div>
+<div class="MsoNormal"><b>LoadTreeView</b>: In this method I’m passing the record Id which will be the root folder. Then I’m calling CreateFolderXML() which is the recursive function.</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-dfd5ff814fafa2ca08eb3ec4b372cc4b">protected</span><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">void</span> LoadTreeView(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> recordId)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPSecurity</span>.RunWithElevatedPrivileges(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">delegate</span>()</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span> folder = <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPContext</span>.Current.Web.GetFolder(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPContext</span>.Current.Web.ServerRelativeUrl + <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">CaseDocumentRepository</span>(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">Convert</span>.ToInt32(caseId)).GetListName() + <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“/”</span> + recordId);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">var</span>xmlRoot = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XElement</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Tree”</span>, <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">DocumentTreeViewService</span>.CreateFolderXML(folder, recordId));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">var</span> doc = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XDocument</span>(<span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XDeclaration</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“1.0”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“UTF-8”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“yes”</span>), xmlRoot);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                RadTreeView1.LoadXml(doc.ToString());</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            });</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">        }</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b>CreateFolderXML</b>: This is the recursive method which takes the root folder and loop through, it adds directory name and the tree-view node text and a folder image to show the yellow folder and then the URL for clicking.</div>
+<div class="MsoNormal">One important thing I want to note here, when you have a lots of folder in your library (in my case I have 70000 record ID as root folder so you can think about the load), this type of recursive call can take long time. So I used LINQ to query the SP folders instead on conventional CAML query or normal GetFolder as below</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-7ff96862f8e5dd3fb4e2399be3a454c6">List</span><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">&lt;<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>&gt; folderList = dir.SubFolders.Cast&lt;<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>&gt;()</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                .Where(p =&gt; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_w”</span>&amp;&amp; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_t”</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                .OrderBy(li =&gt; li.Name.Trim()).ToList();</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">Where(p =&gt; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_w”</span> &amp;&amp; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_t”</span>)- </span>this is used because you can use the same code on a picture library and exclude smaller thumbnalis which stored under _w or in _t folder ( when you uploads a picture in Picture library SharePoint create 3 copies of it)</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-dfd5ff814fafa2ca08eb3ec4b372cc4b">public</span><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">static</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XElement</span> CreateFolderXML(<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>dir, <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">string</span> caseID)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">        {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>[] content;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XElement</span> xmlInfo;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">if</span> (dir.Name == caseID)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>[4];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[0] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Text”</span>, dir.Name);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[1] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Value”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“/”</span> + dir.Url + <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“&amp;View=”</span> + dir.DocumentLibrary.DefaultView.ID);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[2] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“ImageUrl”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“/_layouts/images/folder.gif”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[3] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Expanded”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“True”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">else</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>[3];</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[0] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Text”</span>, dir.Name);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[1] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span><span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Value”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“/”</span> + dir.Url + <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“&amp;View=”</span> + dir.DocumentLibrary.DefaultView.ID);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                content[2] = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XAttribute</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“ImageUrl”</span>, <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“/_layouts/images/folder.gif”</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            xmlInfo = <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">new</span> <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">XElement</span>(<span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“Node”</span>, content);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">List</span>&lt;<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>&gt; folderList = dir.SubFolders.Cast&lt;<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>&gt;()</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                .Where(p =&gt; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_w”</span>&amp;&amp; p.Name.ToLower() != <span class="amp-wp-inline-18b437614bed45025c4c295b9ac5faad">“_t”</span>)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                .OrderBy(li =&gt; li.Name.Trim()).ToList();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            </span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">foreach</span> (<span class="amp-wp-inline-1e68163ef7a15f988f9c58428906a5d6">SPFolder</span>subDir <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">in</span> folderList)</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">                xmlInfo.Add(CreateFolderXML(subDir, caseID));</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            }</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">            <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">return</span> xmlInfo;</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-9ef4ea86a9ae8ad3f7132ab53f7fdefd">        }</span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Create a new Custom View </span></b></div>
+<div class="MsoNormal">You can modify default allitems.aspx, but I would say you create a new view and keep the default one. You can just use SharePoint designer to create a new view.</div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Create Webpart for the TreeView</span></b></div>
+<div class="MsoNormal">Just create a new Visual webpart for RadTreeview, you can placed your own custom control here if you don’t use Telerik.
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">script</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">language</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”javascript”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">type</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”text/javascript”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">      <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">function</span> selectNode(text) {</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">var</span> treeView = $find(<span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">“<span class="amp-wp-inline-b6b17766f6beeb75d23b3ebd1ffee9f1">&lt;%</span>= RadTreeView1.ClientID <span class="amp-wp-inline-b6b17766f6beeb75d23b3ebd1ffee9f1">%&gt;</span>“</span>);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">var</span> node = treeView.findNodeByText(text);</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">          node.select();</span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69">      }</span></div>
+<p> </p>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;/</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">script</span><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&gt;</span></div>
+</div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e8abb6984ecbd0f97eb8d20f31774e0c">&lt;</span><span class="amp-wp-inline-5b36a4eff2af6dea048c0c9bbee73125">table</span><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">id</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”tblRadTreeView”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">width</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”100%”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">tr</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">valign</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”top”&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">td</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">telerik</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">RadTreeView</span> <span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">ID</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”RadTreeView1″</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">runat</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”server”</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">OnNodeClick</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”RadTreeView1_NodeClick”</span><span class="amp-wp-inline-86384b0e20ac09afa0084aec2224fdda">EnableViewState</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">=”true”</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">telerik</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">:</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">RadTreeView</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">td</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">tr</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal amp-wp-inline-05ab307d38bdb379aa5333d572894a76"><span class="amp-wp-inline-e3f0d32be2ad9251ec9d8e1ff0fb1e69"> <span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&lt;/</span><span class="amp-wp-inline-ee5fd51e69321dbad6f7eff33922a681">table</span><span class="amp-wp-inline-4b6e73a3d9e3c461ef7943640bc40b8e">&gt;</span></span></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Place the tree-view in the new custom view</span></b></div>
+<div class="MsoNormal">Here I’m not describing much of the customization you can or need to do in the custom view page but give what I did for my requirement.</div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/02/d654d-des.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/02/d654d-des501a.gif?w=640&amp;h=234" width="640" height="234" sizes="(min-width: 640px) 640px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"></div>
+<div class="MsoNormal"><b><span class="amp-wp-inline-99c52334eaf71f7a7bbc81e65ee7c9f7">Final View</span></b></div>
+<p> </p>
+<div class="MsoNormal">And here how it’s looking now. Happy coding <span class="amp-wp-inline-26da04586a0c58e3701ad7a6dabbdc3c">J</span></div>
+<div class="separator amp-wp-inline-9a8696467202e91c01706d4c3510dd46"><a href="../../../../../../arindamchat.files.wordpress.com/2014/02/f44c3-lib.gif" class="amp-wp-inline-984b56f41b49a5d1dd7e19b98440ddd0"><amp-anim src="../../../../../../arindamchat.files.wordpress.com/2014/02/f44c3-lib9c8c.gif?w=400&amp;h=238" width="400" height="238" sizes="(min-width: 400px) 400px, 100vw" class="amp-wp-enforced-sizes"></amp-anim></a></div>
+<div class="MsoNormal"><span class="amp-wp-inline-26da04586a0c58e3701ad7a6dabbdc3c"> </span></div>
+</div>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<amp-ad width="300" height="250" type="pubmine" data-adsafe="0" data-section="2" data-siteid="2694" data-wordads="0"><div placeholder="" class="amp-wp-iframe-placeholder"></div>
+					</amp-ad></div>
+			</div>
+		</div>	</div>
+
+	<footer class="amp-wp-article-footer">
+			<div class="amp-wp-meta amp-wp-tax-category">
+		Categories: <a href="../../../../../category/microsoft-technologies/index.html" rel="category tag">Microsoft Technologies</a>, <a href="../../../../../category/sharepoint/sharepoint-2010/index.html" rel="category tag">SharePoint 2010</a>	</div>
+
+	<div class="amp-wp-meta amp-wp-tax-tag">
+		Tags: <a href="../../../../../tag/sharepoint-2010/index.html" rel="tag">SharePoint 2010</a>, <a href="../../../../../tag/treeview/index.html" rel="tag">TreeView</a>	</div>
+		<div class="amp-wp-meta amp-wp-comments-link">
+		<a href="../index.html#respond">
+			Leave a Comment		</a>
+	</div>
+	</footer>
+
+</article>
+
+<footer class="amp-wp-footer">
+	<div>
+		<h2>Arindam&#039;s Blog</h2>
+		<p>
+			<a href="https://wordpress.com/?ref=footer_blog">Blog at WordPress.com.</a>
+		</p>
+		<a href="#top" class="back-to-top">Back to top</a>
+	</div>
+</footer>
+
+	<amp-pixel src="../../../../../../pixel.wp.com/bacaf.gif?rand=RANDOM&amp;host=arindamchat.wordpress.com&amp;ref=DOCUMENT_REFERRER&amp;amp=1&amp;blog=72867871&amp;v=wpcom&amp;tz=0&amp;user_id=0&amp;post=8&amp;subd=arindamchat"></amp-pixel>
+	<amp-pixel src="../../../../../../pixel.wp.com/bf34f.gif?rand=RANDOM&amp;v=wpcom-no-pv&amp;crypt=UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRLWhqanhKV3x0UkRILjFhcVJaLG0%2FMEx1NjN1W0krTU9WPXRzXTdKMFpwTT1mRVEzZkNXa01aP2VJREdMOC1peDliZ3FbWjh%2BRXd2RGJ4VVt%2BVltoUFlFZXZidmtPX2VBWE1EUHBOX2d2ZDhFfmhxNEZ0cXFnVnNJdl8vNVNSYUs1NFgrJXRacFpfaTdGJTMyMX55P2d4NVNVLkdnZTBp"></amp-pixel>
+	
+</body>
+
+<!-- Mirrored from arindamchat.wordpress.com/2014/02/15/sharepoint-library-with-tree-view/amp/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Jun 2017 13:52:37 GMT -->
+</html>
